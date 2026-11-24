@@ -30,14 +30,14 @@
   --bg:#f5f5f7; --surface:#ffffff; --text:#1d1d1f; --sub:#424245;
   --muted:#6e6e73; --faint:#86868b; --chip:#e8e8ed; --link:#0066cc;
   --bar:rgba(251,251,253,.72); --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.03);
-  --field:#e9e9ee;
+  --field:#e9e9ee; --ring:rgba(0,102,204,.45);
 }
 @media (prefers-color-scheme:dark){
   :root{
     color-scheme:dark;
     --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
     --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --link:#2997ff;
-    --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e;
+    --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e; --ring:rgba(41,151,255,.55);
   }
 }
 *{box-sizing:border-box}
@@ -64,7 +64,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .topbar nav a{color:var(--link);text-decoration:none;padding:8px 4px}
 main{max-width:692px;margin:0 auto;padding:24px 20px calc(72px + env(safe-area-inset-bottom,0px))}
 .sub{font-size:13px;color:var(--muted);line-height:1.65;margin:2px 0 0;max-width:56em}
-.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:2px}
 .chip-btn{appearance:none;border:0;background:var(--surface);color:var(--sub);box-shadow:var(--shadow);
   border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:inherit}
 .chip-btn[aria-pressed="true"]{background:var(--text);color:var(--bg)}
@@ -125,12 +125,12 @@ a,button,input{touch-action:manipulation}
 .search-cancel{transition:opacity .15s ease}
 .search-cancel:active{opacity:.5}
 .topbar nav a{transition:opacity .15s ease}
-.search:focus{outline:none;box-shadow:0 0 0 2px var(--link)}
+.search:focus{outline:none;box-shadow:0 0 0 2px var(--ring)}
 .search:focus-visible{outline:none}
 .live-meta{font-variant-numeric:tabular-nums}
 .live-rows,.hot-rows{transition:opacity .18s ease}
 .rows-loading{opacity:.4}
-.search-row{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;
+.search-row{display:grid;grid-template-columns:1fr;grid-template-rows:0fr;opacity:0;visibility:hidden;
   transition:grid-template-rows .32s cubic-bezier(.32,.72,.24,1),opacity .22s ease,visibility 0s linear .32s}
 .search-row.open{grid-template-rows:1fr;opacity:1;visibility:visible;
   transition:grid-template-rows .32s cubic-bezier(.32,.72,.24,1),opacity .22s ease}
@@ -185,7 +185,6 @@ section{scroll-margin-top:64px}
 <nav><button class="search-btn" type="button" aria-label="搜索" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="2026-11-23.html">往期</a></nav>
 </div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div></div>
 <main>
-<p class="sub">文章实时更新 · 简报每天早上更新 · 每条附出处。</p>
 <div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button></div>
 <p class="result-line" aria-live="polite"></p>
 <section data-kind="hot" style="margin-top:34px">
@@ -358,7 +357,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><a href="2026-11-23.html"><span class="dir">← 上一期</span>2026 年 11 月 23 日 · 周一</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 20:10 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 20:19 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
