@@ -55,7 +55,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 @media (prefers-color-scheme:dark){.topbar.scrolled{box-shadow:0 1px 0 rgba(255,255,255,.09),0 10px 28px rgba(0,0,0,.4)}}
 .topbar-in{max-width:692px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px}
 .wordmark{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--text);text-decoration:none}
-.topbar .today{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.search-btn{appearance:none;border:0;background:none;color:var(--text);cursor:pointer;
+  width:32px;height:32px;margin:-6px -8px -6px -4px;display:grid;place-items:center;border-radius:999px}
+.search-row-in{max-width:692px;margin:0 auto;padding:0 20px 10px;display:flex;gap:10px;align-items:center}
+.search-cancel{appearance:none;border:0;background:none;color:var(--link);font-size:13px;cursor:pointer;
+  padding:6px 2px;font-family:inherit;white-space:nowrap}
 .topbar nav{margin-left:auto;font-size:12px;display:flex;align-items:center;gap:14px}
 .topbar nav a{color:var(--link);text-decoration:none;padding:4px 2px}
 main{max-width:692px;margin:0 auto;padding:24px 20px calc(72px + env(safe-area-inset-bottom,0px))}
@@ -64,8 +68,8 @@ main{max-width:692px;margin:0 auto;padding:24px 20px calc(72px + env(safe-area-i
 .chip-btn{appearance:none;border:0;background:var(--surface);color:var(--sub);box-shadow:var(--shadow);
   border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:inherit}
 .chip-btn[aria-pressed="true"]{background:var(--text);color:var(--bg)}
-.search{flex:1;min-width:150px;appearance:none;border:0;background:var(--field);color:var(--text);
-  border-radius:999px;padding:7px 14px;font-size:12.5px;font-family:inherit}
+.search{flex:1;min-width:0;appearance:none;border:0;background:var(--field);color:var(--text);
+  border-radius:999px;padding:8px 14px;font-size:13px;font-family:inherit}
 .search::placeholder{color:var(--faint)}
 .result-line{font-size:12px;color:var(--faint);margin-top:10px;min-height:15px}
 section{margin-top:42px}
@@ -113,7 +117,7 @@ footer a{color:var(--link);text-decoration:none}
 @media (max-width:480px){
   main{padding:20px 16px 60px}
   .topbar-in{padding:10px 16px}
-  .topbar .today .y{display:none}
+  .search-row-in{padding:0 16px 10px}
   h1{font-size:19px}
   .item{padding:14px 15px 12px;border-radius:12px}
   .item.lead h3{font-size:16px}
@@ -123,7 +127,7 @@ footer a{color:var(--link);text-decoration:none}
 .live-dot{width:7px;height:7px;border-radius:50%;background:#ff3b30;flex:none;
   animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.live-when{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.live-when,.hot-when{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
 .live-refresh{appearance:none;border:0;background:none;color:var(--link);font-size:12px;cursor:pointer;
   font-family:inherit;padding:4px 2px}
 .live-card{background:var(--surface);border-radius:14px;box-shadow:var(--shadow);padding:6px 18px;margin-top:12px}
@@ -146,20 +150,19 @@ section{scroll-margin-top:64px}
 <body>
 <div class="topbar"><div class="topbar-in">
 <a class="wordmark" href="index.html">每日新闻</a>
-<span class="today"><span class="y">2026 年 </span>11 月 23 日 · 周一</span>
-<nav><a href="index.html">今日</a><a href="2026-11-24.html">往期</a></nav>
-</div></div>
+<nav><button class="search-btn" type="button" aria-label="搜索"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="index.html">今日</a><a href="2026-11-24.html">往期</a></nav>
+</div><div class="search-row" hidden><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"><button class="search-cancel" type="button">取消</button></div></div></div>
 <main>
 <p class="sub">文章实时更新 · 简报每天早上更新 · 每条附出处。</p>
-<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
+<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button></div>
 <p class="result-line"></p>
 <section data-kind="hot" style="margin-top:34px">
-<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="live-when hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
 <p class="overview" style="margin-top:6px">微博、抖音、今日头条、知乎、哔哩哔哩、百度的热榜合并精选：多平台都在热议的排前面，总共只留十来条重点。</p>
 <div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
 <section data-kind="live">
-<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh" type="button">刷新</button></div>
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button><button class="live-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
 <section data-kind="ai">
@@ -281,7 +284,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 15:01 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 19:18 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -313,6 +316,14 @@ chips.forEach(function(c){c.addEventListener('click',function(){
   c.setAttribute('aria-pressed','true'); activeKind=c.dataset.kind; applyFilter();
 })});
 search.addEventListener('input',applyFilter);
+var sBtn=document.querySelector('.search-btn'), sRow=document.querySelector('.search-row'),
+    sCancel=document.querySelector('.search-cancel');
+function closeSearch(){sRow.hidden=true;if(search.value){search.value='';applyFilter()}}
+if(sBtn)sBtn.addEventListener('click',function(){
+  if(sRow.hidden){sRow.hidden=false;search.focus()}else{closeSearch()}
+});
+if(sCancel)sCancel.addEventListener('click',closeSearch);
+search.addEventListener('keydown',function(e){if(e.key==='Escape')closeSearch()});
 function ago(ts){var m=Math.max(1,Math.round((Date.now()-ts)/60000));
   if(m<60)return m+' 分钟前';var h=Math.round(m/60);if(h<24)return h+' 小时前';return Math.round(h/24)+' 天前'}
 function money(v){if(v>=1e6)return '$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return '$'+Math.round(v/1e3)+'K';return '$'+Math.round(v)}
@@ -324,13 +335,44 @@ function esc(t){var d=document.createElement('div');d.textContent=t||'';return d
 function stamp(el){var d=new Date();el.textContent='更新于 '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
 function fetchT(url,ms){var c=new AbortController();var t=setTimeout(function(){c.abort()},ms||9000);
   return fetch(url,{signal:c.signal}).then(function(r){clearTimeout(t);if(!r.ok)throw 0;return r.json()})}
-var liveBox=document.querySelector('.live-rows'), liveWhen=document.querySelector('.live-when');
+var liveBox=document.querySelector('.live-rows'), liveWhen=document.querySelector('section[data-kind="live"] .live-when');
+var liveData=[], trMode=false, trCache={}, trBusy=false, trBtn=document.querySelector('.tr-btn');
+function renderLive(){
+  if(!liveData.length)return;
+  liveBox.innerHTML=liveData.map(function(r){
+    var t=(trMode&&trCache[r.title])?trCache[r.title]:r.title;
+    return rowHTML(r.chip,esc(t),r.url,r.meta);
+  }).join('');
+  applyFilter();
+}
+async function translateTitle(t){
+  if(trCache[t])return trCache[t];
+  if(!/[A-Za-z]{3,}/.test(t)){trCache[t]=t;return t}
+  var d=await fetchT('https://api.mymemory.translated.net/get?q='+encodeURIComponent(t.slice(0,450))+'&langpair=en%7Czh-CN',12000);
+  var out=d&&d.responseData&&d.responseData.translatedText;
+  if(!out||/MYMEMORY WARNING|QUERY LENGTH|INVALID/i.test(out))throw 0;
+  trCache[t]=out; return out;
+}
+async function translatePending(){
+  if(trBusy)return; trBusy=true;
+  for(var i=0;i<liveData.length;i++){
+    var r=liveData[i];
+    if(!trCache[r.title]){try{await translateTitle(r.title)}catch(e){trCache[r.title]=r.title}}
+  }
+  trBusy=false; if(trMode)renderLive();
+}
+if(trBtn)trBtn.addEventListener('click',async function(){
+  if(trMode){trMode=false;trBtn.textContent='翻译';renderLive();return}
+  trMode=true;trBtn.textContent='翻译中…';trBtn.disabled=true;
+  await translatePending();
+  trBtn.disabled=false;trBtn.textContent='原文';
+});
 async function loadLive(){
-  var rows=[];
+  var data=[];
   try{
     var hn=await fetchT('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30');
     hn.hits.filter(function(h){return h.title&&h.url}).slice(0,6).forEach(function(h){
-      rows.push(rowHTML('Hacker News',esc(h.title),h.url,(h.points||0).toLocaleString()+' 热度 · '+ago(new Date(h.created_at).getTime())));
+      data.push({chip:'Hacker News',title:h.title,url:h.url,meta:(h.points||0).toLocaleString()+' 热度 · '+ago(new Date(h.created_at).getTime())});
     });
   }catch(e){}
   try{
@@ -343,16 +385,16 @@ async function loadLive(){
       if(!prices.length)continue;
       var top=Math.max.apply(null,prices.map(Number)); if(top>0.97)continue;
       var ti=prices.map(Number).indexOf(top);
-      rows.push(rowHTML('Polymarket',esc(ev.title),'https://polymarket.com/event/'+ev.slug,
-        '24 小时成交 '+money(ev.volume24hr||0)+' · '+(outs[ti]||'')+' '+Math.round(top*100)+'%'));
+      data.push({chip:'Polymarket',title:ev.title,url:'https://polymarket.com/event/'+ev.slug,
+        meta:'24 小时成交 '+money(ev.volume24hr||0)+' · '+(outs[ti]||'')+' '+Math.round(top*100)+'%'});
       n++;
     }
   }catch(e){}
-  if(rows.length){liveBox.innerHTML=rows.join('');applyFilter()}
+  if(data.length){liveData=data;renderLive();if(trMode)translatePending()}
   else if(!liveBox.querySelector('.live-row')){liveBox.innerHTML='<p class="live-note">实时源暂时连不上，稍后再试。</p>'}
   stamp(liveWhen);
 }
-var hotBox=document.querySelector('.hot-rows'), hotWhen=document.querySelector('.hot-when');
+var hotBox=document.querySelector('.hot-rows'), hotWhen=document.querySelector('section[data-kind="hot"] .hot-when');
 var PLATFORMS=[
   ['微博','weibo'],['抖音','douyin'],['今日头条','toutiao'],['知乎','zhihu'],['哔哩哔哩','bilibili'],['百度','baidu']
 ];
@@ -420,7 +462,8 @@ async function loadHot(){
     hotBox.innerHTML=top.map(function(m){
       var hv='';
       if(m.hotText&&/^[\d.]+$/.test(m.hotText))hv='热度 '+hotFmt(parseFloat(m.hotText));
-      else if(m.hotText)hv=(/播放|阅读/.test(m.hotText)?m.hotText:('热度 '+m.hotText));
+      else if(m.hotText){var mm2=m.hotText.match(/^([\d.]+)\s*(播放|阅读)$/);
+        hv=mm2?(hotFmt(parseFloat(mm2[1]))+mm2[2]):(/播放|阅读/.test(m.hotText)?m.hotText:('热度 '+m.hotText));}
       else if(hotFmt(m.hot))hv='热度 '+hotFmt(m.hot);
       var meta=(m.plats.length>1?('多平台热议 · '):'')+(hv?(hv+' · '):'')+'最高第 '+(m.rank+1)+' 名';
       return rowHTML(m.plats.join(' · '),esc(m.title),m.url,meta);
@@ -433,8 +476,8 @@ async function loadHot(){
 }
 function loadAll(){loadLive();loadHot()}
 loadAll(); setInterval(loadAll,300000);
-document.querySelector('.live-refresh').addEventListener('click',loadLive);
-document.querySelector('.hot-refresh').addEventListener('click',loadHot);
+document.querySelector('section[data-kind="live"] .live-refresh:not(.tr-btn)').addEventListener('click',loadLive);
+document.querySelector('section[data-kind="hot"] .hot-refresh').addEventListener('click',loadHot);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)loadAll()});
 var tb=document.querySelector('.topbar');
 addEventListener('scroll',function(){tb.classList.toggle('scrolled',window.scrollY>4)},{passive:true});
