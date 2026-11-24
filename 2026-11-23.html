@@ -315,7 +315,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 20:23 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 20:28 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -363,6 +363,9 @@ if(sBtn)sBtn.addEventListener('click',function(){
 });
 if(sCancel)sCancel.addEventListener('click',closeSearch);
 search.addEventListener('keydown',function(e){if(e.key==='Escape')closeSearch()});
+var vpMeta=document.querySelector('meta[name="viewport"]'), vpBase=vpMeta.getAttribute('content');
+search.addEventListener('focus',function(){vpMeta.setAttribute('content',vpBase+', maximum-scale=1')});
+search.addEventListener('blur',function(){vpMeta.setAttribute('content',vpBase)});
 function ago(ts){var m=Math.max(1,Math.round((Date.now()-ts)/60000));
   if(m<60)return m+' 分钟前';var h=Math.round(m/60);if(h<24)return h+' 小时前';return Math.round(h/24)+' 天前'}
 function money(v){if(v>=1e6)return '$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return '$'+Math.round(v/1e3)+'K';return '$'+Math.round(v)}
