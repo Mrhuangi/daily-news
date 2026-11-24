@@ -248,7 +248,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:23 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:28 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -329,12 +329,23 @@ function srcChain(key){
   if(key==='douyin'||key==='toutiao')return [v,prox];
   return [prox,v];
 }
+function parseHot(v){if(typeof v==='number')return v;if(!v)return 0;
+  var m=(''+v).match(/([\d.]+)\s*万/);if(m)return parseFloat(m[1])*10000;
+  var n=parseFloat(v);return isNaN(n)?0:n}
 async function fetchPlat(key){
+  try{
+    var u=await fetchT('https://uapis.cn/api/v1/misc/hotboard?type='+key,10000);
+    if(u&&u.list&&u.list.length&&u.list[0]&&u.list[0].title){
+      return u.list.map(function(it){return {title:it.title,url:it.url||'',hot:parseHot(it.hot_value),hotText:(''+(it.hot_value||'')).trim()}});
+    }
+  }catch(e){}
   var urls=srcChain(key);
   for(var i=0;i<urls.length;i++){
     try{
       var d=await fetchT(urls[i],10000);
-      if(d&&d.data&&d.data.length&&d.data[0]&&d.data[0].title)return d.data;
+      if(d&&d.data&&d.data.length&&d.data[0]&&d.data[0].title){
+        return d.data.map(function(it){return {title:it.title,url:it.url||it.mobileUrl||'',hot:parseHot(it.hot),hotText:''}});
+      }
     }catch(e){}
   }
   return [];
@@ -356,8 +367,9 @@ async function loadHot(){
         if(found.plats.indexOf(PLATFORMS[pi][0])<0)found.plats.push(PLATFORMS[pi][0]);
         if(rank<found.rank)found.rank=rank;
         if(!found.hot&&it.hot)found.hot=it.hot;
+        if(!found.hotText&&it.hotText)found.hotText=it.hotText;
       }else{
-        merged.push({title:it.title,url:it.url||it.mobileUrl||'',hot:it.hot||0,rank:rank,plats:[PLATFORMS[pi][0]]});
+        merged.push({title:it.title,url:it.url||'',hot:it.hot||0,hotText:it.hotText||'',rank:rank,plats:[PLATFORMS[pi][0]]});
       }
     });
   });
@@ -368,7 +380,8 @@ async function loadHot(){
   var top=merged.slice(0,12);
   if(top.length){
     hotBox.innerHTML=top.map(function(m){
-      var meta=(m.plats.length>1?('多平台热议 · '):'')+(hotFmt(m.hot)?('热度 '+hotFmt(m.hot)+' · '):'')+'最高第 '+(m.rank+1)+' 名';
+      var hv=m.hotText?('热度 '+m.hotText):(hotFmt(m.hot)?('热度 '+hotFmt(m.hot)):'');
+      var meta=(m.plats.length>1?('多平台热议 · '):'')+(hv?(hv+' · '):'')+'最高第 '+(m.rank+1)+' 名';
       return rowHTML(m.plats.join(' · '),esc(m.title),m.url,meta);
     }).join('');
     applyFilter();
