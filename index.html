@@ -7,20 +7,34 @@
 <meta name="description" content="每天早上更新的两份简报：AI 与 Agent 圈、全网科技，外加时代周刊精选。取自最近 30 天各平台真实讨论与报道，按热度整理，每条附出处。">
 <meta property="og:title" content="每日新闻 · 2026-11-24">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://mrhuangi.github.io/daily-news/images/2026-11-24-ai-1.jpg">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d1d1f'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23ffffff' font-family='-apple-system,PingFang SC,sans-serif'%3E%E6%96%B0%3C/text%3E%3C/svg%3E">
+<script>
+(function(){try{var t=localStorage.getItem('dn-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
 <style>
 :root{
-  color-scheme:light dark;
+  color-scheme:light;
   --bg:#f5f5f7; --surface:#ffffff; --text:#1d1d1f; --sub:#424245;
   --muted:#6e6e73; --faint:#86868b; --chip:#e8e8ed; --link:#0066cc;
   --bar:rgba(251,251,253,.72); --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.03);
+  --field:#e9e9ee;
 }
 @media (prefers-color-scheme:dark){
-  :root{--bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
+    --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --link:#2997ff;
+    --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
   --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --link:#2997ff;
-  --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4)}
+  --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -29,19 +43,29 @@ body{margin:0;background:var(--bg);color:var(--text);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   -webkit-tap-highlight-color:transparent}
 ::selection{background:rgba(0,102,204,.18)}
-a:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:6px}
 .topbar{position:sticky;top:0;z-index:10;background:var(--bar);
   -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
-.topbar-in{max-width:692px;margin:0 auto;padding:11px 20px;display:flex;align-items:baseline;gap:12px}
+.topbar-in{max-width:692px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px}
 .wordmark{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--text);text-decoration:none}
-.topbar .today{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.topbar nav{margin-left:auto;font-size:12px}
-.topbar nav a{color:var(--link);text-decoration:none;margin-left:14px;padding:4px 2px}
+.topbar .today{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.topbar nav{margin-left:auto;font-size:12px;display:flex;align-items:center;gap:14px}
+.topbar nav a{color:var(--link);text-decoration:none;padding:4px 2px}
+.theme-btn{appearance:none;border:0;background:var(--chip);color:var(--sub);width:28px;height:28px;
+  border-radius:999px;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
 main{max-width:692px;margin:0 auto;padding:34px 20px 72px}
 .date-line{font-size:12.5px;color:var(--muted);letter-spacing:.02em;margin:0;font-variant-numeric:tabular-nums}
 h1{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:6px 0 8px}
 .sub{font-size:13px;color:var(--muted);line-height:1.65;margin:0;max-width:56em}
-section{margin-top:46px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
+.chip-btn{appearance:none;border:0;background:var(--surface);color:var(--sub);box-shadow:var(--shadow);
+  border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.chip-btn[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.search{flex:1;min-width:150px;appearance:none;border:0;background:var(--field);color:var(--text);
+  border-radius:999px;padding:7px 14px;font-size:12.5px;font-family:inherit}
+.search::placeholder{color:var(--faint)}
+.result-line{font-size:12px;color:var(--faint);margin-top:10px;min-height:15px}
+section{margin-top:42px}
 .sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
 .kind{font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--muted);margin:0}
 .sec-count{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
@@ -51,7 +75,8 @@ h2{font-size:16.5px;font-weight:600;line-height:1.5;letter-spacing:-.005em;margi
 .item .thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;
   margin-bottom:11px;background:var(--chip);opacity:0;transition:opacity .45s ease}
 .item .thumb.on{opacity:1}
-@media (prefers-color-scheme:dark){.item .thumb.on{filter:brightness(.94)}}
+:root[data-theme="dark"] .item .thumb.on{filter:brightness(.94)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item .thumb.on{filter:brightness(.94)}}
 .item h3{font-size:15px;font-weight:600;line-height:1.5;margin:0 0 5px;letter-spacing:-.005em}
 .item p{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0}
 .item.lead{padding-top:18px}
@@ -60,39 +85,50 @@ h2{font-size:16.5px;font-weight:600;line-height:1.5;letter-spacing:-.005em;margi
 .chip{background:var(--chip);border-radius:999px;padding:2px 9px;font-size:11.5px;color:var(--sub);line-height:1.5}
 .meta a{color:var(--link);text-decoration:none;margin-left:auto;white-space:nowrap;padding:2px 0}
 .meta a:hover,.topbar nav a:hover{text-decoration:underline}
-.archive{margin-top:54px}
+.daynav{display:flex;gap:8px;margin-top:54px}
+.daynav a{flex:1;background:var(--surface);border-radius:12px;box-shadow:var(--shadow);
+  padding:11px 14px;font-size:13px;color:var(--text);text-decoration:none}
+.daynav a:hover{color:var(--link)}
+.daynav .dir{display:block;font-size:11px;color:var(--faint);margin-bottom:2px}
+.daynav a.next{text-align:right}
+.daynav span.spacer{flex:1}
+.archive{margin-top:26px}
 .archive .kind{margin-bottom:10px}
 .archive a{display:inline-block;background:var(--surface);border-radius:999px;
   padding:5px 13px;font-size:12.5px;color:var(--text);text-decoration:none;margin:0 8px 8px 0;box-shadow:var(--shadow)}
 .archive a:hover{color:var(--link)}
-footer{margin-top:46px;font-size:12px;color:var(--faint);line-height:1.8}
+footer{margin-top:44px;font-size:12px;color:var(--faint);line-height:1.8}
 footer a{color:var(--link);text-decoration:none}
+[hidden]{display:none!important}
 @media (max-width:480px){
   main{padding:26px 16px 60px}
   .topbar-in{padding:10px 16px}
+  .topbar .today .y{display:none}
   h1{font-size:19px}
   .item{padding:14px 15px 12px;border-radius:12px}
   .item.lead h3{font-size:16px}
 }
-@media print{.topbar{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
+@media print{.topbar,.controls,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="topbar-in">
 <a class="wordmark" href="index.html">每日新闻</a>
-<span class="today">2026 年 11 月 24 日 · 周二</span>
-<nav><a href="2026-11-23.html">往期</a></nav>
+<span class="today"><span class="y">2026 年 </span>11 月 24 日 · 周二</span>
+<nav><a href="2026-11-23.html">往期</a><button class="theme-btn" type="button" aria-label="切换深浅色">☾</button></nav>
 </div></div>
 <main>
 <p class="date-line">2026-11-24</p>
 <h1>今日简报</h1>
-<p class="sub">每天早上 07:30 更新。两份简报取自最近 30 天 Reddit、Hacker News、GitHub、X、YouTube、TikTok、Instagram、Threads、Bluesky、Polymarket 与全网新闻的真实讨论和报道；另有时代周刊（TIME）精选专栏。每条附出处。</p>
-<section>
+<p class="sub">每天早上更新。两份简报取自最近 30 天 Reddit、Hacker News、GitHub、X、YouTube、TikTok、Instagram、Threads、Bluesky、Polymarket 与全网新闻的真实讨论和报道；另有时代周刊（TIME）精选专栏。每条附出处。</p>
+<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
+<p class="result-line"></p>
+<section data-kind="ai">
 <div class="sec-head"><p class="kind">AI 与 Agent 圈</p><span class="sec-count">8 条</span></div>
 <h2>Claude 协助证明黎曼猜想获 Lean 认证，Anthropic 以史上最大 IPO 上市，GPT-6.2 与 Gemini 4 Neon 同周打响价格战。</h2>
 <p class="overview">过去一周 AI 圈同时迎来科学突破与资本大事件：Anthropic 数学家 Levent Alpöge 与 Claude 合作的黎曼猜想 Lean 证明获 Lean 与 Mathlib 社区认证，登顶 Hacker News；Anthropic 以 813 亿美元募资完成史上最大 IPO。模型侧则进入降价与分工竞争，OpenAI、Google、阿里巴巴、Thinking Machines 相继发布新模型，开源与本地 AI 社区也在围绕推理引擎与工具链激烈讨论。</p>
 <div class="item lead">
-<img class="thumb" src="images/2026-11-24-ai-1.jpg" alt="Claude 协助的黎曼猜想证明获 Lean 与 Mathlib 社区认证" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-24-ai-1.jpg" alt="Claude 协助的黎曼猜想证明获 Lean 与 Mathlib 社区认证" fetchpriority="high" decoding="async">
 <h3>Claude 协助的黎曼猜想证明获 Lean 与 Mathlib 社区认证</h3>
 <p>Anthropic 数学家 Levent Alpöge 于 11 月 20 日发布与 Claude 合作完成的黎曼猜想 Lean 4 证明，含 175,187 个文件、约 1,700 万行代码，另称涵盖广义黎曼猜想；11 月 21 日 Lean 与 Mathlib 社区联合声明认证其陈述与证明正确，MIT 的 Andrew Sutherland 独立编译全部模块无错误。证明目前只有 Lean 代码形式、可读版本尚未出现，Clay 千禧年奖仍需正式发表与长期审查。</p>
 <div class="meta"><span class="chip">HN 11 月 21 日头条：2,102 upvotes、1,426 条评论</span><span>Scientific American</span><a href="https://www.scientificamerican.com/article/the-ai-riemann-hypothesis-proof-is-almost-certainly-true-independent-mathematicians-attest/" target="_blank" rel="noopener">出处 →</a></div>
@@ -138,29 +174,24 @@ footer a{color:var(--link);text-decoration:none}
 <div class="meta"><span class="chip">r/LocalLLaMA 置顶帖：1,175 upvotes、345 条评论</span><span>DEV Community</span><a href="https://dev.to/jamilxt/1175-redditors-just-told-you-to-stop-using-ollama-heres-why-local-ai-tooling-got-serious-2eia" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 </section>
-<section>
-<div class="sec-head"><p class="kind">全网科技</p><span class="sec-count">8 条</span></div>
+<section data-kind="tech">
+<div class="sec-head"><p class="kind">全网科技</p><span class="sec-count">7 条</span></div>
 <h2>Anthropic 史上最大 IPO 撞上纳指暴跌，芯片、航天与安全漏洞同周刷屏</h2>
 <p class="overview">过去一周科技面以市场动荡为主线：Anthropic 以 83 美元定价、募资约 813 亿美元上市，创史上最大 IPO，却没能止住美股抛售，纳指录得 2020 年 3 月以来最差一周。与此同时，Nvidia 高管变动与财报、SpaceX 星舰首次回收上面级、NGINX 五个 9.2 分严重漏洞、微软 365 近一日断邮，以及 Cybertruck 停产与内存涨价，共同构成了本期最热的科技议题。</p>
 <div class="item">
-<h3>Anthropic 史上最大 IPO 上市，纳指却创 2020 年 3 月以来最差一周</h3>
-<p>Anthropic 以每股 83 美元定价 IPO，高于 70–78 美元的推介区间，募资约 813 亿美元，估值约 1.5 万亿美元，11 月 19 日在纳斯达克以 ANT 代码开盘报 111.50 美元，收盘约 97 美元。但上市当日道指仍跌 1,100 点（2.2%），标普 500 连跌 6 日；到 11 月 20 日收盘，纳指一周跌约 10%，抹去 2026 年全年涨幅，标普与道指进入回调区间。</p>
-<div class="meta"><span class="chip">道指单日跌 1,100 点；纳指一周跌约 10%，为 2020 年 3 月以来最差一周</span><span>Investopedia</span><a href="https://www.investopedia.com/stock-market-today-dow-jones-s-and-p-500-nasdaq-11192026-12263687" target="_blank" rel="noopener">出处 →</a></div>
-</div>
-<div class="item">
-<img class="thumb" src="images/2026-11-24-tech-2.jpg" alt="Nvidia 财报大涨却遇 CEO 离任风波，芯片股 11 月 5 日集体暴跌" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-24-tech-1.jpg" alt="Nvidia 财报大涨却遇 CEO 离任风波，芯片股 11 月 5 日集体暴跌" loading="lazy" decoding="async">
 <h3>Nvidia 财报大涨却遇 CEO 离任风波，芯片股 11 月 5 日集体暴跌</h3>
 <p>Nvidia 第三季度营收 1158 亿美元，同比增 103%，并预计第四季度营收 1300 亿美元；AMD 第三季度营收 134 亿美元，同比增 45%。但 CEO 黄仁勋离任引发调查与 10-Q 延期，叠加 11 月 3 日美国中期选举后市场担忧 AI 数据中心受限，11 月 5 日 AMD 跌 17.3%、Nvidia 跌 9.3%、Intel 跌 10.3%。Intel 则在 11 月 18 日宣布签下首个 18A 外部客户，当日股价反弹约 7%。</p>
 <div class="meta"><span class="chip">Nvidia Q3 营收 1158 亿美元，同比增 103%；11 月 5 日 AMD 单日跌 17.3%</span><span>Distill Intelligence</span><a href="https://www.distillintelligence.com/briefings/semiconductors-ai-chips-2026-11-20" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item">
-<img class="thumb" src="images/2026-11-24-tech-3.jpg" alt="SpaceX 星舰 Flight 15：上面级首次被塔臂回收，助推器失联坠海" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-24-tech-2.jpg" alt="SpaceX 星舰 Flight 15：上面级首次被塔臂回收，助推器失联坠海" loading="lazy" decoding="async">
 <h3>SpaceX 星舰 Flight 15：上面级首次被塔臂回收，助推器失联坠海</h3>
 <p>11 月 13 日，星舰第 15 次试飞从得州 Starbase 升空，上面级 Ship 42 入轨并成功部署 26 颗 Starlink V3 卫星，绕地约 22 小时后于 11 月 14 日被发射塔机械臂首次捕获回收。但 Super Heavy 助推器 Booster 22 在返场途中发动机提前关机、偏离回收路径，被导向墨西哥湾并爆炸，双回收目标只完成一半。NASA 局长 Jared Isaacman 对此次飞行表示肯定，星舰是 NASA 登月着陆器方案的关键。</p>
 <div class="meta"><span class="chip">HN Daily 11 月 15 日头条话题；首次上面级轨道回收成功</span><span>Intelligence Report</span><a href="https://intelligencereport.org/2026/11/15/spacex-starship-rocket-launch-ship-catch/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item">
-<img class="thumb" src="images/2026-11-24-tech-4.jpg" alt="NGINX 曝五个 CVSS 9.2 严重漏洞，可未授权远程执行代码，约 880 万服务暴露" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-24-tech-3.jpg" alt="NGINX 曝五个 CVSS 9.2 严重漏洞，可未授权远程执行代码，约 880 万服务暴露" loading="lazy" decoding="async">
 <h3>NGINX 曝五个 CVSS 9.2 严重漏洞，可未授权远程执行代码，约 880 万服务暴露</h3>
 <p>11 月 18 日，F5 发布安全更新，披露 NGINX 的五个严重漏洞，统称 NGINX2Root，其中 CVE-2026-123007（HTTP/2 流控整数下溢，影响版本可追溯至 2015 年的 1.9.5）与 CVE-2026-123633（HTTP/2 use-after-free）均可未授权远程执行代码，CVSS 4.0 均为 9.2 分。研究者已证实可执行代码，Xint 还演示了结合 Linux 内核漏洞提权至 root。修复版为开源 1.30.7 / 1.31.9，无法立即升级者建议先关闭 HTTP/2。</p>
 <div class="meta"><span class="chip">HN 首页热帖；CVSS 9.2；Censys 统计约 880 万个 NGINX 服务可能暴露</span><span>BleepingComputer</span><a href="https://www.bleepingcomputer.com/news/security/critical-nginx-nginx2root-bugs-let-attackers-hijack-servers/" target="_blank" rel="noopener">出处 →</a></div>
@@ -171,25 +202,25 @@ footer a{color:var(--link);text-decoration:none}
 <div class="meta"><span class="chip">Gadgets 360 11 月 23 日头条汇总；MacBook Neo 与 iPhone 17e 同为 599 美元起</span><span>Gadgets 360</span><a href="https://turbo.gadgets360.com/en/mobiles/apple-iphone-17e-ipad-m4-macbook-air-pro-m5-m5-pro-max-neo-studio-display-launch-price-specifications-roundup-11172407?utm_source=website&amp;utm_medium=content&amp;utm_campaign=gadgets360turbo" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item">
-<img class="thumb" src="images/2026-11-24-tech-6.jpg" alt="特斯拉砍掉 Cybertruck 改产 Cybercab，Rivian 靠 R2 逆势上扬" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-24-tech-5.jpg" alt="特斯拉砍掉 Cybertruck 改产 Cybercab，Rivian 靠 R2 逆势上扬" loading="lazy" decoding="async">
 <h3>特斯拉砍掉 Cybertruck 改产 Cybercab，Rivian 靠 R2 逆势上扬</h3>
 <p>特斯拉决定停产 Cybertruck，计划 2027 年年中前后将产线转产自动驾驶出租车 Cybercab。Cybertruck 原计划年产 12.5 万辆，但 2026 年前三个月仅售出 11,586 辆，且每辆都在亏钱。与此同时，Rivian 第三季度营收 21.6 亿美元、同比增 38%，将全年交付指引上调至 6.7–7 万辆；其 R2 SUV 起价约 4.5 万美元，获 MotorTrend 2027 年度 SUV 称号；美国 9 月纯电注册量同比跌 44%，特斯拉与 Rivian 合计占近三分之二。</p>
 <div class="meta"><span class="chip">11 月 17 日报道；Rivian Q3 营收 21.6 亿美元，同比增 38%</span><span>The Motley Fool</span><a href="https://WWW.FOOL.COM/investing/2026/11/17/elon-musk-just-killed-the-cybertruck-to-build-cybercabs-heres-what-it-means-for-tesla-stock-and-rivians/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item">
-<img class="thumb" src="images/2026-11-24-tech-7.jpg" alt="微软 365 全球断邮近 24 小时：7 月埋下的缺陷被 Teams 故障转移引爆" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-24-tech-6.jpg" alt="微软 365 全球断邮近 24 小时：7 月埋下的缺陷被 Teams 故障转移引爆" loading="lazy" decoding="async">
 <h3>微软 365 全球断邮近 24 小时：7 月埋下的缺陷被 Teams 故障转移引爆</h3>
 <p>11 月 12 日 11:20（美东）至 11 月 13 日 11:10，微软 365 的 Exchange Online 全球大面积无法访问，Outlook 邮箱打不开、邮件延迟，Teams、Copilot 等也受波及。微软初步事后报告称，根源是 7 月一次更新引入的网关服务器潜伏缺陷：Teams 在故障前约 15 小时切换到 Exchange 用的网关、叠加约 14% 网关容量因维护下线与美国流量高峰，触发锁竞争耗尽 CPU 与内存，高峰时逾 80% 网关服务器无响应。微软称无网络攻击、无邮件永久丢失，最终通过回退缺陷代码路径修复。</p>
 <div class="meta"><span class="chip">持续近 24 小时；高峰时逾 80% 网关服务器无响应</span><span>The Register</span><a href="https://www.theregister.com/saas/2026/11/16/microsoft-blames-monster-email-outage-on-software-defect-introduced-in-july-fix/5310026" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item">
-<img class="thumb" src="images/2026-11-24-tech-8.jpg" alt="内存与 SSD 涨价潮蔓延到消费端：NAND 四季度合约价再涨 15–20%" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-24-tech-7.jpg" alt="内存与 SSD 涨价潮蔓延到消费端：NAND 四季度合约价再涨 15–20%" loading="lazy" decoding="async">
 <h3>内存与 SSD 涨价潮蔓延到消费端：NAND 四季度合约价再涨 15–20%</h3>
 <p>TrendForce 预计 2026 年第四季度 NAND 闪存合约价环比再涨 15–20%，企业级 SSD 涨幅更高；256GB TLC SSD 合约价已从一年前的 33.30 美元涨至约 134.20 美元，涨幅 303%。GamersNexus 的统计显示，2TB NVMe SSD 均价已从约 190 美元涨至近 450 美元。主因是 AI 数据中心抢占产能，厂商优先供应高利润企业级产品，Kioxia 称今年产能已售罄，短缺预计延续至 2027 年，黑五消费电子涨价已成定局。</p>
 <div class="meta"><span class="chip">TrendForce 预计 Q4 NAND 合约价涨 15–20%；256GB SSD 合约价一年涨 303%</span><span>Pandromeda</span><a href="http://pandromeda.com/hardware/ssd-prices-are-surging-into-black-friday-2026-as-nand-runs-short" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 </section>
-<section>
+<section data-kind="time">
 <div class="sec-head"><p class="kind">时代周刊 · TIME</p><span class="sec-count">6 条</span></div>
 <h2>时代周刊精选</h2>
 <p class="overview">来自《时代周刊》（TIME）最新报道，标题与摘要为中文编译，点出处看英文原文。</p>
@@ -230,8 +261,9 @@ footer a{color:var(--link);text-decoration:none}
 <div class="meta"><span class="chip">时代周刊 · 11 月 23 日</span><span>时代周刊 TIME</span><a href="https://time.com/article/2026/11/23/thanksgiving-beaver-supermoon-what-to-know/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 </section>
+<div class="daynav"><a href="2026-11-23.html"><span class="dir">← 上一期</span>2026 年 11 月 23 日 · 周一</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 12:54 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 13:34 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -240,6 +272,36 @@ document.querySelectorAll('img.thumb').forEach(function(im){
   im.addEventListener('error',function(){im.remove()});
   if(im.complete&&im.naturalWidth>0)done();
 });
+var root=document.documentElement, tbtn=document.querySelector('.theme-btn');
+function themeIcon(){var d=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);tbtn.textContent=d?'\u2600':'\u263E';}
+themeIcon();
+tbtn.addEventListener('click',function(){
+  var d=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=d?'light':'dark';
+  try{localStorage.setItem('dn-theme',root.dataset.theme)}catch(e){}
+  themeIcon();
+});
+var chips=document.querySelectorAll('.chip-btn'), search=document.querySelector('.search'),
+    sections=document.querySelectorAll('section[data-kind]'), rline=document.querySelector('.result-line'),
+    activeKind='all';
+function applyFilter(){
+  var q=search.value.trim().toLowerCase(), shown=0;
+  sections.forEach(function(sec){
+    if(activeKind!=='all'&&sec.dataset.kind!==activeKind){sec.hidden=true;return}
+    var any=false;
+    sec.querySelectorAll('.item').forEach(function(it){
+      var hit=!q||it.textContent.toLowerCase().indexOf(q)>-1;
+      it.hidden=!hit; if(hit){any=true;shown++}
+    });
+    sec.hidden=!any;
+  });
+  rline.textContent=q?('找到 '+shown+' 条'):(activeKind==='all'?'':'已筛选，可点「全部」恢复');
+}
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.setAttribute('aria-pressed','false')});
+  c.setAttribute('aria-pressed','true'); activeKind=c.dataset.kind; applyFilter();
+})});
+search.addEventListener('input',applyFilter);
 </script>
 </body>
 </html>

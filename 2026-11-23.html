@@ -7,20 +7,34 @@
 <meta name="description" content="每天早上更新的两份简报：AI 与 Agent 圈、全网科技，外加时代周刊精选。取自最近 30 天各平台真实讨论与报道，按热度整理，每条附出处。">
 <meta property="og:title" content="每日新闻 · 2026-11-23">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d1d1f'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23ffffff' font-family='-apple-system,PingFang SC,sans-serif'%3E%E6%96%B0%3C/text%3E%3C/svg%3E">
+<script>
+(function(){try{var t=localStorage.getItem('dn-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
 <style>
 :root{
-  color-scheme:light dark;
+  color-scheme:light;
   --bg:#f5f5f7; --surface:#ffffff; --text:#1d1d1f; --sub:#424245;
   --muted:#6e6e73; --faint:#86868b; --chip:#e8e8ed; --link:#0066cc;
   --bar:rgba(251,251,253,.72); --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.03);
+  --field:#e9e9ee;
 }
 @media (prefers-color-scheme:dark){
-  :root{--bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
+    --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --link:#2997ff;
+    --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
   --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --link:#2997ff;
-  --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4)}
+  --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -29,19 +43,29 @@ body{margin:0;background:var(--bg);color:var(--text);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   -webkit-tap-highlight-color:transparent}
 ::selection{background:rgba(0,102,204,.18)}
-a:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:6px}
 .topbar{position:sticky;top:0;z-index:10;background:var(--bar);
   -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
-.topbar-in{max-width:692px;margin:0 auto;padding:11px 20px;display:flex;align-items:baseline;gap:12px}
+.topbar-in{max-width:692px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px}
 .wordmark{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--text);text-decoration:none}
-.topbar .today{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.topbar nav{margin-left:auto;font-size:12px}
-.topbar nav a{color:var(--link);text-decoration:none;margin-left:14px;padding:4px 2px}
+.topbar .today{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.topbar nav{margin-left:auto;font-size:12px;display:flex;align-items:center;gap:14px}
+.topbar nav a{color:var(--link);text-decoration:none;padding:4px 2px}
+.theme-btn{appearance:none;border:0;background:var(--chip);color:var(--sub);width:28px;height:28px;
+  border-radius:999px;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
 main{max-width:692px;margin:0 auto;padding:34px 20px 72px}
 .date-line{font-size:12.5px;color:var(--muted);letter-spacing:.02em;margin:0;font-variant-numeric:tabular-nums}
 h1{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:6px 0 8px}
 .sub{font-size:13px;color:var(--muted);line-height:1.65;margin:0;max-width:56em}
-section{margin-top:46px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
+.chip-btn{appearance:none;border:0;background:var(--surface);color:var(--sub);box-shadow:var(--shadow);
+  border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.chip-btn[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.search{flex:1;min-width:150px;appearance:none;border:0;background:var(--field);color:var(--text);
+  border-radius:999px;padding:7px 14px;font-size:12.5px;font-family:inherit}
+.search::placeholder{color:var(--faint)}
+.result-line{font-size:12px;color:var(--faint);margin-top:10px;min-height:15px}
+section{margin-top:42px}
 .sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
 .kind{font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--muted);margin:0}
 .sec-count{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
@@ -51,7 +75,8 @@ h2{font-size:16.5px;font-weight:600;line-height:1.5;letter-spacing:-.005em;margi
 .item .thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;
   margin-bottom:11px;background:var(--chip);opacity:0;transition:opacity .45s ease}
 .item .thumb.on{opacity:1}
-@media (prefers-color-scheme:dark){.item .thumb.on{filter:brightness(.94)}}
+:root[data-theme="dark"] .item .thumb.on{filter:brightness(.94)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item .thumb.on{filter:brightness(.94)}}
 .item h3{font-size:15px;font-weight:600;line-height:1.5;margin:0 0 5px;letter-spacing:-.005em}
 .item p{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0}
 .item.lead{padding-top:18px}
@@ -60,34 +85,45 @@ h2{font-size:16.5px;font-weight:600;line-height:1.5;letter-spacing:-.005em;margi
 .chip{background:var(--chip);border-radius:999px;padding:2px 9px;font-size:11.5px;color:var(--sub);line-height:1.5}
 .meta a{color:var(--link);text-decoration:none;margin-left:auto;white-space:nowrap;padding:2px 0}
 .meta a:hover,.topbar nav a:hover{text-decoration:underline}
-.archive{margin-top:54px}
+.daynav{display:flex;gap:8px;margin-top:54px}
+.daynav a{flex:1;background:var(--surface);border-radius:12px;box-shadow:var(--shadow);
+  padding:11px 14px;font-size:13px;color:var(--text);text-decoration:none}
+.daynav a:hover{color:var(--link)}
+.daynav .dir{display:block;font-size:11px;color:var(--faint);margin-bottom:2px}
+.daynav a.next{text-align:right}
+.daynav span.spacer{flex:1}
+.archive{margin-top:26px}
 .archive .kind{margin-bottom:10px}
 .archive a{display:inline-block;background:var(--surface);border-radius:999px;
   padding:5px 13px;font-size:12.5px;color:var(--text);text-decoration:none;margin:0 8px 8px 0;box-shadow:var(--shadow)}
 .archive a:hover{color:var(--link)}
-footer{margin-top:46px;font-size:12px;color:var(--faint);line-height:1.8}
+footer{margin-top:44px;font-size:12px;color:var(--faint);line-height:1.8}
 footer a{color:var(--link);text-decoration:none}
+[hidden]{display:none!important}
 @media (max-width:480px){
   main{padding:26px 16px 60px}
   .topbar-in{padding:10px 16px}
+  .topbar .today .y{display:none}
   h1{font-size:19px}
   .item{padding:14px 15px 12px;border-radius:12px}
   .item.lead h3{font-size:16px}
 }
-@media print{.topbar{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
+@media print{.topbar,.controls,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="topbar-in">
 <a class="wordmark" href="index.html">每日新闻</a>
-<span class="today">2026 年 11 月 23 日 · 周一</span>
-<nav><a href="index.html">今日</a><a href="2026-11-24.html">往期</a></nav>
+<span class="today"><span class="y">2026 年 </span>11 月 23 日 · 周一</span>
+<nav><a href="index.html">今日</a><a href="2026-11-24.html">往期</a><button class="theme-btn" type="button" aria-label="切换深浅色">☾</button></nav>
 </div></div>
 <main>
 <p class="date-line">2026-11-23</p>
 <h1>今日简报</h1>
-<p class="sub">每天早上 07:30 更新。两份简报取自最近 30 天 Reddit、Hacker News、GitHub、X、YouTube、TikTok、Instagram、Threads、Bluesky、Polymarket 与全网新闻的真实讨论和报道；另有时代周刊（TIME）精选专栏。每条附出处。</p>
-<section>
+<p class="sub">每天早上更新。两份简报取自最近 30 天 Reddit、Hacker News、GitHub、X、YouTube、TikTok、Instagram、Threads、Bluesky、Polymarket 与全网新闻的真实讨论和报道；另有时代周刊（TIME）精选专栏。每条附出处。</p>
+<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
+<p class="result-line"></p>
+<section data-kind="ai">
 <div class="sec-head"><p class="kind">AI 与 Agent 圈</p><span class="sec-count">8 条</span></div>
 <h2>前沿模型一周连发与 llama.cpp 1.0 落地，Agent 之争转向记忆、成本与电力</h2>
 <p class="overview">11 月中下旬前沿模型密集发布：Claude Fable 5.2、Gemini 4 系列、GPT-6.2 Astra/Sol 与 Qwen4-Max、Kimi K3.1 Pro 几乎同周登场，价格战同步打响。与此同时开源侧 llama.cpp 正式发布 1.0、编码 Agent 的记忆层 claude-mem 星数冲高，而 Anthropic 数据中心 87% 燃气供电的分析在 HN 引爆了关于 AI 碳账的争论。</p>
@@ -138,7 +174,7 @@ footer a{color:var(--link);text-decoration:none}
 <div class="meta"><span class="chip">11 月模型汇总重点条目，开源社区与部署厂商持续热议，无单一平台确切计数</span><span>Qovery Blog / Hugging Face</span><a href="https://www.qovery.com/blog/kimi-k3-1-pro-self-host-kubernetes-gpu-memory-multi-node" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 </section>
-<section>
+<section data-kind="tech">
 <div class="sec-head"><p class="kind">全网科技</p><span class="sec-count">8 条</span></div>
 <h2>日本三大车企罕见联手标准化降本，NGINX 爆 9.2 分严重漏洞成全网焦点</h2>
 <p class="overview">最近几天科技圈的主线是成本与安全双重压力：丰田、日产、本田在 Hacker News 以 1310 分登顶，宣布标准化零部件对抗中国车企；NGINX 被曝潜伏十年的未授权远程代码执行漏洞，约 880 万服务可能暴露。与此同时 NVIDIA 交出首个千亿美元季度却因新加坡销售披露引发出口管制质疑，Apple 首款折叠屏 iPhone Duo 售罄、Tesla Cybercab 开卖，芯片与航天领域也密集发布新品与任务。</p>
@@ -188,8 +224,9 @@ footer a{color:var(--link);text-decoration:none}
 <div class="meta"><span class="chip">Spaceflight Now 11 月 22 日直播更新报道，打破发射台周转纪录逾 23 小时</span><span>Spaceflight Now</span><a href="https://spaceflightnow.com/2026/11/21/live-coverage-spacex-to-launch-intelligence-gathering-satellites-for-the-national-reconnaissance-office-3/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 </section>
+<div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 12:54 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 13:34 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -198,6 +235,36 @@ document.querySelectorAll('img.thumb').forEach(function(im){
   im.addEventListener('error',function(){im.remove()});
   if(im.complete&&im.naturalWidth>0)done();
 });
+var root=document.documentElement, tbtn=document.querySelector('.theme-btn');
+function themeIcon(){var d=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);tbtn.textContent=d?'\u2600':'\u263E';}
+themeIcon();
+tbtn.addEventListener('click',function(){
+  var d=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme=d?'light':'dark';
+  try{localStorage.setItem('dn-theme',root.dataset.theme)}catch(e){}
+  themeIcon();
+});
+var chips=document.querySelectorAll('.chip-btn'), search=document.querySelector('.search'),
+    sections=document.querySelectorAll('section[data-kind]'), rline=document.querySelector('.result-line'),
+    activeKind='all';
+function applyFilter(){
+  var q=search.value.trim().toLowerCase(), shown=0;
+  sections.forEach(function(sec){
+    if(activeKind!=='all'&&sec.dataset.kind!==activeKind){sec.hidden=true;return}
+    var any=false;
+    sec.querySelectorAll('.item').forEach(function(it){
+      var hit=!q||it.textContent.toLowerCase().indexOf(q)>-1;
+      it.hidden=!hit; if(hit){any=true;shown++}
+    });
+    sec.hidden=!any;
+  });
+  rline.textContent=q?('找到 '+shown+' 条'):(activeKind==='all'?'':'已筛选，可点「全部」恢复');
+}
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.setAttribute('aria-pressed','false')});
+  c.setAttribute('aria-pressed','true'); activeKind=c.dataset.kind; applyFilter();
+})});
+search.addEventListener('input',applyFilter);
 </script>
 </body>
 </html>
