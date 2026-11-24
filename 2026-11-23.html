@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>每日新闻 · 2026-11-23</title>
+<style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
+background:#f5f5f7;color:#1d1d1f;-webkit-font-smoothing:antialiased}
+@media (prefers-color-scheme:dark){body{background:#000;color:#f5f5f7}}
+main{max-width:680px;margin:0 auto;padding:40px 20px 64px}
+header{margin-bottom:8px}
+.site{font-size:13px;color:#6e6e73;letter-spacing:.02em}
+h1{font-size:22px;font-weight:600;margin:6px 0 4px}
+.sub{font-size:13px;color:#6e6e73;line-height:1.6;margin:0 0 28px}
+section{margin-top:36px}
+.kind{font-size:13px;color:#6e6e73;margin:0 0 6px}
+h2{font-size:17px;font-weight:600;line-height:1.45;margin:0 0 8px}
+.overview{font-size:14px;line-height:1.75;color:#424245;margin:0 0 8px}
+@media (prefers-color-scheme:dark){.overview{color:#a1a1a6}}
+.item{margin-top:26px}
+.item h3{font-size:15.5px;font-weight:600;line-height:1.5;margin:0 0 4px}
+.item p{font-size:14px;line-height:1.75;color:#424245;margin:0}
+@media (prefers-color-scheme:dark){.item p{color:#a1a1a6}}
+.meta{font-size:12px;color:#86868b;margin-top:6px}
+.meta a{color:#0066cc;text-decoration:none}
+@media (prefers-color-scheme:dark){.meta a{color:#2997ff}}
+nav{margin-top:48px;font-size:13px;color:#6e6e73;line-height:2}
+nav a{color:#0066cc;text-decoration:none;margin-right:14px}
+@media (prefers-color-scheme:dark){nav a{color:#2997ff}}
+footer{margin-top:40px;font-size:12px;color:#86868b;line-height:1.7}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="site">每日新闻</div>
+<h1>2026 年 11 月 23 日 · 周一</h1>
+<p class="sub">每天早上 07:30 更新。内容取自最近 30 天 Reddit、Hacker News、GitHub、X、YouTube 等平台的真实讨论与报道，按热度整理，每条附出处。</p>
+</header>
+<section>
+<p class="kind">AI 与 Agent 圈</p>
+<h2>前沿模型一周连发与 llama.cpp 1.0 落地，Agent 之争转向记忆、成本与电力</h2>
+<p class="overview">11 月中下旬前沿模型密集发布：Claude Fable 5.2、Gemini 4 系列、GPT-6.2 Astra/Sol 与 Qwen4-Max、Kimi K3.1 Pro 几乎同周登场，价格战同步打响。与此同时开源侧 llama.cpp 正式发布 1.0、编码 Agent 的记忆层 claude-mem 星数冲高，而 Anthropic 数据中心 87% 燃气供电的分析在 HN 引爆了关于 AI 碳账的争论。</p>
+<div class="item">
+<h3>llama.cpp 发布 v1.0：本地 AI 终于有了稳定 API 契约</h3>
+<p>11 月 13 日，llama.cpp 与底层 ggml 同步发布 v1.0.0，结束三年半按提交编号发版的历史，承诺公共 C API 的破坏性变更只随大版本出现。此版清理了 35 个已弃用函数，新增 FP8 KV 缓存、主机内存 MoE 专家缓存，并支持 Kimi-K3.1-Pro 等新架构，总支持架构超过 150 种。Ollama、LM Studio 等大量本地工具都建在它之上，社区普遍视其为本地推理走向成熟的标志。</p>
+<div class="meta">Reddit r/LocalLLaMA 帖子 1798 分、224 条评论，周榜前列 · Reddit r/LocalLLaMA · <a href="https://raw.githubusercontent.com/liyedanpdx/reddit-ai-trends/main/reports/2026/11/15/report_20261115_en.md" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>claude-mem 冲至约 11.9 万 Star：编码 Agent 开始拼记忆层</h3>
+<p>thedotmack/claude-mem 为 Claude Code、Codex、OpenCode、Gemini 等编码 Agent 提供跨会话持久记忆：记录 Agent 的操作、经 AI 压缩后再注入后续会话，避免每天重复交代项目背景。11 月 23 日其 Star 达 119,085，过去 30 天新增 16,525；同期 vercel-labs/agent-browser 等 Agent 工具也在 GitHub Trending 上走热，显示 Agent 竞争正从模型本身转向记忆、浏览器操作等外围基础设施。</p>
+<div class="meta">GitHub 119,085 Stars（11 月 23 日），30 天新增 16,525 Stars · GitHub / RepoTrending · <a href="https://repotrending.com/repo/thedotmack/claude-mem/" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>Claude Fable 5.2 发布：降价 20% 并守住多项榜首</h3>
+<p>Anthropic 于 11 月 9 日发布 Claude Fable 5.2 与仅供验证机构使用的 Mythos 5.2，定价降至每百万 Token 输入 $8、输出 $40（前代为 $10/$50），上下文 1M。厂商评测称其在 FrontierCode 2.0、FrontierSWE v2 等长程工程与多 Agent 编排任务上领先，被定位为需要数小时自主工作的场景，普通工程则建议先用 Opus 5.5 或 Sonnet 5.5 再升级。</p>
+<div class="meta">HN 首页热帖，同一提交约 923–996 分（11 月 15 日复查为 923 分） · BeevR / Hacker News · <a href="https://beevr.ai/blog/ai-model-releases-november-2026" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>阿里发布 Qwen4-Max：2.4T 参数、1M 上下文，价格压到 $1.50/$4.50</h3>
+<p>阿里于 11 月 16 日正式发布 Qwen 家族迄今最强的 Qwen4-Max：2.4 万亿总参数 MoE、每 Token 激活 71B，原生视觉与 100 万 Token 上下文，主打编码、Agent 与视觉推理，DeepSWE v1.1 厂商成绩为 75.7。旗舰本身不开放权重、仅经 QwenCloud API 提供，阿里称更小的 Qwen4 开源权重版将随后发布，但未给日期。</p>
+<div class="meta">HN 当日领跑，843 个赞（11 月 16 日 HN 首页汇总） · HPCwire AIwire / Hacker News · <a href="https://www.hpcwire.com/aiwire/2026/11/16/alibaba-releases-qwen4-max-with-2-4-trillion-parameters/" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>Anthropic 电力账被扒：2028 年美国算力约 87% 燃气、11% 燃煤引爆争论</h3>
+<p>Better Data Center Project 11 月 16 日的逐站分析估算，Anthropic 已签约约 15 GW 算力，按边际电源计其 2028 年在美电力约 87% 来自燃气、11% 来自燃煤，年排放中位估算达 3200 万吨 CO2e；报告还指出其在美无直接可再生能源承诺，却已买下 1.7 GW、价值 $34 亿的燃气发电机承诺。该话题成为当天 HN 评论量最高的争论之一，焦点是 AI 扩张的真实碳成本与厂商的责任叙事是否匹配。</p>
+<div class="meta">HN 773 分、801 条评论，为 11 月 22 日 HN 首页评论量最高的争论帖 · Better Data Center Project / Hacker News · <a href="https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>Apple Harbor 曝光：把 Mac 变成可组集群的私有本地 AI 服务器</h3>
+<p>11 月 10 日曝光的 Harbor 由 Apple 子公司 Claris 开发、私密预览中，可在 Apple Silicon Mac 上下载并运行开源权重模型，数据不出本机；更引人注目的是它能通过 Thunderbolt 5 自动组网、多台 Mac 池化统一内存以跑更大模型，依托 macOS Tahoe 26.2 的 RDMA over Thunderbolt 5。社区欢迎更简单的私有推理体验，但也指出凑齐硬件的成本不低；目前 App Store 页面已被下架，无发布日期。</p>
+<div class="meta">Reddit r/LocalLLaMA 752 分、169 条评论；HN 相关帖 580 分 · MacRumors / Reddit r/LocalLLaMA · <a href="https://www.macrumors.com/2026/11/10/apple-claris-harbor-app/" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>OpenAI 发布 GPT-6.2 Astra 与 Sol：旗舰降价 20%，与 Fable 5.2 同价</h3>
+<p>OpenAI 于 11 月 17 日同日推出 GPT-6.2 Astra 与 Sol：Astra 面向复杂专业与科学工作，定价降至每百万 Token 输入 $8、输出 $40，与 Claude Fable 5.2 持平，缓存输入折扣加深至 60%；Sol 维持 $2/$10，主打日常任务与多步 Agent 工作流。两款已在 ChatGPT Work、Codex 与 API 上线，同时因网络安全能力被评为 Critical 级别而收紧了高风险安全类请求的防护。</p>
+<div class="meta">发布当日登上 HN 首页与多家科技媒体头条，X 官方发布帖广泛转发 · OpenAI Developer Community · <a href="https://community.openai.com/t/gpt-6-2-astra-and-sol-are-now-available/1417531?ref=apidog.com" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>Moonshot 开放 Kimi K3.1 Pro 权重：2.8T 参数、1.56 TB，本地部署门槛拉满</h3>
+<p>Moonshot 于 11 月 2 日提前把 Kimi K3.1 Pro 完整权重放上 Hugging Face：2.8 万亿总参数 MoE、每 Token 激活 104B、896 个专家、1M 上下文与原生图像输入，MXFP4 检查点约 1.56 TB，许可证允许商用但对大营收 MaaS 业务另设协议。讨论焦点不在跑分而在现实门槛——单是权重就需一台 8×B300 级节点，vLLM 等工具链当时仍在追赶，普通本地玩家只能围观。</p>
+<div class="meta">11 月模型汇总重点条目，开源社区与部署厂商持续热议，无单一平台确切计数 · Qovery Blog / Hugging Face · <a href="https://www.qovery.com/blog/kimi-k3-1-pro-self-host-kubernetes-gpu-memory-multi-node" target="_blank" rel="noopener">出处</a></div>
+</div>
+</section>
+<section>
+<p class="kind">全网科技</p>
+<h2>日本三大车企罕见联手标准化降本，NGINX 爆 9.2 分严重漏洞成全网焦点</h2>
+<p class="overview">最近几天科技圈的主线是成本与安全双重压力：丰田、日产、本田在 Hacker News 以 1310 分登顶，宣布标准化零部件对抗中国车企；NGINX 被曝潜伏十年的未授权远程代码执行漏洞，约 880 万服务可能暴露。与此同时 NVIDIA 交出首个千亿美元季度却因新加坡销售披露引发出口管制质疑，Apple 首款折叠屏 iPhone Duo 售罄、Tesla Cybercab 开卖，芯片与航天领域也密集发布新品与任务。</p>
+<div class="item">
+<h3>丰田、日产、本田联手标准化零部件降本，应对中国车企竞争</h3>
+<p>日本三大车企宣布将统一钢材质量标准、塑料与树脂规范以及线束颜色编码，首批措施预计明年落地，后续将扩展到更多零部件。JAMA 主席、丰田副董事长佐藤恒治称此举源于强烈的危机感，意在削减消费者不易感知的环节成本，把资源投入新技术，以应对价格更低的中国品牌竞争。</p>
+<div class="meta">HN 2026-11-22 首页第 1 名，1310 points、706 comments · Hacker News / WhichCar (源自 Automotive News / Car and Driver) · <a href="https://www.whichcar.com.au/news/toyota-nissan-honda-lower-costs-collaboration-parts-standardise" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>NGINX 爆未授权远程代码执行漏洞，最老一例潜伏自 2015 年</h3>
+<p>Wiz、Ikotas Labs、Metnir、Rapid7 与 Xint 独立发现 NGINX 两项严重漏洞 CVE-2026-123633 与 CVE-2026-123007，均需开启 HTTP/2，其中一例源于整数下溢、自 NGINX 1.9.5 起存在逾十年，静态文件服务也可被攻破。F5 已于 11 月 18 日发布修复版本 1.30.7 与 1.31.9，无法立即升级者被建议先关闭 HTTP/2。</p>
+<div class="meta">CVSS 4.0 评分 9.2 严重级；Censys 估算约 880 万 NGINX 服务可能暴露；HN 首页热帖 · Wiz Blog / BleepingComputer · <a href="https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>NVIDIA 首个千亿美元季度：营收 1158 亿美元，却停报新加坡销售引质疑</h3>
+<p>NVIDIA 于 11 月 17 日公布 FY27 第三季度业绩，营收 1158 亿美元、同比增长 103%，其中数据中心 1076 亿美元，并给出约 1300 亿美元的 Q4 指引。但据 FT 报道，公司已停止单独披露新加坡销售——该口径此前约 1040 亿美元且大涨约 70%，在美国调查先进芯片是否经新加坡转运至中国的背景下，披露口径改为按客户总部归属，透明度争议升温。</p>
+<div class="meta">HN Daily 2026-11-18 当日最高评级文章之一 · DEV / Hacker News Daily（源自 NVIDIA 财报与 FT） · <a href="https://dev.to/976905690/nvidia-q3-first-ever-100-billion-dollar-quarter-1gmf" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>Apple 首款折叠屏 iPhone Duo 上市即售罄，门店仅有限现货</h3>
+<p>Apple 首款折叠手机 iPhone Duo 起售价 1999 美元，配备 5.4 英寸外屏与 7.6 英寸内屏，采用侧边 Touch ID 而非 Face ID。首批在线订单数分钟售罄、部分交付推迟至 1 月，Apple 称周五开售时各门店仅有有限数量供到店购买，中国大陆、法国、日本、韩国等多地仅供已在线下单者自提，铰链产能被认为是供给瓶颈。</p>
+<div class="meta">首批在线订单数分钟售罄、部分订单交付推迟至 1 月 · ET ElectronicsWorld (Reuters) · <a href="https://electronics.economictimes.indiatimes.com/news/consumer-electronics/apple-will-have-limited-iphone-duo-units-available-in-stores-on-friday/135104019?utm_source=top_news&amp;utm_medium=homepage" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>Palo Alto Networks 45 亿美元全股票收购 Applied Compute</h3>
+<p>网络安全巨头 Palo Alto Networks 于 11 月 18 日宣布以 45 亿美元全股票交易收购由前 OpenAI 研究人员创立的 Applied Compute，其平台专注于开放权重模型的后训练与推理，联合创始人兼 CEO Yash Patil 将出任联席首席 AI 官。交易预计在 FY27 第三季度完成、尚待监管批准；公司同日公布季度营收 34.4 亿美元、同比增长 39%，并上调全年指引。</p>
+<div class="meta">45 亿美元全股票交易，WSJ、CNA、Morningstar 等多家媒体同日报道 · Palo Alto Networks 官方新闻稿 · <a href="https://www.paloaltonetworks.com/company/press/2026/palo-alto-networks-to-acquire-applied-compute--bringing-secure-open-weight-ai-to-the-enterprise" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>SC26 超算大会三巨头同日亮剑：NVIDIA 5 万核 GPU、AMD Venice、Intel D270</h3>
+<p>在芝加哥 SC26 上，NVIDIA、AMD 与 Intel 在约 24 小时内接连发布旗舰硬件：NVIDIA Rubin HPC 单 GPU 超 5 万 CUDA 核心、预计 2028 年上市；AMD 第 6 代 EPYC Venice 已于 11 月 10 日出货，最高 256 核、台积电 2nm，后续 Venice-X 将堆至 1152MB L3 缓存；Intel D270 则反其道用 160GB LPDDR5X 替代昂贵 HBM。三款均为 2027–2028 年面向国家实验室与 AI 工厂的产品。</p>
+<div class="meta">SC26 大会三巨头 24 小时内密集发布，科技媒体专题复盘 · NedvedTech (SC26 报道) · <a href="https://www.nedvedtech.com/post/2026/11/17/sc26-supercomputing-2026-rubin-venice-d270-explained/" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>Tesla Cybercab 向个人消费者开卖：29990 美元，另需每月 299 美元订阅</h3>
+<p>据 WSJ 等报道，Tesla 已于 11 月 13 日起向部分美国消费者开放无方向盘、无踏板的双座 Cybercab 个人预订，售价 29990 美元，但需每月支付 299 美元的全自动驾驶订阅才能运行，下月开始交付。该车今年 2 月已在得州超级工厂量产，目前 robotaxi 仅在美国 8 个城市运营；Tesla 还计划明年停产 Cybertruck 转产 Cybercab，并在柏林工厂投资 30 亿欧元。</p>
+<div class="meta">WSJ 报道引发整车厂与电池供应商连锁担忧，韩媒 11 月 20 日专题跟进 · CHOSUNBIZ（源自 WSJ） · <a href="https://biz.chosun.com/en/en-industry/2026/11/20/WORQDO7URFA3ZISJDXDQOUQRWE/" target="_blank" rel="noopener">出处</a></div>
+</div>
+<div class="item">
+<h3>SpaceX 为国家侦察局发射 NROL-136，打破范登堡发射台周转纪录</h3>
+<p>SpaceX 于 11 月 22 日清晨从范登堡太空军基地以 Falcon 9 发射 NROL-136 任务，为美国国家侦察局的低轨 proliferated architecture 星座补充一批情报卫星，具体数量未披露。所用助推器 B1097 为第 14 次飞行，发射后约 7.5 分钟回收于 4 号着陆区；此次发射将该发射台的周转纪录缩短了 23 小时以上。</p>
+<div class="meta">Spaceflight Now 11 月 22 日直播更新报道，打破发射台周转纪录逾 23 小时 · Spaceflight Now · <a href="https://spaceflightnow.com/2026/11/21/live-coverage-spacex-to-launch-intelligence-gathering-satellites-for-the-national-reconnaissance-office-3/" target="_blank" rel="noopener">出处</a></div>
+</div>
+</section>
+<nav>往期：<a href="2026-11-24.html">2026-11-24</a></nav>
+<footer>由 Muse 每天整理生成。数据来源为各平台公开讨论与报道，热度信号为抓取时刻的公开数值。</footer>
+</main>
+</body>
+</html>
