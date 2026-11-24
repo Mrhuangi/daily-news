@@ -248,7 +248,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:31 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:34 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -385,7 +385,10 @@ async function loadHot(){
   var top=merged.slice(0,12);
   if(top.length){
     hotBox.innerHTML=top.map(function(m){
-      var hv=m.hotText?('热度 '+m.hotText):(hotFmt(m.hot)?('热度 '+hotFmt(m.hot)):'');
+      var hv='';
+      if(m.hotText&&/^[\d.]+$/.test(m.hotText))hv='热度 '+hotFmt(parseFloat(m.hotText));
+      else if(m.hotText)hv=(/播放|阅读/.test(m.hotText)?m.hotText:('热度 '+m.hotText));
+      else if(hotFmt(m.hot))hv='热度 '+hotFmt(m.hot);
       var meta=(m.plats.length>1?('多平台热议 · '):'')+(hv?(hv+' · '):'')+'最高第 '+(m.rank+1)+' 名';
       return rowHTML(m.plats.join(' · '),esc(m.title),m.url,meta);
     }).join('');
