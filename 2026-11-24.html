@@ -12,7 +12,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d1d1f'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23ffffff' font-family='-apple-system,PingFang SC,sans-serif'%3E%E6%96%B0%3C/text%3E%3C/svg%3E">
 <script>
-(function(){try{var t=localStorage.getItem('dn-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+(function(){try{localStorage.removeItem('dn-theme')}catch(e){}})();
 </script>
 <style>
 :root{
@@ -23,18 +23,12 @@
   --field:#e9e9ee;
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
+  :root{
     color-scheme:dark;
     --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
     --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --link:#2997ff;
     --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e;
   }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#a1a1a6;
-  --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --link:#2997ff;
-  --bar:rgba(22,22,23,.72); --shadow:0 1px 2px rgba(0,0,0,.4); --field:#2c2c2e;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -51,8 +45,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .topbar .today{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .topbar nav{margin-left:auto;font-size:12px;display:flex;align-items:center;gap:14px}
 .topbar nav a{color:var(--link);text-decoration:none;padding:4px 2px}
-.theme-btn{appearance:none;border:0;background:var(--chip);color:var(--sub);width:28px;height:28px;
-  border-radius:999px;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
 main{max-width:692px;margin:0 auto;padding:34px 20px 72px}
 .date-line{font-size:12.5px;color:var(--muted);letter-spacing:.02em;margin:0;font-variant-numeric:tabular-nums}
 h1{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:6px 0 8px}
@@ -75,8 +67,7 @@ h2{font-size:16.5px;font-weight:600;line-height:1.5;letter-spacing:-.005em;margi
 .item .thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;
   margin-bottom:11px;background:var(--chip);opacity:0;transition:opacity .45s ease}
 .item .thumb.on{opacity:1}
-:root[data-theme="dark"] .item .thumb.on{filter:brightness(.94)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item .thumb.on{filter:brightness(.94)}}
+@media (prefers-color-scheme:dark){.item .thumb.on{filter:brightness(.94)}}
 .item h3{font-size:15px;font-weight:600;line-height:1.5;margin:0 0 5px;letter-spacing:-.005em}
 .item p{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0}
 .item.lead{padding-top:18px}
@@ -115,12 +106,12 @@ footer a{color:var(--link);text-decoration:none}
 <div class="topbar"><div class="topbar-in">
 <a class="wordmark" href="index.html">每日新闻</a>
 <span class="today"><span class="y">2026 年 </span>11 月 24 日 · 周二</span>
-<nav><a href="2026-11-23.html">往期</a><button class="theme-btn" type="button" aria-label="切换深浅色">☾</button></nav>
+<nav><a href="2026-11-23.html">往期</a></nav>
 </div></div>
 <main>
 <p class="date-line">2026-11-24</p>
 <h1>今日简报</h1>
-<p class="sub">每天早上更新。两份简报取自最近 30 天 Reddit、Hacker News、GitHub、X、YouTube、TikTok、Instagram、Threads、Bluesky、Polymarket 与全网新闻的真实讨论和报道；另有时代周刊（TIME）精选专栏。每条附出处。</p>
+<p class="sub">每天早上更新 · 取自最近 30 天全网真实讨论与报道，另有时代周刊（TIME）精选。每条附出处。</p>
 <div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
 <p class="result-line"></p>
 <section data-kind="ai">
@@ -263,7 +254,7 @@ footer a{color:var(--link);text-decoration:none}
 </section>
 <div class="daynav"><a href="2026-11-23.html"><span class="dir">← 上一期</span>2026 年 11 月 23 日 · 周一</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 13:34 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:04 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -271,15 +262,6 @@ document.querySelectorAll('img.thumb').forEach(function(im){
   im.addEventListener('load',done);
   im.addEventListener('error',function(){im.remove()});
   if(im.complete&&im.naturalWidth>0)done();
-});
-var root=document.documentElement, tbtn=document.querySelector('.theme-btn');
-function themeIcon(){var d=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);tbtn.textContent=d?'\u2600':'\u263E';}
-themeIcon();
-tbtn.addEventListener('click',function(){
-  var d=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);
-  root.dataset.theme=d?'light':'dark';
-  try{localStorage.setItem('dn-theme',root.dataset.theme)}catch(e){}
-  themeIcon();
 });
 var chips=document.querySelectorAll('.chip-btn'), search=document.querySelector('.search'),
     sections=document.querySelectorAll('section[data-kind]'), rline=document.querySelector('.result-line'),
