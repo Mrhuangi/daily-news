@@ -133,11 +133,16 @@ section{scroll-margin-top:64px}
 <main>
 <p class="date-line">2026-11-23</p>
 <h1>今日简报</h1>
-<p class="sub">每天早上更新 · 实时动态全天刷新 · 每条附出处。</p>
-<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
+<p class="sub">文章实时更新 · 简报每天早上更新 · 每条附出处。</p>
+<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
 <p class="result-line"></p>
-<section data-kind="live" style="margin-top:34px">
-<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">实时动态</p><span class="live-when"></span><button class="live-refresh" type="button">刷新</button></div>
+<section data-kind="hot" style="margin-top:34px">
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="live-when hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
+<p class="overview" style="margin-top:6px">微博、抖音、今日头条、知乎、哔哩哔哩、百度的热榜合并精选：多平台都在热议的排前面，总共只留十来条重点。</p>
+<div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
+</section>
+<section data-kind="live">
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
 <section data-kind="ai">
@@ -243,7 +248,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:07 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:12 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -258,14 +263,15 @@ var chips=document.querySelectorAll('.chip-btn'), search=document.querySelector(
 function applyFilter(){
   var q=search.value.trim().toLowerCase(), shown=0;
   sections.forEach(function(sec){
-    if(sec.dataset.kind==='live'){if(!q){sec.hidden=false}return}
-    if(activeKind!=='all'&&sec.dataset.kind!==activeKind){sec.hidden=true;return}
-    var any=false;
-    sec.querySelectorAll('.item').forEach(function(it){
-      var hit=!q||it.textContent.toLowerCase().indexOf(q)>-1;
-      it.hidden=!hit; if(hit){any=true;shown++}
-    });
-    sec.hidden=!any;
+    var rows=sec.querySelectorAll('.item, .live-row');
+    if(q){
+      var any=false;
+      rows.forEach(function(it){var hit=it.textContent.toLowerCase().indexOf(q)>-1; it.hidden=!hit; if(hit){any=true;shown++}});
+      sec.hidden=!any; return;
+    }
+    rows.forEach(function(it){it.hidden=false});
+    sec.hidden=!(activeKind==='all'||sec.dataset.kind===activeKind);
+    if(!sec.hidden)shown+=rows.length;
   });
   rline.textContent=q?('找到 '+shown+' 条'):(activeKind==='all'?'':'已筛选，可点「全部」恢复');
 }
@@ -274,26 +280,29 @@ chips.forEach(function(c){c.addEventListener('click',function(){
   c.setAttribute('aria-pressed','true'); activeKind=c.dataset.kind; applyFilter();
 })});
 search.addEventListener('input',applyFilter);
-
-var liveBox=document.querySelector('.live-rows'), liveWhen=document.querySelector('.live-when');
 function ago(ts){var m=Math.max(1,Math.round((Date.now()-ts)/60000));
   if(m<60)return m+' 分钟前';var h=Math.round(m/60);if(h<24)return h+' 小时前';return Math.round(h/24)+' 天前'}
 function money(v){if(v>=1e6)return '$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return '$'+Math.round(v/1e3)+'K';return '$'+Math.round(v)}
+function hotFmt(v){if(!v)return '';if(v>=10000)return (v/10000).toFixed(1).replace(/\.0$/,'')+' 万';return ''+Math.round(v)}
 function rowHTML(chip,title,url,meta){
   return '<div class="live-row"><a href="'+url+'" target="_blank" rel="noopener">'+title+'</a>'+
   '<div class="live-meta"><span class="chip">'+chip+'</span><span>'+meta+'</span></div></div>'}
 function esc(t){var d=document.createElement('div');d.textContent=t||'';return d.innerHTML}
+function stamp(el){var d=new Date();el.textContent='更新于 '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function fetchT(url,ms){var c=new AbortController();var t=setTimeout(function(){c.abort()},ms||9000);
+  return fetch(url,{signal:c.signal}).then(function(r){clearTimeout(t);if(!r.ok)throw 0;return r.json()})}
+var liveBox=document.querySelector('.live-rows'), liveWhen=document.querySelector('.live-when');
 async function loadLive(){
   var rows=[];
   try{
-    var hn=await (await fetch('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30')).json();
+    var hn=await fetchT('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30');
     hn.hits.filter(function(h){return h.title&&h.url}).slice(0,6).forEach(function(h){
       rows.push(rowHTML('Hacker News',esc(h.title),h.url,(h.points||0).toLocaleString()+' 热度 · '+ago(new Date(h.created_at).getTime())));
     });
   }catch(e){}
   try{
-    var pm=await (await fetch('https://gamma-api.polymarket.com/events?active=true&closed=false&order=volume24hr&ascending=false&limit=40')).json();
-    var bad=/nfl|nba|mlb|nhl|ufc|soccer|football|tennis|golf| vs\.? /i, n=0;
+    var pm=await fetchT('https://gamma-api.polymarket.com/events?active=true&closed=false&order=volume24hr&ascending=false&limit=40');
+    var bad=/nfl|nba|mlb|nhl|ufc|soccer|football|tennis|golf|uefa|champions league|premier league|world cup|grand prix| vs\.? /i, n=0;
     for(var i=0;i<pm.length&&n<4;i++){
       var ev=pm[i]; if(bad.test(ev.title||''))continue;
       var mk=(ev.markets||[])[0]; if(!mk)continue;
@@ -306,15 +315,73 @@ async function loadLive(){
       n++;
     }
   }catch(e){}
-  if(rows.length){liveBox.innerHTML=rows.join('')}
+  if(rows.length){liveBox.innerHTML=rows.join('');applyFilter()}
   else if(!liveBox.querySelector('.live-row')){liveBox.innerHTML='<p class="live-note">实时源暂时连不上，稍后再试。</p>'}
-  var d=new Date();
-  liveWhen.textContent='更新于 '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  stamp(liveWhen);
 }
-loadLive(); setInterval(loadLive,300000);
+var hotBox=document.querySelector('.hot-rows'), hotWhen=document.querySelector('.hot-when');
+var PLATFORMS=[
+  ['微博','weibo'],['抖音','douyin'],['今日头条','toutiao'],['知乎','zhihu'],['哔哩哔哩','bilibili'],['百度','baidu']
+];
+function srcChain(key){
+  var b='https://hot.baiwumm.com/api/'+key, v='https://dailyhot-api.vercel.app/'+key;
+  var prox='https://api.allorigins.win/raw?url='+encodeURIComponent(b);
+  if(key==='douyin'||key==='toutiao')return [v,prox];
+  return [prox,v];
+}
+async function fetchPlat(key){
+  var urls=srcChain(key);
+  for(var i=0;i<urls.length;i++){
+    try{
+      var d=await fetchT(urls[i],10000);
+      if(d&&d.data&&d.data.length&&d.data[0]&&d.data[0].title)return d.data;
+    }catch(e){}
+  }
+  return [];
+}
+function bigrams(t){var x=(t||'').toLowerCase().replace(/[\s\W_]+/g,'');var o={};
+  for(var i=0;i<x.length-1;i++)o[x.substr(i,2)]=1;return o}
+function similar(a,b){var A=bigrams(a),B=bigrams(b),inter=0,all=0,k;
+  for(k in A){all++;if(B[k])inter++}for(k in B){all++}
+  return all?(2*inter)/all:0}
+async function loadHot(){
+  var lists=await Promise.all(PLATFORMS.map(function(p){return fetchPlat(p[1])}));
+  var merged=[];
+  lists.forEach(function(items,pi){
+    items.slice(0,8).forEach(function(it,rank){
+      if(!it.title||it.title.length<4||/undefined/.test(it.title))return;
+      var found=null;
+      for(var m=0;m<merged.length;m++){if(similar(merged[m].title,it.title)>=0.42){found=merged[m];break}}
+      if(found){
+        if(found.plats.indexOf(PLATFORMS[pi][0])<0)found.plats.push(PLATFORMS[pi][0]);
+        if(rank<found.rank)found.rank=rank;
+        if(!found.hot&&it.hot)found.hot=it.hot;
+      }else{
+        merged.push({title:it.title,url:it.url||it.mobileUrl||'',hot:it.hot||0,rank:rank,plats:[PLATFORMS[pi][0]]});
+      }
+    });
+  });
+  merged.sort(function(a,b){
+    var sa=a.plats.length*100-a.rank, sb=b.plats.length*100-b.rank;
+    return sb-sa||(b.hot||0)-(a.hot||0);
+  });
+  var top=merged.slice(0,12);
+  if(top.length){
+    hotBox.innerHTML=top.map(function(m){
+      var meta=(m.plats.length>1?('多平台热议 · '):'')+(hotFmt(m.hot)?('热度 '+hotFmt(m.hot)+' · '):'')+'最高第 '+(m.rank+1)+' 名';
+      return rowHTML(m.plats.join(' · '),esc(m.title),m.url,meta);
+    }).join('');
+    applyFilter();
+  }else if(!hotBox.querySelector('.live-row')){
+    hotBox.innerHTML='<p class="live-note">热榜暂时拉不到，稍后再试。</p>';
+  }
+  stamp(hotWhen);
+}
+function loadAll(){loadLive();loadHot()}
+loadAll(); setInterval(loadAll,300000);
 document.querySelector('.live-refresh').addEventListener('click',loadLive);
-document.addEventListener('visibilitychange',function(){if(!document.hidden)loadLive()});
+document.querySelector('.hot-refresh').addEventListener('click',loadHot);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)loadAll()});
 
-</script>
 </body>
 </html>
