@@ -99,6 +99,28 @@ footer a{color:var(--link);text-decoration:none}
   .item{padding:14px 15px 12px;border-radius:12px}
   .item.lead h3{font-size:16px}
 }
+
+.live-head{display:flex;align-items:center;gap:8px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#ff3b30;flex:none;
+  animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.live-when{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.live-refresh{appearance:none;border:0;background:none;color:var(--link);font-size:12px;cursor:pointer;
+  font-family:inherit;padding:4px 2px}
+.live-card{background:var(--surface);border-radius:14px;box-shadow:var(--shadow);padding:6px 18px;margin-top:12px}
+.live-row{padding:11px 0}
+.live-row + .live-row{padding-top:2px}
+.live-row a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;line-height:1.55;display:block}
+.live-row a:hover{color:var(--link)}
+.live-meta{display:flex;align-items:center;gap:8px;margin-top:3px;font-size:12px;color:var(--faint)}
+.live-note{font-size:12px;color:var(--faint);padding:12px 0}
+.skel{padding:11px 0}
+.skel i{display:block;height:12px;border-radius:6px;background:var(--chip);animation:pulse 1.4s ease-in-out infinite}
+.skel i + i{margin-top:8px;height:10px;width:55%}
+.item{transition:transform .12s ease}
+.item:active{transform:scale(.995)}
+h2,h3{text-wrap:balance}
+section{scroll-margin-top:64px}
 @media print{.topbar,.controls,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
 </head>
@@ -111,9 +133,13 @@ footer a{color:var(--link);text-decoration:none}
 <main>
 <p class="date-line">2026-11-23</p>
 <h1>今日简报</h1>
-<p class="sub">每天早上更新 · 取自最近 30 天全网真实讨论与报道，另有时代周刊（TIME）精选。每条附出处。</p>
+<p class="sub">每天早上更新 · 实时动态全天刷新 · 每条附出处。</p>
 <div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
 <p class="result-line"></p>
+<section data-kind="live" style="margin-top:34px">
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">实时动态</p><span class="live-when"></span><button class="live-refresh" type="button">刷新</button></div>
+<div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
+</section>
 <section data-kind="ai">
 <div class="sec-head"><p class="kind">AI 与 Agent 圈</p><span class="sec-count">8 条</span></div>
 <h2>前沿模型一周连发与 llama.cpp 1.0 落地，Agent 之争转向记忆、成本与电力</h2>
@@ -217,7 +243,7 @@ footer a{color:var(--link);text-decoration:none}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:04 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:07 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -232,6 +258,7 @@ var chips=document.querySelectorAll('.chip-btn'), search=document.querySelector(
 function applyFilter(){
   var q=search.value.trim().toLowerCase(), shown=0;
   sections.forEach(function(sec){
+    if(sec.dataset.kind==='live'){if(!q){sec.hidden=false}return}
     if(activeKind!=='all'&&sec.dataset.kind!==activeKind){sec.hidden=true;return}
     var any=false;
     sec.querySelectorAll('.item').forEach(function(it){
@@ -247,6 +274,47 @@ chips.forEach(function(c){c.addEventListener('click',function(){
   c.setAttribute('aria-pressed','true'); activeKind=c.dataset.kind; applyFilter();
 })});
 search.addEventListener('input',applyFilter);
+
+var liveBox=document.querySelector('.live-rows'), liveWhen=document.querySelector('.live-when');
+function ago(ts){var m=Math.max(1,Math.round((Date.now()-ts)/60000));
+  if(m<60)return m+' 分钟前';var h=Math.round(m/60);if(h<24)return h+' 小时前';return Math.round(h/24)+' 天前'}
+function money(v){if(v>=1e6)return '$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return '$'+Math.round(v/1e3)+'K';return '$'+Math.round(v)}
+function rowHTML(chip,title,url,meta){
+  return '<div class="live-row"><a href="'+url+'" target="_blank" rel="noopener">'+title+'</a>'+
+  '<div class="live-meta"><span class="chip">'+chip+'</span><span>'+meta+'</span></div></div>'}
+function esc(t){var d=document.createElement('div');d.textContent=t||'';return d.innerHTML}
+async function loadLive(){
+  var rows=[];
+  try{
+    var hn=await (await fetch('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30')).json();
+    hn.hits.filter(function(h){return h.title&&h.url}).slice(0,6).forEach(function(h){
+      rows.push(rowHTML('Hacker News',esc(h.title),h.url,(h.points||0).toLocaleString()+' 热度 · '+ago(new Date(h.created_at).getTime())));
+    });
+  }catch(e){}
+  try{
+    var pm=await (await fetch('https://gamma-api.polymarket.com/events?active=true&closed=false&order=volume24hr&ascending=false&limit=40')).json();
+    var bad=/nfl|nba|mlb|nhl|ufc|soccer|football|tennis|golf| vs\.? /i, n=0;
+    for(var i=0;i<pm.length&&n<4;i++){
+      var ev=pm[i]; if(bad.test(ev.title||''))continue;
+      var mk=(ev.markets||[])[0]; if(!mk)continue;
+      var prices=JSON.parse(mk.outcomePrices||'[]'), outs=JSON.parse(mk.outcomes||'[]');
+      if(!prices.length)continue;
+      var top=Math.max.apply(null,prices.map(Number)); if(top>0.97)continue;
+      var ti=prices.map(Number).indexOf(top);
+      rows.push(rowHTML('Polymarket',esc(ev.title),'https://polymarket.com/event/'+ev.slug,
+        '24 小时成交 '+money(ev.volume24hr||0)+' · '+(outs[ti]||'')+' '+Math.round(top*100)+'%'));
+      n++;
+    }
+  }catch(e){}
+  if(rows.length){liveBox.innerHTML=rows.join('')}
+  else if(!liveBox.querySelector('.live-row')){liveBox.innerHTML='<p class="live-note">实时源暂时连不上，稍后再试。</p>'}
+  var d=new Date();
+  liveWhen.textContent='更新于 '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+loadLive(); setInterval(loadLive,300000);
+document.querySelector('.live-refresh').addEventListener('click',loadLive);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)loadLive()});
+
 </script>
 </body>
 </html>
