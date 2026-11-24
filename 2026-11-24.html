@@ -285,7 +285,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><a href="2026-11-23.html"><span class="dir">← 上一期</span>2026 年 11 月 23 日 · 周一</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:28 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:31 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -371,7 +371,7 @@ function parseHot(v){if(typeof v==='number')return v;if(!v)return 0;
   var n=parseFloat(v);return isNaN(n)?0:n}
 async function fetchPlat(key){
   try{
-    var u=await fetchT('https://uapis.cn/api/v1/misc/hotboard?type='+key,10000);
+    var u=await fetchT('https://uapis.cn/api/v1/misc/hotboard?type='+key,15000);
     if(u&&u.list&&u.list.length&&u.list[0]&&u.list[0].title){
       return u.list.map(function(it){return {title:it.title,url:it.url||'',hot:parseHot(it.hot_value),hotText:(''+(it.hot_value||'')).trim()}});
     }
@@ -393,7 +393,12 @@ function similar(a,b){var A=bigrams(a),B=bigrams(b),inter=0,all=0,k;
   for(k in A){all++;if(B[k])inter++}for(k in B){all++}
   return all?(2*inter)/all:0}
 async function loadHot(){
-  var lists=await Promise.all(PLATFORMS.map(function(p){return fetchPlat(p[1])}));
+  var lists=[];
+  for(var pi2=0;pi2<PLATFORMS.length;pi2++){
+    var one=await fetchPlat(PLATFORMS[pi2][1]);
+    if(!one.length){await new Promise(function(r){setTimeout(r,1200)});one=await fetchPlat(PLATFORMS[pi2][1]);}
+    lists.push(one);
+  }
   var merged=[];
   lists.forEach(function(items,pi){
     items.slice(0,8).forEach(function(it,rank){
