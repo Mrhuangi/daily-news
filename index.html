@@ -57,11 +57,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .wordmark{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--text);text-decoration:none}
 .search-btn{appearance:none;border:0;background:none;color:var(--text);cursor:pointer;
   width:32px;height:32px;margin:-6px -8px -6px -4px;display:grid;place-items:center;border-radius:999px}
-.search-row-in{max-width:692px;margin:0 auto;padding:0 20px 10px;display:flex;gap:10px;align-items:center}
+.search-row-in{max-width:692px;margin:0 auto;padding:0 20px 10px;display:flex;gap:10px;align-items:center;overflow:hidden;min-height:0}
 .search-cancel{appearance:none;border:0;background:none;color:var(--link);font-size:13px;cursor:pointer;
   padding:6px 2px;font-family:inherit;white-space:nowrap}
 .topbar nav{margin-left:auto;font-size:12px;display:flex;align-items:center;gap:14px}
-.topbar nav a{color:var(--link);text-decoration:none;padding:4px 2px}
+.topbar nav a{color:var(--link);text-decoration:none;padding:8px 4px}
 main{max-width:692px;margin:0 auto;padding:24px 20px calc(72px + env(safe-area-inset-bottom,0px))}
 .sub{font-size:13px;color:var(--muted);line-height:1.65;margin:2px 0 0;max-width:56em}
 .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
@@ -110,6 +110,38 @@ h2{font-size:16.5px;font-weight:600;line-height:1.5;letter-spacing:-.005em;margi
 footer{margin-top:44px;font-size:12px;color:var(--faint);line-height:1.8}
 footer a{color:var(--link);text-decoration:none}
 [hidden]{display:none!important}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+main{animation:fadein .35s ease backwards}
+.item{animation:rise .5s cubic-bezier(.22,.61,.21,1) backwards;animation-delay:calc(var(--i,0)*45ms)}
+.live-row{animation:rise .35s ease backwards}
+section.pop{animation:rise .3s ease backwards}
+a,button,input{touch-action:manipulation}
+.chip-btn{transition:background-color .18s ease,color .18s ease,transform .1s ease}
+.chip-btn:active{transform:scale(.95)}
+.live-refresh{transition:opacity .15s ease}
+.live-refresh:active{opacity:.5}
+.live-refresh:disabled{opacity:.5;cursor:default}
+.search-cancel{transition:opacity .15s ease}
+.search-cancel:active{opacity:.5}
+.topbar nav a{transition:opacity .15s ease}
+.search:focus{outline:none;box-shadow:0 0 0 2px var(--link)}
+.search:focus-visible{outline:none}
+.live-meta{font-variant-numeric:tabular-nums}
+.live-rows,.hot-rows{transition:opacity .18s ease}
+.rows-loading{opacity:.4}
+.search-row{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;
+  transition:grid-template-rows .32s cubic-bezier(.32,.72,.24,1),opacity .22s ease,visibility 0s linear .32s}
+.search-row.open{grid-template-rows:1fr;opacity:1;visibility:visible;
+  transition:grid-template-rows .32s cubic-bezier(.32,.72,.24,1),opacity .22s ease}
+@media (hover:hover){
+  .item{transition:transform .25s ease,box-shadow .25s ease}
+  .item:hover{transform:translateY(-1px);box-shadow:0 2px 4px rgba(0,0,0,.05),0 12px 32px rgba(0,0,0,.07)}
+}
+@media (hover:hover) and (prefers-color-scheme:dark){
+  .item:hover{box-shadow:0 2px 4px rgba(0,0,0,.5),0 12px 32px rgba(0,0,0,.5)}
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -150,12 +182,12 @@ section{scroll-margin-top:64px}
 <body>
 <div class="topbar"><div class="topbar-in">
 <a class="wordmark" href="index.html">每日新闻</a>
-<nav><button class="search-btn" type="button" aria-label="搜索"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="2026-11-23.html">往期</a></nav>
-</div><div class="search-row" hidden><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"><button class="search-cancel" type="button">取消</button></div></div></div>
+<nav><button class="search-btn" type="button" aria-label="搜索" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="2026-11-23.html">往期</a></nav>
+</div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div></div>
 <main>
 <p class="sub">文章实时更新 · 简报每天早上更新 · 每条附出处。</p>
 <div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button></div>
-<p class="result-line"></p>
+<p class="result-line" aria-live="polite"></p>
 <section data-kind="hot" style="margin-top:34px">
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
 <p class="overview" style="margin-top:6px">微博、抖音、今日头条、知乎、哔哩哔哩、百度的热榜合并精选：多平台都在热议的排前面，总共只留十来条重点。</p>
@@ -326,7 +358,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><a href="2026-11-23.html"><span class="dir">← 上一期</span>2026 年 11 月 23 日 · 周一</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 19:45 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 20:10 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -338,20 +370,25 @@ document.querySelectorAll('img.thumb').forEach(function(im){
 var chips=document.querySelectorAll('.chip-btn'), search=document.querySelector('.search'),
     sections=document.querySelectorAll('section[data-kind]'), rline=document.querySelector('.result-line'),
     activeKind='all';
+document.querySelectorAll('.item').forEach(function(el,i){el.style.setProperty('--i',Math.min(i,14))});
 function applyFilter(){
   var q=search.value.trim().toLowerCase(), shown=0;
   sections.forEach(function(sec){
+    var was=sec.hidden;
     var rows=sec.querySelectorAll('.item, .live-row');
     if(q){
       var any=false;
       rows.forEach(function(it){var hit=it.textContent.toLowerCase().indexOf(q)>-1; it.hidden=!hit; if(hit){any=true;shown++}});
-      sec.hidden=!any; return;
+      sec.hidden=!any;
+      if(was&&!sec.hidden){sec.classList.remove('pop');void sec.offsetWidth;sec.classList.add('pop')}
+      return;
     }
     rows.forEach(function(it){it.hidden=false});
     sec.hidden=!(activeKind==='all'||sec.dataset.kind===activeKind);
     if(!sec.hidden)shown+=rows.length;
+    if(was&&!sec.hidden){sec.classList.remove('pop');void sec.offsetWidth;sec.classList.add('pop')}
   });
-  rline.textContent=q?('找到 '+shown+' 条'):(activeKind==='all'?'':'已筛选，可点「全部」恢复');
+  rline.textContent=q?(shown?('找到 '+shown+' 条'):'没有找到相关新闻，换个词试试'):(activeKind==='all'?'':'已筛选，可点「全部」恢复');
 }
 chips.forEach(function(c){c.addEventListener('click',function(){
   chips.forEach(function(x){x.setAttribute('aria-pressed','false')});
@@ -360,9 +397,12 @@ chips.forEach(function(c){c.addEventListener('click',function(){
 search.addEventListener('input',applyFilter);
 var sBtn=document.querySelector('.search-btn'), sRow=document.querySelector('.search-row'),
     sCancel=document.querySelector('.search-cancel');
-function closeSearch(){sRow.hidden=true;if(search.value){search.value='';applyFilter()}}
+function closeSearch(){sRow.classList.remove('open');sBtn.setAttribute('aria-expanded','false');
+  if(search.value){search.value='';applyFilter()}}
 if(sBtn)sBtn.addEventListener('click',function(){
-  if(sRow.hidden){sRow.hidden=false;search.focus()}else{closeSearch()}
+  if(sRow.classList.contains('open')){closeSearch()}
+  else{sRow.classList.add('open');sBtn.setAttribute('aria-expanded','true');
+    setTimeout(function(){search.focus()},70)}
 });
 if(sCancel)sCancel.addEventListener('click',closeSearch);
 search.addEventListener('keydown',function(e){if(e.key==='Escape')closeSearch()});
@@ -410,6 +450,7 @@ if(trBtn)trBtn.addEventListener('click',async function(){
   trBtn.disabled=false;trBtn.textContent='原文';
 });
 async function loadLive(){
+  if(liveBox.querySelector('.live-row'))liveBox.classList.add('rows-loading');
   var data=[];
   try{
     var hn=await fetchT('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30');
@@ -434,6 +475,7 @@ async function loadLive(){
   }catch(e){}
   if(data.length){liveData=data;renderLive();if(trMode)translatePending()}
   else if(!liveBox.querySelector('.live-row')){liveBox.innerHTML='<p class="live-note">实时源暂时连不上，稍后再试。</p>'}
+  liveBox.classList.remove('rows-loading');
   stamp(liveWhen);
 }
 var hotBox=document.querySelector('.hot-rows'), hotWhen=document.querySelector('section[data-kind="hot"] .hot-when');
@@ -473,6 +515,7 @@ function similar(a,b){var A=bigrams(a),B=bigrams(b),inter=0,all=0,k;
   for(k in A){all++;if(B[k])inter++}for(k in B){all++}
   return all?(2*inter)/all:0}
 async function loadHot(){
+  if(hotBox.querySelector('.live-row'))hotBox.classList.add('rows-loading');
   var lists=[];
   for(var pi2=0;pi2<PLATFORMS.length;pi2++){
     var one=await fetchPlat(PLATFORMS[pi2][1]);
@@ -514,6 +557,7 @@ async function loadHot(){
   }else if(!hotBox.querySelector('.live-row')){
     hotBox.innerHTML='<p class="live-note">热榜暂时拉不到，稍后再试。</p>';
   }
+  hotBox.classList.remove('rows-loading');
   stamp(hotWhen);
 }
 function loadAll(){loadLive();loadHot()}
