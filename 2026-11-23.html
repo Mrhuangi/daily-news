@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>每日新闻</title>
-<meta name="description" content="每天早上更新的两份简报：AI 与 Agent 圈、全网科技，外加时代周刊精选。取自最近 30 天各平台真实讨论与报道，按热度整理，每条附出处。">
+<meta name="description" content="文章实时更新：国内六大平台热榜精选与全球实时动态；每天早上另有 AI 与 Agent 圈、全网科技与时代周刊简报。每条附出处。">
 <meta property="og:title" content="每日新闻">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbfd"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161617">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d1d1f'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23ffffff' font-family='-apple-system,PingFang SC,sans-serif'%3E%E6%96%B0%3C/text%3E%3C/svg%3E">
 <script>
 (function(){try{localStorage.removeItem('dn-theme')}catch(e){}})();
@@ -31,24 +31,22 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   -webkit-tap-highlight-color:transparent}
 ::selection{background:rgba(0,102,204,.18)}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:6px}
-.topbar{position:sticky;top:0;z-index:10;background:var(--bar);
+.topbar{position:sticky;top:0;z-index:10;background:var(--bar);padding-top:env(safe-area-inset-top,0px);
   -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
 .topbar-in{max-width:692px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px}
 .wordmark{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--text);text-decoration:none}
 .topbar .today{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .topbar nav{margin-left:auto;font-size:12px;display:flex;align-items:center;gap:14px}
 .topbar nav a{color:var(--link);text-decoration:none;padding:4px 2px}
-main{max-width:692px;margin:0 auto;padding:34px 20px 72px}
-.date-line{font-size:12.5px;color:var(--muted);letter-spacing:.02em;margin:0;font-variant-numeric:tabular-nums}
-h1{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:6px 0 8px}
-.sub{font-size:13px;color:var(--muted);line-height:1.65;margin:0;max-width:56em}
+main{max-width:692px;margin:0 auto;padding:24px 20px 72px}
+.sub{font-size:13px;color:var(--muted);line-height:1.65;margin:2px 0 0;max-width:56em}
 .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
 .chip-btn{appearance:none;border:0;background:var(--surface);color:var(--sub);box-shadow:var(--shadow);
   border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:inherit}
@@ -92,7 +90,7 @@ footer{margin-top:44px;font-size:12px;color:var(--faint);line-height:1.8}
 footer a{color:var(--link);text-decoration:none}
 [hidden]{display:none!important}
 @media (max-width:480px){
-  main{padding:26px 16px 60px}
+  main{padding:20px 16px 60px}
   .topbar-in{padding:10px 16px}
   .topbar .today .y{display:none}
   h1{font-size:19px}
@@ -131,8 +129,6 @@ section{scroll-margin-top:64px}
 <nav><a href="index.html">今日</a><a href="2026-11-24.html">往期</a></nav>
 </div></div>
 <main>
-<p class="date-line">2026-11-23</p>
-<h1>今日简报</h1>
 <p class="sub">文章实时更新 · 简报每天早上更新 · 每条附出处。</p>
 <div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻"></div>
 <p class="result-line"></p>
@@ -248,7 +244,7 @@ section{scroll-margin-top:64px}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:34 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 14:56 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
