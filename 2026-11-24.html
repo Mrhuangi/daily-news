@@ -193,6 +193,22 @@ h2,h3{text-wrap:balance}
 .press-time{font-size:11px;color:var(--faint);margin-top:3px;font-variant-numeric:tabular-nums}
 .press-thumb{flex:none;width:84px}
 .press-thumb img{width:84px;height:auto;border-radius:8px;display:block}
+@media (min-width:1024px){
+  .topbar-in,.filterbar,.search-row-in,main{max-width:1160px}
+  .topbar-in{padding-left:28px;padding-right:28px}
+  .filterbar{padding-left:28px;padding-right:28px}
+  .search-row-in{padding-left:28px;padding-right:28px}
+  main{padding-top:30px;padding-left:28px;padding-right:28px}
+  .live-pair{display:flex;gap:16px;align-items:flex-start}
+  .live-pair>section{flex:1 1 0;min-width:0;margin-top:8px}
+  .items{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .items .item{margin-top:0}
+  .items .item.lead{grid-column:1/-1}
+  .item.lead h3{font-size:19px}
+  h2{font-size:19px}
+  .press-card{columns:2;column-gap:40px}
+  .press-group{break-inside:avoid}
+}
 @media print{.topbar,.filterbar,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
 </head>
@@ -204,6 +220,7 @@ h2,h3{text-wrap:balance}
 </div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div><div class="filterbar"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button></div></div>
 <main>
 <p class="result-line" aria-live="polite"></p>
+<div class="live-pair">
 <section data-kind="hot" style="margin-top:8px">
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
@@ -212,10 +229,12 @@ h2,h3{text-wrap:balance}
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button><button class="live-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
+</div>
 <section data-kind="ai">
 <div class="sec-head"><p class="kind">AI 与 Agent 圈</p><span class="sec-count">8 条</span></div>
 <h2>Anthropic 以 813 亿美元创纪录 IPO 登陆 Nasdaq，三强新模型十天内连发、Agent 进入治理时代</h2>
 <p class="overview">本月 AI 圈被资本与模型双线点燃：Anthropic 成为首家上市的前沿实验室，OpenAI、Google、Anthropic 在十天内连发 GPT-6.2、Gemini 4 与 Claude Fable 5.2 并打起价格战。与此同时，Microsoft 披露 Agent 365 已登记超 5000 万个 Agent，HN 与 GitHub 的讨论显示开发者正转向多 Agent 并行、记忆与技能（skills）生态，本地推理也因 Apple Harbor 再起热潮。</p>
+<div class="items">
 <div class="item lead" data-url="https://www.nasdaq.com/articles/anthropic-prices-ipo-83-shr-raises-81-bln-ahead-stock-market-debut">
 <div class="eyebrow"><span class="src-name">Nasdaq / RTTNews</span><span class="chip">募资约 $81.3B 创史上最大 IPO 纪录，定价 $83 高于 $70–78 区间</span></div>
 <h3>Anthropic 创纪录 IPO 登陆 Nasdaq，首日开盘大涨</h3>
@@ -270,11 +289,13 @@ h2,h3{text-wrap:balance}
 <p>Polymarket 市场「Anthropic vs OpenAI — 12 月 31 日谁估值更高」当前价格约 73%（买 70%/卖 76%，近 7 天 -8.5%、近 30 天 -19%），逻辑是 Anthropic 已于 11 月 19 日上市、市值可直接计价，而 OpenAI 仍为私募估值标记。此前 Polymarket 对 Anthropic 年内 IPO 的定价约 87–88%，而 OpenAI 年内上市仅约 1.5%，预测市场成为观察两家上市节奏的风向标。</p>
 <div class="meta"><a href="https://forecast.agenticlearning.ai/scans/v2/7589" target="_blank" rel="noopener">出处 →</a></div>
 </div>
+</div>
 </section>
 <section data-kind="tech">
 <div class="sec-head"><p class="kind">全网科技</p><span class="sec-count">8 条</span></div>
 <h2>Nvidia 董事会全票请回黄仁勋，股价单日暴涨逾 30% 成为今日科技圈最大震动</h2>
 <p class="overview">最近 30 天科技面被人事、航天与硬件三线主导：Nvidia 创始人在辞职 11 天后被董事会全票复职，HN 与社媒热度断层领先；SpaceX Starship 第 15 次飞行尝试双回收、ULA Vulcan 首飞 Amazon Leo 却失败，卫星互联网竞速分化明显。与此同时 NGINX 爆出 CVSS 9.2 的远程代码执行漏洞、Google 扩充 TPU 芯片线、Tesla Cybercab 下线与 BYD 闪充落地，消费电子则由 Apple 折叠 iPhone Duo 售罄与独立浏览器 Ladybird 进入 alpha 撑场。</p>
+<div class="items">
 <div class="item" data-url="https://www.cnn.com/2026/11/23/tech/nvidia-reinstates-jensen-huang-ceo?cid=external-feeds_iluminar_meta">
 <img class="thumb" src="images/2026-11-24-tech-1.jpg" alt="Nvidia 董事会全票复职黄仁勋，股价暴涨逾 30%" width="800" height="450" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">CNN / Hacker News / Facebook @NVIDIA</span><span class="chip">HN 当日最高：1,635 points / 2,746 comments；NVIDIA 官方 Facebook 帖 99K Likes、6.2K Comments；股价单日涨逾 30%</span></div>
@@ -330,10 +351,12 @@ h2,h3{text-wrap:balance}
 <p>开发逾四年的 Ladybird 浏览器 11 月 23 日发布首个 alpha，提供 macOS 与 Linux 下载，最大卖点是引擎完全从零自研、非 Chromium/WebKit 分叉，官方坦言部分网站打不开、偶尔崩溃，并邀请安全研究者来攻。Ladybird 登上 HN Daily 11 月 23 日十大高分文章。开源圈本月热度同样集中在 agent 工具：GitHub 月度趋势榜首 morluto/rea 累计约 475k stars、本月新增约 58.5k stars，pingdotgg/t3code 等编程 agent 控制台紧随其后。</p>
 <div class="meta"><a href="https://ladybird.org" target="_blank" rel="noopener">出处 →</a></div>
 </div>
+</div>
 </section>
 <section data-kind="time">
 <div class="sec-head"><p class="kind">时代周刊 · TIME</p><span class="sec-count">6 条</span></div>
 <h2>时代周刊精选</h2>
+<div class="items">
 <div class="item" data-url="https://time.com/article/2026/11/23/jensen-huang-return-nvidia-trump/">
 <img class="thumb" src="images/2026-11-24-time-1.jpg" alt="黄仁勋戏剧性回归英伟达 CEO：六个待解的问题" width="1024" height="710" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 23 日</span></div>
@@ -376,10 +399,11 @@ h2,h3{text-wrap:balance}
 <p>一场天象秀赶在假期前登场——本周的「海狸月」将是今年最大的超级月亮之一。TIME 整理了最佳观赏时间和这轮满月的由来。</p>
 <div class="meta"><a href="https://time.com/article/2026/11/23/thanksgiving-beaver-supermoon-what-to-know/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
+</div>
 </section>
 <div class="daynav"><a href="2026-11-23.html"><span class="dir">← 上一期</span>2026 年 11 月 23 日 · 周一</a><a class="next" href="2026-11-25.html"><span class="dir">下一期 →</span>2026 年 11 月 25 日 · 周三</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-25.html">11 月 25 日</a><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 12:48 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>数据来源 · 时代周刊：TIME 官方 RSS<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 17:44 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>数据来源 · 时代周刊：TIME 官方 RSS<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
