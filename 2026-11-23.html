@@ -193,6 +193,22 @@ h2,h3{text-wrap:balance}
 .press-time{font-size:11px;color:var(--faint);margin-top:3px;font-variant-numeric:tabular-nums}
 .press-thumb{flex:none;width:84px}
 .press-thumb img{width:84px;height:auto;border-radius:8px;display:block}
+@media (min-width:1024px){
+  .topbar-in,.filterbar,.search-row-in,main{max-width:1160px}
+  .topbar-in{padding-left:28px;padding-right:28px}
+  .filterbar{padding-left:28px;padding-right:28px}
+  .search-row-in{padding-left:28px;padding-right:28px}
+  main{padding-top:30px;padding-left:28px;padding-right:28px}
+  .live-pair{display:flex;gap:16px;align-items:flex-start}
+  .live-pair>section{flex:1 1 0;min-width:0;margin-top:8px}
+  .items{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .items .item{margin-top:0}
+  .items .item.lead{grid-column:1/-1}
+  .item.lead h3{font-size:19px}
+  h2{font-size:19px}
+  .press-card{columns:2;column-gap:40px}
+  .press-group{break-inside:avoid}
+}
 @media print{.topbar,.filterbar,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
 </head>
@@ -204,6 +220,7 @@ h2,h3{text-wrap:balance}
 </div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div><div class="filterbar"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button></div></div>
 <main>
 <p class="result-line" aria-live="polite"></p>
+<div class="live-pair">
 <section data-kind="hot" style="margin-top:8px">
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
@@ -212,10 +229,12 @@ h2,h3{text-wrap:balance}
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button><button class="live-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
+</div>
 <section data-kind="ai">
 <div class="sec-head"><p class="kind">AI 与 Agent 圈</p><span class="sec-count">8 条</span></div>
 <h2>前沿模型一周连发与 llama.cpp 1.0 落地，Agent 之争转向记忆、成本与电力</h2>
 <p class="overview">11 月中下旬前沿模型密集发布：Claude Fable 5.2、Gemini 4 系列、GPT-6.2 Astra/Sol 与 Qwen4-Max、Kimi K3.1 Pro 几乎同周登场，价格战同步打响。与此同时开源侧 llama.cpp 正式发布 1.0、编码 Agent 的记忆层 claude-mem 星数冲高，而 Anthropic 数据中心 87% 燃气供电的分析在 HN 引爆了关于 AI 碳账的争论。</p>
+<div class="items">
 <div class="item lead" data-url="https://raw.githubusercontent.com/liyedanpdx/reddit-ai-trends/main/reports/2026/11/15/report_20261115_en.md">
 <div class="eyebrow"><span class="src-name">Reddit r/LocalLLaMA</span><span class="chip">Reddit r/LocalLLaMA 帖子 1798 分、224 条评论，周榜前列</span></div>
 <h3>llama.cpp 发布 v1.0：本地 AI 终于有了稳定 API 契约</h3>
@@ -270,11 +289,13 @@ h2,h3{text-wrap:balance}
 <p>Moonshot 于 11 月 2 日提前把 Kimi K3.1 Pro 完整权重放上 Hugging Face：2.8 万亿总参数 MoE、每 Token 激活 104B、896 个专家、1M 上下文与原生图像输入，MXFP4 检查点约 1.56 TB，许可证允许商用但对大营收 MaaS 业务另设协议。讨论焦点不在跑分而在现实门槛——单是权重就需一台 8×B300 级节点，vLLM 等工具链当时仍在追赶，普通本地玩家只能围观。</p>
 <div class="meta"><a href="https://www.qovery.com/blog/kimi-k3-1-pro-self-host-kubernetes-gpu-memory-multi-node" target="_blank" rel="noopener">出处 →</a></div>
 </div>
+</div>
 </section>
 <section data-kind="tech">
 <div class="sec-head"><p class="kind">全网科技</p><span class="sec-count">8 条</span></div>
 <h2>日本三大车企罕见联手标准化降本，NGINX 爆 9.2 分严重漏洞成全网焦点</h2>
 <p class="overview">最近几天科技圈的主线是成本与安全双重压力：丰田、日产、本田在 Hacker News 以 1310 分登顶，宣布标准化零部件对抗中国车企；NGINX 被曝潜伏十年的未授权远程代码执行漏洞，约 880 万服务可能暴露。与此同时 NVIDIA 交出首个千亿美元季度却因新加坡销售披露引发出口管制质疑，Apple 首款折叠屏 iPhone Duo 售罄、Tesla Cybercab 开卖，芯片与航天领域也密集发布新品与任务。</p>
+<div class="items">
 <div class="item" data-url="https://www.whichcar.com.au/news/toyota-nissan-honda-lower-costs-collaboration-parts-standardise">
 <div class="eyebrow"><span class="src-name">Hacker News / WhichCar (源自 Automotive News / Car and Driver)</span><span class="chip">HN 2026-11-22 首页第 1 名，1310 points、706 comments</span></div>
 <h3>丰田、日产、本田联手标准化零部件降本，应对中国车企竞争</h3>
@@ -328,10 +349,11 @@ h2,h3{text-wrap:balance}
 <p>SpaceX 于 11 月 22 日清晨从范登堡太空军基地以 Falcon 9 发射 NROL-136 任务，为美国国家侦察局的低轨 proliferated architecture 星座补充一批情报卫星，具体数量未披露。所用助推器 B1097 为第 14 次飞行，发射后约 7.5 分钟回收于 4 号着陆区；此次发射将该发射台的周转纪录缩短了 23 小时以上。</p>
 <div class="meta"><a href="https://spaceflightnow.com/2026/11/21/live-coverage-spacex-to-launch-intelligence-gathering-satellites-for-the-national-reconnaissance-office-3/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
+</div>
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-25.html">11 月 25 日</a><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 12:48 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 17:44 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
