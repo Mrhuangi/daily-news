@@ -193,6 +193,22 @@ h2,h3{text-wrap:balance}
 .press-time{font-size:11px;color:var(--faint);margin-top:3px;font-variant-numeric:tabular-nums}
 .press-thumb{flex:none;width:84px}
 .press-thumb img{width:84px;height:auto;border-radius:8px;display:block}
+@media (min-width:1024px){
+  .topbar-in,.filterbar,.search-row-in,main{max-width:1160px}
+  .topbar-in{padding-left:28px;padding-right:28px}
+  .filterbar{padding-left:28px;padding-right:28px}
+  .search-row-in{padding-left:28px;padding-right:28px}
+  main{padding-top:30px;padding-left:28px;padding-right:28px}
+  .live-pair{display:flex;gap:16px;align-items:flex-start}
+  .live-pair>section{flex:1 1 0;min-width:0;margin-top:8px}
+  .items{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .items .item{margin-top:0}
+  .items .item.lead{grid-column:1/-1}
+  .item.lead h3{font-size:19px}
+  h2{font-size:19px}
+  .press-card{columns:2;column-gap:40px}
+  .press-group{break-inside:avoid}
+}
 @media print{.topbar,.filterbar,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
 </head>
@@ -204,6 +220,7 @@ h2,h3{text-wrap:balance}
 </div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div><div class="filterbar"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button><button class="chip-btn" data-kind="press" aria-pressed="false">国际名媒</button></div></div>
 <main>
 <p class="result-line" aria-live="polite"></p>
+<div class="live-pair">
 <section data-kind="hot" style="margin-top:8px">
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
@@ -212,10 +229,12 @@ h2,h3{text-wrap:balance}
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button><button class="live-refresh" type="button">刷新</button></div>
 <div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
+</div>
 <section data-kind="ai">
 <div class="sec-head"><p class="kind">AI 与 Agent 圈</p><span class="sec-count">8 条</span></div>
 <h2>黄仁勋11天后复职、英伟达股价单日暴涨超30%，GPT-6.2与微软7款MAI模型同周登场</h2>
 <p class="overview">11月23日英伟达董事会全票恢复黄仁勋总裁兼CEO职务，成为本周AI圈最重磅的公司动向，股价单日涨超30%。模型侧同样密集：OpenAI于11月17日发布GPT-6.2 Astra与Sol，微软同日在Ignite推出7款MAI模型，主打以更低成本接近前沿性能。与此同时，加州起诉OpenAI的Agent失控案与Signal为防OS级AI Agent偷窥而默认屏蔽截图，让Agent安全与隐私成为社区热议焦点。</p>
+<div class="items">
 <div class="item lead" data-url="https://techcrunch.com/2026/11/23/nvidia-reverses-course-and-brings-jensen-huang-back-as-ceo/">
 <img class="thumb" src="images/2026-11-25-ai-1.jpg" alt="黄仁勋11天后复职：英伟达董事会全票恢复其CEO职务，股价单日涨超30%" width="1024" height="658" fetchpriority="high" decoding="async">
 <div class="eyebrow"><span class="src-name">TechCrunch</span><span class="chip">股价单日涨超30%、市值单日增逾9000亿美元；Reddit r/LocalLLaMA相关帖1965赞、681评论</span></div>
@@ -271,11 +290,13 @@ h2,h3{text-wrap:balance}
 <p>TIME周末文章引述康奈尔大学助理教授Aditya Vashistha的观点指出，AI竞赛正日益集中于美国与中国，世界多数国家对技术如何构建与治理几乎没有话语权。文章引述Epoch AI的估算：2022年至2026年6月，全球新增AI算力中美国约占72%、中国约10%，其余所有国家合计仅18%；另引卡内基基金会研究，2025年在NeurIPS发表论文的逾万名研究者中约四分之三受雇于美中机构。文章呼吁让美中之外的数十亿人参与决定AI为谁服务、如何治理。</p>
 <div class="meta"><a href="https://newsroomamerica.com/a/Yjy5d6C0epPOMRxO9vg2Uf5MF8R/time_reports_a_cornell_professor_s_essay_arguing_the_u_s_china_ai_rivalry_concentrates_computing_power_data_centers_and_research_leaving_billions_outside_those_countries_with_little_say_in_how_the_technology_is_governed.html" target="_blank" rel="noopener">出处 →</a></div>
 </div>
+</div>
 </section>
 <section data-kind="tech">
 <div class="sec-head"><p class="kind">全网科技</p><span class="sec-count">8 条</span></div>
 <h2>黄仁勋辞职11天后重返英伟达，微软为24小时大宕机拉响Code Red，星舰首次空中接住飞船</h2>
 <p class="overview">今天科技圈的主线是巨头人事与基础设施的双重震荡：英伟达在白宫施压下11天内让黄仁勋复职，股价单日大涨约三成；微软则为11月12日至13日的24小时宕机宣布最高级别Code Red整改。与此同时，航天、浏览器、汽车与监管也各有标志性进展，从星舰首次接住返回飞船，到从零自研的Ladybird浏览器发布首个Alpha，再到意大利对Meta开出8.05亿欧元罚单。</p>
+<div class="items">
 <div class="item" data-url="https://www.cnn.com/2026/11/23/politics/trump-administration-jensen-huang-reinstated?cid=external-feeds_iluminar_meta">
 <img class="thumb" src="images/2026-11-25-tech-1.jpg" alt="黄仁勋辞职11天后重返英伟达，特朗普政府直接施压董事会" width="800" height="450" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">CNN</span><span class="chip">HN首页热帖，约4058分；复职当日股价上涨约31%</span></div>
@@ -329,10 +350,12 @@ h2,h3{text-wrap:balance}
 <p>TIME发布2026年度最佳发明榜单，评选300项突破性发明与100项特别提名，封面人物是9月接替库克的苹果CEO John Ternus，主题为“苹果新时代”。报道称，Ternus的工程背景与折叠手机iPhone Duo的研发直接相关，这款折叠机被视为他工程主导路线的早期象征；同榜还包括Anthropic的Claude Code、Google的SynthID与Lovable等。</p>
 <div class="meta"><a href="https://www.newsbytesapp.com/news/business/time-magazine-features-apple-ceo-john-ternus-on-its-cover/story" target="_blank" rel="noopener">出处 →</a></div>
 </div>
+</div>
 </section>
 <section data-kind="time">
 <div class="sec-head"><p class="kind">时代周刊 · TIME</p><span class="sec-count">6 条</span></div>
 <h2>时代周刊精选</h2>
+<div class="items">
 <div class="item" data-url="https://time.com/article/2026/11/24/ai-consumer-data-shopping/">
 <div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 25 日</span></div>
 <h3>AI 正在改变企业对消费者的了解</h3>
@@ -373,6 +396,7 @@ h2,h3{text-wrap:balance}
 <h3>哈瓦那、加拉加斯与特朗普在拉美的未竟之事</h3>
 <p>特朗普正以关税施压、制裁委内瑞拉，甚至不排除对古巴采取军事行动。TIME 梳理美国在西半球这场未完成的政权更迭棋局。</p>
 <div class="meta"><a href="https://time.com/article/2026/11/24/trump-cuba-venezuela-regime-change-western-hemisphere/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
 </div>
 </section>
 <section data-kind="press">
@@ -447,7 +471,7 @@ h2,h3{text-wrap:balance}
 </section>
 <div class="daynav"><a href="2026-11-24.html"><span class="dir">← 上一期</span>2026 年 11 月 24 日 · 周二</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 12:48 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>数据来源 · 时代周刊：TIME 官方 RSS<br>数据来源 · 国际名媒：BBC、CNN、路透社、美联社、法新社、纽约时报、卫报、半岛电视台的公开 RSS<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 17:44 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>数据来源 · 时代周刊：TIME 官方 RSS<br>数据来源 · 国际名媒：BBC、CNN、路透社、美联社、法新社、纽约时报、卫报、半岛电视台的公开 RSS<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
