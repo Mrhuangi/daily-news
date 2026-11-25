@@ -205,9 +205,23 @@ h2,h3{text-wrap:balance}
   .items .item{margin-top:0}
   .items .item.lead{grid-column:1/-1}
   .item.lead h3{font-size:19px}
-  h2{font-size:19px}
+  h2{font-size:22px;letter-spacing:-.015em}
   .press-card{columns:2;column-gap:40px}
   .press-group{break-inside:avoid}
+  main{padding-top:34px}
+  section{margin-top:56px}
+  .sec-head{margin-bottom:8px}
+  .overview{font-size:14.5px;max-width:48em}
+  .live-pair{gap:20px}
+  .live-card{padding:8px 22px}
+  .items{gap:16px}
+  .item{padding:22px 22px 18px}
+  .item.lead{display:grid;grid-template-columns:1.08fr .92fr;gap:26px;align-items:center;padding:26px}
+  .item.lead .thumb{margin:0}
+  .item.lead h3{font-size:23px;line-height:1.4}
+  .item.lead p{font-size:14.5px;line-height:1.85}
+  .press-card{padding:10px 26px}
+  .wordmark{font-size:15px}
 }
 @media print{.topbar,.filterbar,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
@@ -222,11 +236,11 @@ h2,h3{text-wrap:balance}
 <p class="result-line" aria-live="polite"></p>
 <div class="live-pair">
 <section data-kind="hot" style="margin-top:8px">
-<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span></div>
 <div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
 <section data-kind="live">
-<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button><button class="live-refresh" type="button">刷新</button></div>
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button></div>
 <div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
 </div>
@@ -236,10 +250,12 @@ h2,h3{text-wrap:balance}
 <p class="overview">11 月中下旬前沿模型密集发布：Claude Fable 5.2、Gemini 4 系列、GPT-6.2 Astra/Sol 与 Qwen4-Max、Kimi K3.1 Pro 几乎同周登场，价格战同步打响。与此同时开源侧 llama.cpp 正式发布 1.0、编码 Agent 的记忆层 claude-mem 星数冲高，而 Anthropic 数据中心 87% 燃气供电的分析在 HN 引爆了关于 AI 碳账的争论。</p>
 <div class="items">
 <div class="item lead" data-url="https://raw.githubusercontent.com/liyedanpdx/reddit-ai-trends/main/reports/2026/11/15/report_20261115_en.md">
+<div class="lead-body">
 <div class="eyebrow"><span class="src-name">Reddit r/LocalLLaMA</span><span class="chip">Reddit r/LocalLLaMA 帖子 1798 分、224 条评论，周榜前列</span></div>
 <h3>llama.cpp 发布 v1.0：本地 AI 终于有了稳定 API 契约</h3>
 <p>11 月 13 日，llama.cpp 与底层 ggml 同步发布 v1.0.0，结束三年半按提交编号发版的历史，承诺公共 C API 的破坏性变更只随大版本出现。此版清理了 35 个已弃用函数，新增 FP8 KV 缓存、主机内存 MoE 专家缓存，并支持 Kimi-K3.1-Pro 等新架构，总支持架构超过 150 种。Ollama、LM Studio 等大量本地工具都建在它之上，社区普遍视其为本地推理走向成熟的标志。</p>
 <div class="meta"><a href="https://raw.githubusercontent.com/liyedanpdx/reddit-ai-trends/main/reports/2026/11/15/report_20261115_en.md" target="_blank" rel="noopener">出处 →</a></div>
+</div>
 </div>
 <div class="item" data-url="https://repotrending.com/repo/thedotmack/claude-mem/">
 <img class="thumb" src="images/2026-11-23-ai-2.jpg" alt="claude-mem 冲至约 11.9 万 Star：编码 Agent 开始拼记忆层" width="1080" height="567" loading="lazy" decoding="async">
@@ -353,7 +369,7 @@ h2,h3{text-wrap:balance}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-25.html">11 月 25 日</a><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 17:44 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 17:59 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -562,8 +578,6 @@ async function loadHot(){
 }
 function loadAll(){loadLive();loadHot()}
 loadAll(); setInterval(function(){if(!document.hidden)loadAll()},300000);
-document.querySelector('section[data-kind="live"] .live-refresh:not(.tr-btn)').addEventListener('click',loadLive);
-document.querySelector('section[data-kind="hot"] .hot-refresh').addEventListener('click',loadHot);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)loadAll()});
 var tb=document.querySelector('.topbar');
 addEventListener('scroll',function(){tb.classList.toggle('scrolled',window.scrollY>4)},{passive:true});
