@@ -79,7 +79,7 @@ section{margin-top:42px}
 h2{font-size:16.5px;font-weight:600;line-height:1.5;letter-spacing:-.005em;margin:0 0 8px;text-wrap:balance}
 .overview{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0 0 4px;max-width:60em;letter-spacing:.01em;text-wrap:pretty}
 .item{background:var(--surface);border-radius:14px;padding:16px 18px 14px;margin-top:12px;box-shadow:var(--shadow)}
-.item .thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;
+.item .thumb{display:block;width:100%;height:auto;border-radius:9px;
   margin-bottom:11px;background:var(--chip);opacity:0;transition:opacity .45s ease}
 .item .thumb.on{opacity:1}
 @media (prefers-color-scheme:dark){.item .thumb.on{filter:brightness(.94)}}
@@ -182,7 +182,7 @@ section{scroll-margin-top:64px}
 <body>
 <div class="topbar"><div class="topbar-in">
 <a class="wordmark" href="index.html">每日新闻</a>
-<nav><button class="search-btn" type="button" aria-label="搜索" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="index.html">今日</a><a href="2026-11-24.html">往期</a></nav>
+<nav><button class="search-btn" type="button" aria-label="搜索" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="index.html">今日</a><a href="2026-11-25.html">往期</a></nav>
 </div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div></div>
 <main>
 <div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button></div>
@@ -207,14 +207,14 @@ section{scroll-margin-top:64px}
 <div class="meta"><a href="https://raw.githubusercontent.com/liyedanpdx/reddit-ai-trends/main/reports/2026/11/15/report_20261115_en.md" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://repotrending.com/repo/thedotmack/claude-mem/">
-<img class="thumb" src="images/2026-11-23-ai-2.jpg" alt="claude-mem 冲至约 11.9 万 Star：编码 Agent 开始拼记忆层" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-ai-2.jpg" alt="claude-mem 冲至约 11.9 万 Star：编码 Agent 开始拼记忆层" width="1080" height="567" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">GitHub / RepoTrending</span><span class="chip">GitHub 119,085 Stars（11 月 23 日），30 天新增 16,525 Stars</span></div>
 <h3>claude-mem 冲至约 11.9 万 Star：编码 Agent 开始拼记忆层</h3>
 <p>thedotmack/claude-mem 为 Claude Code、Codex、OpenCode、Gemini 等编码 Agent 提供跨会话持久记忆：记录 Agent 的操作、经 AI 压缩后再注入后续会话，避免每天重复交代项目背景。11 月 23 日其 Star 达 119,085，过去 30 天新增 16,525；同期 vercel-labs/agent-browser 等 Agent 工具也在 GitHub Trending 上走热，显示 Agent 竞争正从模型本身转向记忆、浏览器操作等外围基础设施。</p>
 <div class="meta"><a href="https://repotrending.com/repo/thedotmack/claude-mem/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://beevr.ai/blog/ai-model-releases-november-2026">
-<img class="thumb" src="images/2026-11-23-ai-3.jpg" alt="Claude Fable 5.2 发布：降价 20% 并守住多项榜首" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-ai-3.jpg" alt="Claude Fable 5.2 发布：降价 20% 并守住多项榜首" width="1080" height="567" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">BeevR / Hacker News</span><span class="chip">HN 首页热帖，同一提交约 923–996 分（11 月 15 日复查为 923 分）</span></div>
 <h3>Claude Fable 5.2 发布：降价 20% 并守住多项榜首</h3>
 <p>Anthropic 于 11 月 9 日发布 Claude Fable 5.2 与仅供验证机构使用的 Mythos 5.2，定价降至每百万 Token 输入 $8、输出 $40（前代为 $10/$50），上下文 1M。厂商评测称其在 FrontierCode 2.0、FrontierSWE v2 等长程工程与多 Agent 编排任务上领先，被定位为需要数小时自主工作的场景，普通工程则建议先用 Opus 5.5 或 Sonnet 5.5 再升级。</p>
@@ -227,28 +227,28 @@ section{scroll-margin-top:64px}
 <div class="meta"><a href="https://www.hpcwire.com/aiwire/2026/11/16/alibaba-releases-qwen4-max-with-2-4-trillion-parameters/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/">
-<img class="thumb" src="images/2026-11-23-ai-5.jpg" alt="Anthropic 电力账被扒：2028 年美国算力约 87% 燃气、11% 燃煤引爆争论" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-ai-5.jpg" alt="Anthropic 电力账被扒：2028 年美国算力约 87% 燃气、11% 燃煤引爆争论" width="1080" height="958" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">Better Data Center Project / Hacker News</span><span class="chip">HN 773 分、801 条评论，为 11 月 22 日 HN 首页评论量最高的争论帖</span></div>
 <h3>Anthropic 电力账被扒：2028 年美国算力约 87% 燃气、11% 燃煤引爆争论</h3>
 <p>Better Data Center Project 11 月 16 日的逐站分析估算，Anthropic 已签约约 15 GW 算力，按边际电源计其 2028 年在美电力约 87% 来自燃气、11% 来自燃煤，年排放中位估算达 3200 万吨 CO2e；报告还指出其在美无直接可再生能源承诺，却已买下 1.7 GW、价值 $34 亿的燃气发电机承诺。该话题成为当天 HN 评论量最高的争论之一，焦点是 AI 扩张的真实碳成本与厂商的责任叙事是否匹配。</p>
 <div class="meta"><a href="https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://www.macrumors.com/2026/11/10/apple-claris-harbor-app/">
-<img class="thumb" src="images/2026-11-23-ai-6.jpg" alt="Apple Harbor 曝光：把 Mac 变成可组集群的私有本地 AI 服务器" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-ai-6.jpg" alt="Apple Harbor 曝光：把 Mac 变成可组集群的私有本地 AI 服务器" width="1080" height="606" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">MacRumors / Reddit r/LocalLLaMA</span><span class="chip">Reddit r/LocalLLaMA 752 分、169 条评论；HN 相关帖 580 分</span></div>
 <h3>Apple Harbor 曝光：把 Mac 变成可组集群的私有本地 AI 服务器</h3>
 <p>11 月 10 日曝光的 Harbor 由 Apple 子公司 Claris 开发、私密预览中，可在 Apple Silicon Mac 上下载并运行开源权重模型，数据不出本机；更引人注目的是它能通过 Thunderbolt 5 自动组网、多台 Mac 池化统一内存以跑更大模型，依托 macOS Tahoe 26.2 的 RDMA over Thunderbolt 5。社区欢迎更简单的私有推理体验，但也指出凑齐硬件的成本不低；目前 App Store 页面已被下架，无发布日期。</p>
 <div class="meta"><a href="https://www.macrumors.com/2026/11/10/apple-claris-harbor-app/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://community.openai.com/t/gpt-6-2-astra-and-sol-are-now-available/1417531?ref=apidog.com">
-<img class="thumb" src="images/2026-11-23-ai-7.jpg" alt="OpenAI 发布 GPT-6.2 Astra 与 Sol：旗舰降价 20%，与 Fable 5.2 同价" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-ai-7.jpg" alt="OpenAI 发布 GPT-6.2 Astra 与 Sol：旗舰降价 20%，与 Fable 5.2 同价" width="1024" height="576" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">OpenAI Developer Community</span><span class="chip">发布当日登上 HN 首页与多家科技媒体头条，X 官方发布帖广泛转发</span></div>
 <h3>OpenAI 发布 GPT-6.2 Astra 与 Sol：旗舰降价 20%，与 Fable 5.2 同价</h3>
 <p>OpenAI 于 11 月 17 日同日推出 GPT-6.2 Astra 与 Sol：Astra 面向复杂专业与科学工作，定价降至每百万 Token 输入 $8、输出 $40，与 Claude Fable 5.2 持平，缓存输入折扣加深至 60%；Sol 维持 $2/$10，主打日常任务与多步 Agent 工作流。两款已在 ChatGPT Work、Codex 与 API 上线，同时因网络安全能力被评为 Critical 级别而收紧了高风险安全类请求的防护。</p>
 <div class="meta"><a href="https://community.openai.com/t/gpt-6-2-astra-and-sol-are-now-available/1417531?ref=apidog.com" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://www.qovery.com/blog/kimi-k3-1-pro-self-host-kubernetes-gpu-memory-multi-node">
-<img class="thumb" src="images/2026-11-23-ai-8.jpg" alt="Moonshot 开放 Kimi K3.1 Pro 权重：2.8T 参数、1.56 TB，本地部署门槛拉满" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-ai-8.jpg" alt="Moonshot 开放 Kimi K3.1 Pro 权重：2.8T 参数、1.56 TB，本地部署门槛拉满" width="1080" height="608" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">Qovery Blog / Hugging Face</span><span class="chip">11 月模型汇总重点条目，开源社区与部署厂商持续热议，无单一平台确切计数</span></div>
 <h3>Moonshot 开放 Kimi K3.1 Pro 权重：2.8T 参数、1.56 TB，本地部署门槛拉满</h3>
 <p>Moonshot 于 11 月 2 日提前把 Kimi K3.1 Pro 完整权重放上 Hugging Face：2.8 万亿总参数 MoE、每 Token 激活 104B、896 个专家、1M 上下文与原生图像输入，MXFP4 检查点约 1.56 TB，许可证允许商用但对大营收 MaaS 业务另设协议。讨论焦点不在跑分而在现实门槛——单是权重就需一台 8×B300 级节点，vLLM 等工具链当时仍在追赶，普通本地玩家只能围观。</p>
@@ -266,21 +266,21 @@ section{scroll-margin-top:64px}
 <div class="meta"><a href="https://www.whichcar.com.au/news/toyota-nissan-honda-lower-costs-collaboration-parts-standardise" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities">
-<img class="thumb" src="images/2026-11-23-tech-2.jpg" alt="NGINX 爆未授权远程代码执行漏洞，最老一例潜伏自 2015 年" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-tech-2.jpg" alt="NGINX 爆未授权远程代码执行漏洞，最老一例潜伏自 2015 年" width="1080" height="601" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">Wiz Blog / BleepingComputer</span><span class="chip">CVSS 4.0 评分 9.2 严重级；Censys 估算约 880 万 NGINX 服务可能暴露；HN 首页热帖</span></div>
 <h3>NGINX 爆未授权远程代码执行漏洞，最老一例潜伏自 2015 年</h3>
 <p>Wiz、Ikotas Labs、Metnir、Rapid7 与 Xint 独立发现 NGINX 两项严重漏洞 CVE-2026-123633 与 CVE-2026-123007，均需开启 HTTP/2，其中一例源于整数下溢、自 NGINX 1.9.5 起存在逾十年，静态文件服务也可被攻破。F5 已于 11 月 18 日发布修复版本 1.30.7 与 1.31.9，无法立即升级者被建议先关闭 HTTP/2。</p>
 <div class="meta"><a href="https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://dev.to/976905690/nvidia-q3-first-ever-100-billion-dollar-quarter-1gmf">
-<img class="thumb" src="images/2026-11-23-tech-3.jpg" alt="NVIDIA 首个千亿美元季度：营收 1158 亿美元，却停报新加坡销售引质疑" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-tech-3.jpg" alt="NVIDIA 首个千亿美元季度：营收 1158 亿美元，却停报新加坡销售引质疑" width="1080" height="564" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">DEV / Hacker News Daily（源自 NVIDIA 财报与 FT）</span><span class="chip">HN Daily 2026-11-18 当日最高评级文章之一</span></div>
 <h3>NVIDIA 首个千亿美元季度：营收 1158 亿美元，却停报新加坡销售引质疑</h3>
 <p>NVIDIA 于 11 月 17 日公布 FY27 第三季度业绩，营收 1158 亿美元、同比增长 103%，其中数据中心 1076 亿美元，并给出约 1300 亿美元的 Q4 指引。但据 FT 报道，公司已停止单独披露新加坡销售——该口径此前约 1040 亿美元且大涨约 70%，在美国调查先进芯片是否经新加坡转运至中国的背景下，披露口径改为按客户总部归属，透明度争议升温。</p>
 <div class="meta"><a href="https://dev.to/976905690/nvidia-q3-first-ever-100-billion-dollar-quarter-1gmf" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://electronics.economictimes.indiatimes.com/news/consumer-electronics/apple-will-have-limited-iphone-duo-units-available-in-stores-on-friday/135104019?utm_source=top_news&amp;utm_medium=homepage">
-<img class="thumb" src="images/2026-11-23-tech-4.jpg" alt="Apple 首款折叠屏 iPhone Duo 上市即售罄，门店仅有限现货" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-tech-4.jpg" alt="Apple 首款折叠屏 iPhone Duo 上市即售罄，门店仅有限现货" width="1080" height="564" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">ET ElectronicsWorld (Reuters)</span><span class="chip">首批在线订单数分钟售罄、部分订单交付推迟至 1 月</span></div>
 <h3>Apple 首款折叠屏 iPhone Duo 上市即售罄，门店仅有限现货</h3>
 <p>Apple 首款折叠手机 iPhone Duo 起售价 1999 美元，配备 5.4 英寸外屏与 7.6 英寸内屏，采用侧边 Touch ID 而非 Face ID。首批在线订单数分钟售罄、部分交付推迟至 1 月，Apple 称周五开售时各门店仅有有限数量供到店购买，中国大陆、法国、日本、韩国等多地仅供已在线下单者自提，铰链产能被认为是供给瓶颈。</p>
@@ -293,14 +293,14 @@ section{scroll-margin-top:64px}
 <div class="meta"><a href="https://www.paloaltonetworks.com/company/press/2026/palo-alto-networks-to-acquire-applied-compute--bringing-secure-open-weight-ai-to-the-enterprise" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://www.nedvedtech.com/post/2026/11/17/sc26-supercomputing-2026-rubin-venice-d270-explained/">
-<img class="thumb" src="images/2026-11-23-tech-6.jpg" alt="SC26 超算大会三巨头同日亮剑：NVIDIA 5 万核 GPU、AMD Venice、Intel D270" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-tech-6.jpg" alt="SC26 超算大会三巨头同日亮剑：NVIDIA 5 万核 GPU、AMD Venice、Intel D270" width="1080" height="608" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">NedvedTech (SC26 报道)</span><span class="chip">SC26 大会三巨头 24 小时内密集发布，科技媒体专题复盘</span></div>
 <h3>SC26 超算大会三巨头同日亮剑：NVIDIA 5 万核 GPU、AMD Venice、Intel D270</h3>
 <p>在芝加哥 SC26 上，NVIDIA、AMD 与 Intel 在约 24 小时内接连发布旗舰硬件：NVIDIA Rubin HPC 单 GPU 超 5 万 CUDA 核心、预计 2028 年上市；AMD 第 6 代 EPYC Venice 已于 11 月 10 日出货，最高 256 核、台积电 2nm，后续 Venice-X 将堆至 1152MB L3 缓存；Intel D270 则反其道用 160GB LPDDR5X 替代昂贵 HBM。三款均为 2027–2028 年面向国家实验室与 AI 工厂的产品。</p>
 <div class="meta"><a href="https://www.nedvedtech.com/post/2026/11/17/sc26-supercomputing-2026-rubin-venice-d270-explained/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 <div class="item" data-url="https://biz.chosun.com/en/en-industry/2026/11/20/WORQDO7URFA3ZISJDXDQOUQRWE/">
-<img class="thumb" src="images/2026-11-23-tech-7.jpg" alt="Tesla Cybercab 向个人消费者开卖：29990 美元，另需每月 299 美元订阅" loading="lazy" decoding="async">
+<img class="thumb" src="images/2026-11-23-tech-7.jpg" alt="Tesla Cybercab 向个人消费者开卖：29990 美元，另需每月 299 美元订阅" width="1080" height="567" loading="lazy" decoding="async">
 <div class="eyebrow"><span class="src-name">CHOSUNBIZ（源自 WSJ）</span><span class="chip">WSJ 报道引发整车厂与电池供应商连锁担忧，韩媒 11 月 20 日专题跟进</span></div>
 <h3>Tesla Cybercab 向个人消费者开卖：29990 美元，另需每月 299 美元订阅</h3>
 <p>据 WSJ 等报道，Tesla 已于 11 月 13 日起向部分美国消费者开放无方向盘、无踏板的双座 Cybercab 个人预订，售价 29990 美元，但需每月支付 299 美元的全自动驾驶订阅才能运行，下月开始交付。该车今年 2 月已在得州超级工厂量产，目前 robotaxi 仅在美国 8 个城市运营；Tesla 还计划明年停产 Cybertruck 转产 Cybercab，并在柏林工厂投资 30 亿欧元。</p>
@@ -314,8 +314,8 @@ section{scroll-margin-top:64px}
 </div>
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
-<div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 24 日 20:38 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<div class="archive"><p class="kind">往 期</p><a href="2026-11-25.html">11 月 25 日</a><a href="2026-11-24.html">11 月 24 日</a></div>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 10:05 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
