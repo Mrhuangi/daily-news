@@ -331,7 +331,7 @@ h2,h3{text-wrap:balance}
 </section>
 <div class="daynav"><span class="spacer"></span><a class="next" href="2026-11-24.html"><span class="dir">下一期 →</span>2026 年 11 月 24 日 · 周二</a></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-25.html">11 月 25 日</a><a href="2026-11-24.html">11 月 24 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 12:41 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 12:48 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -487,6 +487,8 @@ async function fetchPlat(key){
 }
 function bigrams(t){var x=(t||'').toLowerCase().replace(/[\s\W_]+/g,'');var o={};
   for(var i=0;i<x.length-1;i++)o[x.substr(i,2)]=1;return o}
+function contains(a,b){var x=(a||'').toLowerCase().replace(/[\s\W_]+/g,''),y=(b||'').toLowerCase().replace(/[\s\W_]+/g,'');
+  var s=x.length<y.length?x:y,l=x.length<y.length?y:x;return s.length>=6&&l.indexOf(s)>-1}
 function similar(a,b){var A=bigrams(a),B=bigrams(b),inter=0,all=0,k;
   for(k in A){all++;if(B[k])inter++}for(k in B){all++}
   return all?(2*inter)/all:0}
@@ -503,7 +505,7 @@ async function loadHot(){
     items.slice(0,8).forEach(function(it,rank){
       if(!it.title||it.title.length<4||/undefined/.test(it.title))return;
       var found=null;
-      for(var m=0;m<merged.length;m++){if(similar(merged[m].title,it.title)>=0.42){found=merged[m];break}}
+      for(var m=0;m<merged.length;m++){if(similar(merged[m].title,it.title)>=0.42||contains(merged[m].title,it.title)){found=merged[m];break}}
       if(found){
         if(found.plats.indexOf(PLATFORMS[pi][0])<0)found.plats.push(PLATFORMS[pi][0]);
         if(rank<found.rank)found.rank=rank;
@@ -537,7 +539,7 @@ async function loadHot(){
   stamp(hotWhen);
 }
 function loadAll(){loadLive();loadHot()}
-loadAll(); setInterval(loadAll,300000);
+loadAll(); setInterval(function(){if(!document.hidden)loadAll()},300000);
 document.querySelector('section[data-kind="live"] .live-refresh:not(.tr-btn)').addEventListener('click',loadLive);
 document.querySelector('section[data-kind="hot"] .hot-refresh').addEventListener('click',loadHot);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)loadAll()});
