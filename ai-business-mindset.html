@@ -19,8 +19,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,B
 .topbar nav{margin-left:auto;font-size:12.5px}
 .topbar nav a{color:var(--link);text-decoration:none;padding:8px 4px}
 main{max-width:692px;margin:0 auto;padding:22px 20px calc(60px + env(safe-area-inset-bottom,0px))}
-h1{font-size:17px;font-weight:700;line-height:1.5;margin:2px 0 4px;letter-spacing:-.005em;text-wrap:balance}
-.meta{font-size:12px;color:var(--faint);margin:0 0 14px;font-variant-numeric:tabular-nums}
+h1{font-size:17px;font-weight:700;line-height:1.5;margin:2px 0 14px;letter-spacing:-.005em;text-wrap:balance}
 video{display:block;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;box-shadow:var(--shadow)}
 .kind{font-size:11.5px;font-weight:600;letter-spacing:.18em;color:var(--muted);margin:28px 0 8px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:8px 18px}
@@ -28,8 +27,6 @@ video{display:block;width:100%;aspect-ratio:16/9;background:#000;border-radius:1
 .pt-k{display:block;font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:2px}
 .pt-v{display:block;font-size:13px;line-height:1.65;color:var(--sub)}
 .transcript p{font-size:13.5px;line-height:1.85;color:var(--sub);margin:0 0 10px;letter-spacing:.01em;text-wrap:pretty}
-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--faint);line-height:1.8}
-footer a{color:var(--link);text-decoration:none}
 ::cue{background:rgba(0,0,0,.75);color:#fff}
 @media (max-width:480px){.topbar-in{padding:10px 16px}main{padding:18px 16px 60px}}
 @media (min-width:1024px){.topbar-in,main{max-width:840px}}
@@ -42,7 +39,6 @@ footer a{color:var(--link);text-decoration:none}
 </div></div>
 <main>
 <h1>AI 商业思维：五个思维转变</h1>
-<p class="meta">视频 · 8 分 57 秒 · 1080p · 中文字幕（播放器右下角可开关）· 来源 X</p>
 <video id="v" controls preload="metadata" poster="ai-business-mindset-poster.jpg" playsinline>
 <track kind="subtitles" src="ai-business-mindset.zh.vtt" srclang="zh-CN" label="中文字幕" default>
 </video>
@@ -62,7 +58,6 @@ footer a{color:var(--link);text-decoration:none}
   }).catch(function(){ use(FALLBACK); });
 })();
 </script>
-<p class="meta" style="margin-top:8px"><a href="https://github.com/Mrhuangi/daily-news/releases/download/video-ai-business-mindset/ai-business-mindset.mp4" style="color:var(--link);text-decoration:none">下载原画 1080p（138 MB）</a></p>
 <p class="kind">内容要点</p>
 <div class="card">
 <div class="pt"><span class="pt-k">1 · 别把蠢事做得更快</span><span class="pt-v">先找出企业的首要约束，让团队集中解决它；做对的事，而不是把错的事做得更快。</span></div>
@@ -80,7 +75,6 @@ footer a{color:var(--link);text-decoration:none}
 <p>最后一条，也绝不是最不重要的，是学习闭环。总有人跟我说：Dan，我有机器人。我有机器人。我说：不，你没有。你有的只是自动化。没有学习闭环，你拥有的既不是机器人，也不是智能体。学习闭环是这样一个过程：你定义一个结果，它生成产出，然后在某个环节，会有反馈。反馈被送回最初的提示词里，它带着新知识重新执行流程中的步骤，于是越做越好、越做越好、越做越好。所以，如果你公司里有智能体或机器人，而团队不给它的工作反馈，你就永远不可能随时间变得更好。最好的公司正是这样用 AI 扩张的：他们理解，没有学习闭环的智能体就不算智能体，并把这个过程建起来。一个简单的例子：让你的智能体做某种分析，把结果发到 Slack 里，请团队对分析给出反馈；再让智能体盯着这些发布，收集反馈，把它们当作升级自己大脑、规则、步骤、流程和质量的机会。如果团队持续查看产出、给出反馈，你再把反馈喂给智能体——每周一次，一年 52 次——它就会越来越好、越来越好。这也会反哺你的数据权益。看到了吗？这些理念是层层叠加的。</p>
 <p>想想看：如今的 AI 大多只是让企业主把错事、蠢事做得更快；我们必须提升的是自己，而不是指望团队，因为团队永远超不过我们——我们是领导者，也是天花板；我们要更擅长定义智能体的角色；我们还要搞懂智能体用的数据这一面：数据好不好、有没有好范例、知不知道什么叫赢、什么叫成功；然后把学习闭环建进流程里。这就是我们赚大钱的方式。这就是赢的方法，而且它已经不再是可选项。2027 年将成为分水岭：决定走向专业的公司，和最终倒闭的业余选手，将就此分开。当每家公司都在变成一家 AI 软件公司时——这不是 SaaS，不是软件即服务。而是把你的服务，做成软件。是你为市场解决的那个问题：把信息传达做到极致，然后在后端用这套方法以更高的速度、更高的质量交付，从而提高毛利率，因为你不必再雇一大堆人。你让员工做人的工作，让 AI 做电脑的工作，然后突然之间，你就赚了很多钱。最后快速说一句：你能看到这里，说明了一件事。让我告诉你我对你的了解。你不是那种只找自我安慰式鸡汤的人。你也不是那种只会在社交媒体上漫无目的刷手机的人。你来到这里，是因为你想真正做成一门生意，你已经受够了拿不到能让业务增长的真正洞见。所以我想帮你避开所有的弯路，不必像我当年那样吃尽苦头去摸索。这就是为什么我把自己学到的一切，都整理进了这本《规模化工作手册》。这是我和每一位合作的创始人都会用的内部文件，它能把一盘散沙的生意变成赚钱机器，教你这一切，还不用再多烧时间。它就在屏幕上，因为我是来帮你建立你的帝国的。</p>
 </div>
-<footer>字幕与全文由原视频语音转写后翻译 · <a href="index.html">返回每日新闻</a></footer>
 </main>
 </body>
 </html>
