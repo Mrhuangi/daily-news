@@ -205,9 +205,23 @@ h2,h3{text-wrap:balance}
   .items .item{margin-top:0}
   .items .item.lead{grid-column:1/-1}
   .item.lead h3{font-size:19px}
-  h2{font-size:19px}
+  h2{font-size:22px;letter-spacing:-.015em}
   .press-card{columns:2;column-gap:40px}
   .press-group{break-inside:avoid}
+  main{padding-top:34px}
+  section{margin-top:56px}
+  .sec-head{margin-bottom:8px}
+  .overview{font-size:14.5px;max-width:48em}
+  .live-pair{gap:20px}
+  .live-card{padding:8px 22px}
+  .items{gap:16px}
+  .item{padding:22px 22px 18px}
+  .item.lead{display:grid;grid-template-columns:1.08fr .92fr;gap:26px;align-items:center;padding:26px}
+  .item.lead .thumb{margin:0}
+  .item.lead h3{font-size:23px;line-height:1.4}
+  .item.lead p{font-size:14.5px;line-height:1.85}
+  .press-card{padding:10px 26px}
+  .wordmark{font-size:15px}
 }
 @media print{.topbar,.filterbar,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
@@ -222,11 +236,11 @@ h2,h3{text-wrap:balance}
 <p class="result-line" aria-live="polite"></p>
 <div class="live-pair">
 <section data-kind="hot" style="margin-top:8px">
-<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span></div>
 <div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
 <section data-kind="live">
-<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button><button class="live-refresh" type="button">刷新</button></div>
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button></div>
 <div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
 </section>
 </div>
@@ -237,10 +251,12 @@ h2,h3{text-wrap:balance}
 <div class="items">
 <div class="item lead" data-url="https://techcrunch.com/2026/11/23/nvidia-reverses-course-and-brings-jensen-huang-back-as-ceo/">
 <img class="thumb" src="images/2026-11-25-ai-1.jpg" alt="黄仁勋11天后复职：英伟达董事会全票恢复其CEO职务，股价单日涨超30%" width="1024" height="658" fetchpriority="high" decoding="async">
+<div class="lead-body">
 <div class="eyebrow"><span class="src-name">TechCrunch</span><span class="chip">股价单日涨超30%、市值单日增逾9000亿美元；Reddit r/LocalLLaMA相关帖1965赞、681评论</span></div>
 <h3>黄仁勋11天后复职：英伟达董事会全票恢复其CEO职务，股价单日涨超30%</h3>
 <p>英伟达11月23日宣布董事会全票通过，恢复黄仁勋总裁、CEO及董事职务，即刻生效。此前他于11月12日辞职，董事会主席曾在11月17日财报电话会上表示无意让他回归。报道称白宫高层周末介入斡旋、董事会咨询了政府高层后认定其不构成国家安全风险；复职当日股价涨超30%，单日市值增加逾9000亿美元，创纪录。黄仁勋定于12月初就相关间谍案问题赴国会作证。</p>
 <div class="meta"><a href="https://techcrunch.com/2026/11/23/nvidia-reverses-course-and-brings-jensen-huang-back-as-ceo/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
 </div>
 <div class="item" data-url="https://community.openai.com/t/gpt-6-2-astra-and-sol-are-now-available/1417531?ref=apidog.com">
 <img class="thumb" src="images/2026-11-25-ai-2.jpg" alt="OpenAI发布GPT-6.2 Astra与Sol：Astra降价20%，Sol成日常Agent主力" width="1024" height="576" loading="lazy" decoding="async">
@@ -471,7 +487,7 @@ h2,h3{text-wrap:balance}
 </section>
 <div class="daynav"><a href="2026-11-24.html"><span class="dir">← 上一期</span>2026 年 11 月 24 日 · 周二</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 17:44 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>数据来源 · 时代周刊：TIME 官方 RSS<br>数据来源 · 国际名媒：BBC、CNN、路透社、美联社、法新社、纽约时报、卫报、半岛电视台的公开 RSS<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 17:59 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>数据来源 · 时代周刊：TIME 官方 RSS<br>数据来源 · 国际名媒：BBC、CNN、路透社、美联社、法新社、纽约时报、卫报、半岛电视台的公开 RSS<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
@@ -680,8 +696,6 @@ async function loadHot(){
 }
 function loadAll(){loadLive();loadHot()}
 loadAll(); setInterval(function(){if(!document.hidden)loadAll()},300000);
-document.querySelector('section[data-kind="live"] .live-refresh:not(.tr-btn)').addEventListener('click',loadLive);
-document.querySelector('section[data-kind="hot"] .hot-refresh').addEventListener('click',loadHot);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)loadAll()});
 var tb=document.querySelector('.topbar');
 addEventListener('scroll',function(){tb.classList.toggle('scrolled',window.scrollY>4)},{passive:true});
