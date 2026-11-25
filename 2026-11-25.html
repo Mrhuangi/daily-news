@@ -30,7 +30,7 @@
   --bg:#f5f5f7; --surface:#ffffff; --text:#1d1d1f; --sub:#3a3a3c;
   --muted:#6e6e73; --faint:#86868b; --chip:#e8e8ed; --field:#e9e9ee; --link:#0066cc;
   --line:rgba(0,0,0,.05); --hair:rgba(0,0,0,.07);
-  --bar:rgba(251,251,253,.75); --shadow:0 1px 2px rgba(0,0,0,.03),0 10px 30px rgba(0,0,0,.04);
+  --bar:rgba(251,251,253,.75); --shadow:0 1px 2px rgba(0,0,0,.03),0 12px 34px rgba(0,0,0,.05);
   --ring:rgba(0,102,204,.45);
 }
 @media (prefers-color-scheme:dark){
@@ -71,7 +71,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .filterbar::-webkit-scrollbar{display:none}
 .chip-btn{appearance:none;border:0;background:var(--field);color:var(--sub);flex:none;
   border-radius:999px;padding:6px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
-.chip-btn[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.chip-btn[aria-pressed="true"]{background:var(--text);color:var(--bg);box-shadow:0 1px 5px rgba(0,0,0,.22);font-weight:500}
 main{max-width:692px;margin:0 auto;padding:26px 20px calc(72px + env(safe-area-inset-bottom,0px))}
 .search{flex:1;min-width:0;appearance:none;border:0;background:var(--field);color:var(--text);
   border-radius:10px;padding:8px 12px;font-size:16px;font-family:inherit}
@@ -82,14 +82,14 @@ section{margin-top:40px;scroll-margin-top:118px}
 .sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
 .kind{font-size:11.5px;font-weight:600;letter-spacing:.18em;color:var(--muted);margin:0}
 .sec-count{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
-h2{font-size:17px;font-weight:700;line-height:1.5;letter-spacing:-.005em;margin:0 0 8px;text-wrap:balance}
+h2{font-size:17px;font-weight:700;line-height:1.5;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
 .overview{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0 0 4px;max-width:60em;letter-spacing:.01em;text-wrap:pretty}
-.item{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 18px 15px;margin-top:12px;box-shadow:var(--shadow)}
-.item .thumb{display:block;width:100%;height:auto;border-radius:10px;
+.item{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 15px;margin-top:12px;box-shadow:var(--shadow)}
+.item .thumb{display:block;width:100%;height:auto;border-radius:12px;
   margin-bottom:12px;background:var(--chip);opacity:0;transition:opacity .45s ease}
 .item .thumb.on{opacity:1}
 @media (prefers-color-scheme:dark){.item .thumb.on{filter:brightness(.94)}}
-.item h3{font-size:15.5px;font-weight:600;line-height:1.5;margin:0 0 5px;letter-spacing:-.005em;text-wrap:balance}
+.item h3{font-size:15.5px;font-weight:600;line-height:1.5;margin:0 0 5px;letter-spacing:-.01em;text-wrap:balance}
 .item p{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0;letter-spacing:.01em;text-wrap:pretty}
 .item.lead h3{font-size:18px;line-height:1.45}
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:11px;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
@@ -162,11 +162,11 @@ a,button,input{touch-action:manipulation}
 .live-when,.hot-when{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
 .live-refresh{appearance:none;border:0;background:none;color:var(--link);font-size:12px;cursor:pointer;
   font-family:inherit;padding:4px 2px}
-.live-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:4px 18px;margin-top:12px}
-.live-row{display:flex;gap:10px;padding:10px 0}
+.live-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:4px 18px;margin-top:12px}
+.live-row{display:flex;gap:10px;padding:11px 0}
 .live-row + .live-row{border-top:1px solid var(--line)}
 .live-main{flex:1;min-width:0}
-.rank{flex:none;width:15px;text-align:center;font-size:12px;font-weight:700;color:var(--faint);
+.rank{flex:none;width:15px;text-align:center;font-size:12px;font-weight:600;color:var(--muted);
   padding-top:3px;font-variant-numeric:tabular-nums}
 .live-row a{color:var(--text);text-decoration:none;font-size:14px;font-weight:600;line-height:1.5;display:block;letter-spacing:.01em}
 .live-row a:hover{color:var(--link)}
@@ -178,13 +178,13 @@ a,button,input{touch-action:manipulation}
 .item{transition:transform .12s ease}
 .item:active{transform:scale(.995)}
 h2,h3{text-wrap:balance}
-.press-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:4px 18px;margin-top:12px}
+.press-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:4px 18px;margin-top:12px}
 .press-group{padding:11px 0 7px}
 .press-group + .press-group{border-top:1px solid var(--line)}
 .press-head{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
 .press-name{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--text)}
 .press-zh{font-size:11.5px;color:var(--faint)}
-.press-row{display:flex;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.press-row{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
 .press-head + .press-row{border-top:none}
 .press-main{flex:1;min-width:0}
 .press-title{display:block;font-size:13.5px;font-weight:600;line-height:1.45;color:var(--text);text-decoration:none;letter-spacing:.01em}
@@ -447,7 +447,7 @@ h2,h3{text-wrap:balance}
 </section>
 <div class="daynav"><a href="2026-11-24.html"><span class="dir">← 上一期</span>2026 年 11 月 24 日 · 周二</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 11:02 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 12:41 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
