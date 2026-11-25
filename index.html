@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>每日新闻</title>
-<meta name="description" content="文章实时更新：国内六大平台热榜精选与全球实时动态；每天早上另有 AI 与 Agent 圈、全网科技与时代周刊简报。每条附出处。">
+<meta name="description" content="文章实时更新：国内六大平台热榜精选与全球实时动态；每天早上另有 AI 与 Agent 圈、全网科技、时代周刊简报与八家国际名媒头条。每条附出处。">
 <meta property="og:title" content="每日新闻">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -176,6 +176,14 @@ a,button,input{touch-action:manipulation}
 .item:active{transform:scale(.995)}
 h2,h3{text-wrap:balance}
 section{scroll-margin-top:64px}
+.press-card{background:var(--surface);border-radius:14px;box-shadow:var(--shadow);padding:4px 18px;margin-top:12px}
+.press-group{padding:11px 0 7px}
+.press-group + .press-group{border-top:1px solid var(--chip)}
+.press-head{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+.press-name{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--text)}
+.press-zh{font-size:11.5px;color:var(--faint)}
+.press-line{display:block;font-size:13px;line-height:1.55;color:var(--sub);text-decoration:none;padding:3.5px 0;letter-spacing:.01em}
+.press-line:hover{color:var(--link)}
 @media print{.topbar,.controls,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
 </style>
 </head>
@@ -185,7 +193,7 @@ section{scroll-margin-top:64px}
 <nav><button class="search-btn" type="button" aria-label="搜索" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="2026-11-24.html">往期</a></nav>
 </div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div></div>
 <main>
-<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button></div>
+<div class="controls"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button><button class="chip-btn" data-kind="press" aria-pressed="false">国际名媒</button></div>
 <p class="result-line" aria-live="polite"></p>
 <section data-kind="hot" style="margin-top:34px">
 <div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span><button class="live-refresh hot-refresh" type="button">刷新</button></div>
@@ -360,9 +368,80 @@ section{scroll-margin-top:64px}
 <div class="meta"><a href="https://time.com/article/2026/11/24/trump-cuba-venezuela-regime-change-western-hemisphere/" target="_blank" rel="noopener">出处 →</a></div>
 </div>
 </section>
+<section data-kind="press">
+<div class="sec-head"><p class="kind">国际名媒</p><span class="sec-count">40 条 · 8 家</span></div>
+<h2>世界名媒今日头条</h2>
+<p class="overview">BBC、CNN、路透社、美联社、法新社、纽约时报、卫报、半岛电视台的最新头条，标题为中文编译，点标题看英文原文。</p>
+<div class="press-card">
+<div class="press-group">
+<div class="press-head"><span class="press-name">BBC</span><span class="press-zh">英国广播公司</span></div>
+<a class="press-line" href="https://www.bbc.co.uk/news/articles/crpdw1qx7jgxo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">美国司法部长回避回应英伟达调查问题</a>
+<a class="press-line" href="https://www.bbc.co.uk/news/articles/c65y17pwv1z7o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">法国前总统萨科齐与妻子布鲁尼将受审</a>
+<a class="press-line" href="https://www.bbc.co.uk/news/articles/cm5y1ezx2gqyo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">被拒入境英国航班的印度政客批政府「失了分寸」</a>
+<a class="press-line" href="https://www.bbc.co.uk/news/articles/cmy49ngydqzpo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">华为被判窃取商业机密罪成，敲诈勒索罪不成立</a>
+<a class="press-line" href="https://www.bbc.co.uk/news/articles/c893rl37ywdgo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">叙利亚地雷伤亡激增，战争结束已两年</a>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">CNN</span><span class="press-zh">美国有线电视新闻网</span></div>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMijAFBVV95cUxNcG1HVEl5OFFJbUMtcllrTmlxUlRUdXFjTkNiOXBJVmc5TVJ0eDdiUFVJX3dMeGpOR0N2UGRKVGgtMXdqY2piOFE5WGpaTkR3YTJva3EyMWtxdzJ4QmZBRm05TGF0NVRoOWpJVHdwMlpta3FVZWU2aWU3MXZQckMyLXhXd01PZ0Nwam1CTw?oc=5" target="_blank" rel="noopener">曾力抗误遣萨尔瓦多的阿布雷戈·加西亚将自行离境前往西班牙</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9pOWV5VG1WLXJRRVZTMEVqMjdiYjI1Zkx2bGNRMFVGWkdjYlo0VGJoODNVU2ZIZl9aWGV2dkpfYm9LU1dSME1KMldYZmNJaUZrSnFTVjZtZ0RSNXRUWERHSWxZQWhGNWZORVJlVGR3SXl6VkUzd3NfSA?oc=5" target="_blank" rel="noopener">一架飞机在密西西比州霍恩岛附近坠毁，搜救4名成人和2名儿童</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMihgFBVV95cUxNMEg4aDlMdzhneHQ5d3BwcGhHWjgxTXctM3RTVndfaFZSLS1sUTdyTG5fY0hENWJoSk1jek8yejZLRk1Fc05XZFIzc2ZDRk05M2padnk2V0luUkQ4WDJpQjVINGd6cXlXbjFQVGxGR3kxUUlXQjNoUE5MT0Nnc3VaU2pabEVjZw?oc=5" target="_blank" rel="noopener">特朗普称赦免黄仁勋「永远是一个选项」，但可能用不上</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPQXA1eUlQSi12a2ctcXZCOGVrQ3p1UmRncnM3S3l1Z2lCMXFudzg0X2JkT21kazNpd0dISHZkME4zQW9TY005TXBzVTRnZFhwb0FmTXM3bVQ5S3NYamhvdWJ2SjJPTGFjeFc5SmpjMnFHa09BT2NiWF9FdndsTWtIS3N4clY?oc=5" target="_blank" rel="noopener">CIA遭黑客攻击，部分非机密信息受影响</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOenhvOXJNOXJLSDRFUHo5WmItWXhCRFJ5MDNLdnJmV3VORHpLeENqdWpaWG9pRU9BMjVmWUl5Q0p3VVNXUnRhcVFGZTRIdmd2YnBrV0NlSmJ2Vjk0YzNMNzE2a1U2bzF3UmMxZ05ORWlYcUZ4NjFZYmRzX0JnNHg4YU1n?oc=5" target="_blank" rel="noopener">黄仁勋向员工道歉，称自己正在接受心理治疗</a>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">Reuters</span><span class="press-zh">路透社</span></div>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOV1p3ZkduX2FrdGJhMEMtbmNXNTgxN05HeDFsX2xxNDBkWXZQVkFWS3NzNFpITzZ2RnRyYXVZQ1k5bmthekYzdG9aSDVxcGZGS1RxMnNTTHNRRkQyQWFoWm1zNXVfd2hVQW96VHQ1ZFd4eU04cXNTRWk0cFJ4LS1PLUd1eUFmN3Y4ZjJQbXZpVkd3UQ?oc=5" target="_blank" rel="noopener">金价小幅走低，市场等待美国通胀数据</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxNbVR5QS1fSDJ5YWoyNmRLQ0t2Vm1lZTdWdDlXaU5MakhodlR5QmJyRlhKLTc0dmZuZ2pTYVNwYllvQTIxblMwcm1FZHhPRUl5RWJfRFoxRWNjREZLWjh1MGFlSUUxeDlHdVpIeWlxQmY4dFlDZE55SHFtZkVXazhXWFZiVVZXbkZSX2xySnE1MWtOLWk5ZldQSU10eUtuUjJwM2VEOEc3TExPVDBRekZZc1FsSmhfYWFMYjNZRlVPWGdVWFE?oc=5" target="_blank" rel="noopener">以色列艾森科特达成首份组阁协议</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMivAFBVV95cUxQTnllbUwzQ2tpUDV1TEV6M0gwMlBXSzNwTmVnR2N3TDJjQnhKRXZuVEVUNmpoaGhTMngtQVJZTFpaQnNBMUhPa2hTUURmSjEtNjloanZjN25QaTdSUVIybF9oN29nSTg1TzNEZXdMclA5Y0J0SEI1UnA2YUdRSWkwUjN0R25OTVFQUUZtZEZYY3lCZk5OOVVVTFlZT2hjMGwtOHpaOGhlTnZ4UVBvdFRUUDRXNWZzclNkS1E1Mg?oc=5" target="_blank" rel="noopener">托马斯·马克尔在美被控第二项持有儿童性虐待材料罪</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPSjhpWUkxM0dhYm9Bd0ttQUViUWNfM1NiajJvQVZtREUtREUxaW5vX3pINHpyakFsTTVpLUh2dVRpTUgzWV9nQmZlZng2UUg4Z3Q3V3hxQW04WXBiaFRTaDgwdnM1Rk9iN214d3J0Sm0wYXc2d19taW5hQk9Eb1huRG9qWnR2TEUtWjloS2tPbXhIbmNCaWVKbnl2NEVTWDRheU1mOVd3?oc=5" target="_blank" rel="noopener">雷达故障致芝加哥奥黑尔机场航班延误</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxOZG1EVmJTYUpyMnJPVzlHNE9xZFZpYmZHdkZBOTgtSllCbnRLQnNuUWtLNktuYXJqZms4Tl85T2I2dU41UmEzTWpPY0Z6TU5uaVJJZWZxLXhVcWxSa0h6cUh5bkpSdk9VdDN5QlIzb3hSLUhRV0FaM2FrVzlkUDJoN2FaeUxKOEhlN2RsZ1VoUUUwNHdTcWp6cV9BNE90ejFEVWRTcWtnbW9XV1A0VEhnSDRhMWVhbkFia1E?oc=5" target="_blank" rel="noopener">戴尔上调全年预期：AI服务器需求推动创纪录季度业绩</a>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">AP</span><span class="press-zh">美联社</span></div>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMipAFBVV95cUxNdDBtR1FfWU5YMzBKWUlXWmc3YVotaWZ2eHBQTEdLd1ZJN0duSzA3RFNkQnFFM29rSXVrdnlzMk1ZYzJLbUd5dnJhYUQxb1pVYU9DT0wzMmlfSk84NW03TUZqTEtQNDNDRzQ0OWIyOWJ4OHNEdUV6c0hIWDNtRlk3WGFkbl9LbkpwNExRSS13SjFnQ0o2b0JrbjZKNHZJQmpmZ0VYMw?oc=5" target="_blank" rel="noopener">英伟达董事会与黄仁勋一同受审视：复职争议CEO引质疑</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMingFBVV95cUxPRkhUQ2g4MktLbDJLbVNZT3RFbXQ4NFZtcUJmVTZLb0lMYXV1dDZ6V0tfWVZxUlBnSkhPYTBtNWo3Q2ZzcEJRSWJZTmlqSFR5UnN3RVd2VXo5VTBPRmU3TXVTWENBNWpDV0lkRVdVVVlONUVlRkx2UTN2dDhOQUhja21BWWlXMjFzTEJmcHFFRXRmbHJ0ZDU2QXh3V2IzZw?oc=5" target="_blank" rel="noopener">美军将在感恩节前一天于艾奥瓦州引爆库存炸药化学品</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMinwFBVV95cUxOTnR2aXdGN1dOTnJ1QmhWQWhjWnEwOHQ3QzJ2VExKcHRVZEE3TlloVi11NnJRajdKaThMRGIxeElNM2ZvWWJ5c2dmT2xLbzA1ZHRra0JHTGdteC03dXA5RWFXWTMxejFtSC1odHJiem9QOTY1eWN6OXVEQjV4eUtXX1duQTFLellMcjBCb0NzLUIwT0c1S1FFZEU5N2ZLc3M?oc=5" target="_blank" rel="noopener">俄军空袭乌克兰致2死48伤，基辅解释其在利比亚的袭击</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxOR1JmVGVGUE9ZaW9JMnNkLTZtbm9oSFhJZl9wY0RDM0VwUVhrNWNrWmhFZzNGVW9XazlVcFFoTkdGZjAxLXpYN1VSb1lhU01OSzc0czhMbXI4RDhJZW9JdXAtNGZXNW8yUU16M3N6VnBDWGIyUGFTcXFBZDh0RW1Qc0w3eEMtX3RzOE1DcWU5SjZWUXhxb1FDeTAxTQ?oc=5" target="_blank" rel="noopener">特朗普在白宫举行感恩节火鸡赦免仪式</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPUUxMLWY1amxiVVpwSlZwU2N1LXVEdVVMMU5uZXdRMXlLc2dRQ1ItendWLVVqOTVLdzExV1N4RE1ELWNFUG9QU2pLLXJPaUltcmRxbG5qWkVLRGJmSDBCQ0dmNXhjUWtHWEM2RTlacU5SbGZMblJKVWpyZllvanhkci00S0d5eTZGb21Oc013SVBSQjBNVWE5UHdORWQ?oc=5" target="_blank" rel="noopener">孟加拉国被推翻的领导人哈西娜计划12月16日回国</a>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">AFP</span><span class="press-zh">法新社</span></div>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOUkpsTzl1c2RzaXdsUW9SRTZZd3dlMVJaYWZ1dmZtMV9aV0tOSDBzNVJtWkVscjduNi1NYUJFN09aQVFxV3ZMQmdMQzhuRmhVbWhmWkJUYlFLUUtGM1FwLUlTV09yT2VqQ01BYmU1QlB1WjF1czhzc3NDNGJuSGJBUlZpQQ?oc=5" target="_blank" rel="noopener">教皇方济各私人日记披露：他曾见过魔鬼</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMiekFVX3lxTFBLTEtaU1dvcVN1eXFjMVZ2OVBRLWZoNDI3bUEtVVJOaHpjblNDbjBOcFZVQno0Ni0zT0dEbnh4VVhhelJoczRPUVBmSHZ3SmtrWkw1a0lxRHNVUTM2SmVEVFRYN3Z2V19LYllibVpzYXBSZm11MG9PRGJB?oc=5" target="_blank" rel="noopener">赛诺菲将以410亿美元现金收购美国生物制药公司Insmed</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOdWUxR01SeWc1czBTZmg4VVZRWW1yQlRHbDl4TFU2Y0JPLUM2cXFPTmc3TWFkajEtUGpOMHdmb2czVm04UFcyOWEtR3VfdDZNVkowN2VJb0VaZllFdUtzVU15bmk0S3NHVUFXbnlsNDIzamo3Zl9IRmd1NUstdzBmQlEwYw?oc=5" target="_blank" rel="noopener">NBA：约基奇与穆雷救主掘金险胜，热火击败雷霆</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMic0FVX3lxTFAyMkM1UFZGTm5oYXh6b0JyLTVUTGdlV1hMYnhIYnE3VXAzdG5xMk9xWUJPdFBoQ3pZNkd5WlphUmhYNW9aWDdoQVVSRUJGbkJHVTFvTlNfa09DNWxvSFJvS2dRNkZLeHlpYS0zMnNOV2lOWjg?oc=5" target="_blank" rel="noopener">NBA：开拓者终结76人连胜，雷霆再败</a>
+<a class="press-line" href="https://news.google.com/rss/articles/CBMiekFVX3lxTE5KWEN5QWp3V2pqN3g3WWZGbVUtTm9lUXVmdkpLUEx5cG0yRVlLZGxmalRQODhtWXdEejZnaUtqaE1UVWdBTy1mdDRXcEhlWDZQVGREOWUyOGVWUXF4VlZ3ZmlPS0NEVC16VEFWZ0piekR1QUJtVC1VZzdB?oc=5" target="_blank" rel="noopener">巴基斯坦宇航员将执行中国空间站任务，承载「2.5亿人的希望」</a>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">The New York Times</span><span class="press-zh">纽约时报</span></div>
+<a class="press-line" href="https://www.nytimes.com/2026/11/24/world/middleeast/iraq-prime-minister-kurdistan-control.html" target="_blank" rel="noopener">伊拉克总理意图从库尔德地区收回更多权力</a>
+<a class="press-line" href="https://www.nytimes.com/2026/11/24/world/middleeast/saudi-skyscraper-houthi-strike.html" target="_blank" rel="noopener">胡塞武装袭击沙特首都摩天大楼，致11人受伤</a>
+<a class="press-line" href="https://www.nytimes.com/2026/11/24/world/asia/jensen-huang-nvidia-china.html" target="_blank" rel="noopener">对中国而言，黄仁勋回归英伟达喜忧参半</a>
+<a class="press-line" href="https://www.nytimes.com/2026/11/24/world/middleeast/iran-singer-parastoo-ahmadi-flogging-lashes.html" target="_blank" rel="noopener">伊朗歌手因未戴头巾表演被判74下鞭刑</a>
+<a class="press-line" href="https://www.nytimes.com/2026/11/24/world/europe/france-nahel-merzouk.html" target="_blank" rel="noopener">法国警察枪杀少年案：谋杀指控被恢复</a>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">The Guardian</span><span class="press-zh">卫报</span></div>
+<a class="press-line" href="https://www.theguardian.com/world/2026/nov/24/russian-fighters-killed-in-mali-africa-leaked-data" target="_blank" rel="noopener">泄露数据：逾300名俄罗斯人在马里丧生，莫斯科正扶持其军政府</a>
+<a class="press-line" href="https://www.theguardian.com/world/2026/nov/23/ukraine-naval-drones-strike-russian-warship-libya" target="_blank" rel="noopener">乌克兰确认用海上无人艇在利比亚附近击中两艘俄舰</a>
+<a class="press-line" href="https://www.theguardian.com/us-news/2026/nov/20/california-coastal-communities-alert-big-waves-hit-state" target="_blank" rel="noopener">加州沿海社区警戒：多年未见的大浪来袭</a>
+<a class="press-line" href="https://www.theguardian.com/environment/2026/nov/19/baobab-five-trees-south-africa-dug-up-export-blocked-georgia-aoe" target="_blank" rel="noopener">南非五棵猴面包树因出口受阻，抢救性移栽展开</a>
+<a class="press-line" href="https://www.theguardian.com/world/2026/nov/24/cuba-life-expectancy-decline" target="_blank" rel="noopener">古巴预期寿命自1950年以来首次下降，经济危机加剧</a>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">Al Jazeera</span><span class="press-zh">半岛电视台</span></div>
+<a class="press-line" href="https://www.aljazeera.com/video/newsfeed/2026/11/25/senegal-fans-celebrate-afcon-legal-victory-over-morocco?traffic_source=rss" target="_blank" rel="noopener">塞内加尔球迷庆祝非洲杯对摩洛哥的法律胜诉</a>
+<a class="press-line" href="https://www.aljazeera.com/news/2026/11/25/poll-finds-us-voters-want-government-to-end-iran-war-regardless-of-terms?traffic_source=rss" target="_blank" rel="noopener">民调：美国选民希望政府结束对伊战争，不论条件</a>
+<a class="press-line" href="https://www.aljazeera.com/news/2026/11/25/alaska-ends-deal-to-give-voter-records-to-us-justice-department?traffic_source=rss" target="_blank" rel="noopener">阿拉斯加终止向美国司法部提供选民记录的协议</a>
+<a class="press-line" href="https://www.aljazeera.com/news/liveblog/2026/11/25/iran-war-live-houthis-threaten-saudi-ports-over-coalitions-hodeidah-order?traffic_source=rss" target="_blank" rel="noopener">胡塞武装威胁沙特港口，回应联军荷台达命令</a>
+<a class="press-line" href="https://www.aljazeera.com/news/2026/11/24/rebel-group-retreats-in-dr-congo-after-heavy-clashes-with-government-forces?traffic_source=rss" target="_blank" rel="noopener">刚果（金）反政府武装与政府军激战后撤退</a>
+</div>
+</div>
+</section>
 <div class="daynav"><a href="2026-11-24.html"><span class="dir">← 上一期</span>2026 年 11 月 24 日 · 周二</a><span class="spacer"></span></div>
 <div class="archive"><p class="kind">往 期</p><a href="2026-11-24.html">11 月 24 日</a><a href="2026-11-23.html">11 月 23 日</a></div>
-<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 10:05 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 25 日 10:18 · 数据来源为各平台公开讨论与报道，热度为抓取时刻的公开数值<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
 </main>
 <script>
 document.querySelectorAll('img.thumb').forEach(function(im){
