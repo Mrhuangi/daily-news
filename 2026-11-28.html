@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>每日新闻</title>
+<meta name="description" content="文章实时更新：国内六大平台热榜精选与全球实时动态；每天早上另有 AI 与 Agent 圈、全网科技、时代周刊简报与八家国际名媒头条。每条附出处。">
+<meta property="og:title" content="每日新闻">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://mrhuangi.github.io/daily-news/images/2026-11-28-ai-1.jpg">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbfd"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161617">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d1d1f'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23ffffff' font-family='-apple-system,PingFang SC,sans-serif'%3E%E6%96%B0%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="每日新闻">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://uapis.cn" crossorigin>
+<link rel="preconnect" href="https://hn.algolia.com" crossorigin>
+<link rel="preconnect" href="https://gamma-api.polymarket.com" crossorigin>
+<script>
+(function(){try{localStorage.removeItem('dn-theme')}catch(e){}})();
+</script>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f5f5f7; --surface:#ffffff; --text:#1d1d1f; --sub:#3a3a3c;
+  --muted:#6e6e73; --faint:#86868b; --chip:#e8e8ed; --field:#e9e9ee; --link:#0066cc;
+  --line:rgba(0,0,0,.05); --hair:rgba(0,0,0,.07);
+  --bar:rgba(251,251,253,.75); --shadow:0 1px 2px rgba(0,0,0,.03),0 12px 34px rgba(0,0,0,.05);
+  --ring:rgba(0,102,204,.45);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --bg:#000000; --surface:#1c1c1e; --text:#f5f5f7; --sub:#c7c7cc;
+    --muted:#98989d; --faint:#6e6e73; --chip:#2c2c2e; --field:#2c2c2e; --link:#2997ff;
+    --line:rgba(255,255,255,.07); --hair:rgba(255,255,255,.09);
+    --bar:rgba(22,22,23,.75); --shadow:0 1px 2px rgba(0,0,0,.45);
+    --ring:rgba(41,151,255,.55);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  -webkit-tap-highlight-color:transparent;line-break:strict}
+::selection{background:rgba(0,102,204,.18)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:6px}
+.topbar{position:sticky;top:0;z-index:10;background:var(--bar);padding-top:env(safe-area-inset-top,0px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  user-select:none;-webkit-user-select:none;transition:box-shadow .25s ease}
+.topbar.scrolled{box-shadow:0 1px 0 var(--hair),0 12px 32px rgba(0,0,0,.05)}
+@media (prefers-color-scheme:dark){.topbar.scrolled{box-shadow:0 1px 0 var(--hair),0 12px 32px rgba(0,0,0,.45)}}
+.topbar-in{max-width:692px;margin:0 auto;padding:11px 20px 9px;display:flex;align-items:center;gap:10px}
+.wordmark{font-size:14px;font-weight:700;letter-spacing:.02em;color:var(--text);text-decoration:none}
+.bar-date{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.search-btn{appearance:none;border:0;background:none;color:var(--text);cursor:pointer;
+  width:32px;height:32px;margin:-6px -8px -6px -4px;display:grid;place-items:center;border-radius:999px}
+.search-row-in{width:100%;max-width:692px;margin:0 auto;padding:4px 20px 10px;display:flex;gap:10px;align-items:center;overflow:hidden;min-height:0}
+.search-cancel{appearance:none;border:0;background:none;color:var(--link);font-size:13px;cursor:pointer;
+  padding:6px 2px;font-family:inherit;white-space:nowrap}
+.topbar nav{margin-left:auto;font-size:12.5px;display:flex;align-items:center;gap:14px}
+.topbar nav a{color:var(--link);text-decoration:none;padding:8px 4px}
+.filterbar{max-width:692px;margin:0 auto;padding:1px 20px 11px;display:flex;gap:7px;flex-wrap:nowrap;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filterbar::-webkit-scrollbar{display:none}
+.chip-btn{appearance:none;border:0;background:var(--field);color:var(--sub);flex:none;
+  border-radius:999px;padding:6px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.chip-btn[aria-pressed="true"]{background:var(--text);color:var(--bg);box-shadow:0 1px 5px rgba(0,0,0,.22);font-weight:500}
+main{max-width:692px;margin:0 auto;padding:26px 20px calc(72px + env(safe-area-inset-bottom,0px))}
+.search{flex:1;min-width:0;appearance:none;border:0;background:var(--field);color:var(--text);
+  border-radius:10px;padding:8px 12px;font-size:16px;font-family:inherit}
+.search::placeholder{color:var(--faint)}
+.result-line{font-size:12px;color:var(--faint);margin:0;min-height:0}
+.result-line:not(:empty){margin-bottom:2px}
+section{margin-top:40px;scroll-margin-top:118px}
+.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.kind{font-size:11.5px;font-weight:600;letter-spacing:.18em;color:var(--muted);margin:0}
+.sec-count{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+h2{font-size:17px;font-weight:700;line-height:1.5;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
+.overview{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0 0 4px;max-width:60em;letter-spacing:.01em;text-wrap:pretty}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 15px;margin-top:12px;box-shadow:var(--shadow)}
+.item .thumb{display:block;width:100%;height:auto;border-radius:12px;
+  margin-bottom:12px;background:var(--chip);opacity:0;transition:opacity .45s ease}
+.item .thumb.on{opacity:1}
+@media (prefers-color-scheme:dark){.item .thumb.on{filter:brightness(.94)}}
+.item h3{font-size:15.5px;font-weight:600;line-height:1.5;margin:0 0 5px;letter-spacing:-.01em;text-wrap:balance}
+.item p{font-size:13.5px;line-height:1.8;color:var(--sub);margin:0;letter-spacing:.01em;text-wrap:pretty}
+.item.lead h3{font-size:18px;line-height:1.45}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:11px;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+.eyebrow{display:flex;align-items:center;gap:8px;margin:0 0 6px}
+.eyebrow .src-name{font-size:11.5px;font-weight:600;letter-spacing:.06em;color:var(--muted)}
+.eyebrow .chip{margin-left:auto;max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:none}
+.item[data-url]{cursor:pointer}
+.chip{background:var(--field);border-radius:999px;padding:2px 9px;font-size:11.5px;color:var(--sub);line-height:1.5}
+.meta a{color:var(--link);text-decoration:none;margin-left:auto;white-space:nowrap;padding:2px 0}
+.meta a:hover,.topbar nav a:hover{text-decoration:underline}
+.daynav{display:flex;gap:8px;margin-top:54px}
+.daynav a{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+  padding:11px 14px;font-size:13px;color:var(--text);text-decoration:none}
+.daynav a:hover{color:var(--link)}
+.daynav .dir{display:block;font-size:11px;color:var(--faint);margin-bottom:2px}
+.daynav a.next{text-align:right}
+.daynav span.spacer{flex:1}
+.archive{margin-top:26px}
+.archive .kind{margin-bottom:10px}
+.archive a{display:inline-block;background:var(--field);border-radius:999px;
+  padding:5px 13px;font-size:12.5px;color:var(--text);text-decoration:none;margin:0 8px 8px 0}
+.archive a:hover{color:var(--link)}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--faint);line-height:1.8}
+footer a{color:var(--link);text-decoration:none}
+[hidden]{display:none!important}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+main{animation:fadein .35s ease backwards}
+.item{animation:rise .5s cubic-bezier(.22,.61,.21,1) backwards;animation-delay:calc(var(--i,0)*45ms)}
+.live-row{animation:rise .35s ease backwards}
+section.pop{animation:rise .3s ease backwards}
+a,button,input{touch-action:manipulation}
+.chip-btn{transition:background-color .18s ease,color .18s ease,transform .1s ease}
+.chip-btn:active{transform:scale(.95)}
+.live-refresh{transition:opacity .15s ease}
+.live-refresh:active{opacity:.5}
+.live-refresh:disabled{opacity:.5;cursor:default}
+.search-cancel{transition:opacity .15s ease}
+.search-cancel:active{opacity:.5}
+.topbar nav a{transition:opacity .15s ease}
+.search:focus{outline:none;box-shadow:0 0 0 2px var(--ring)}
+.search:focus-visible{outline:none}
+.live-meta{font-variant-numeric:tabular-nums}
+.live-rows,.hot-rows{transition:opacity .18s ease}
+.rows-loading{opacity:.4}
+.search-row{display:grid;grid-template-columns:1fr;grid-template-rows:0fr;opacity:0;visibility:hidden;
+  transition:grid-template-rows .32s cubic-bezier(.32,.72,.24,1),opacity .22s ease,visibility 0s linear .32s}
+.search-row.open{grid-template-rows:1fr;opacity:1;visibility:visible;
+  transition:grid-template-rows .32s cubic-bezier(.32,.72,.24,1),opacity .22s ease}
+@media (hover:hover){
+  .item{transition:transform .25s ease,box-shadow .25s ease}
+  .item:hover{transform:translateY(-1px)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+@media (max-width:480px){
+  main{padding:22px 16px 60px}
+  .topbar-in{padding:10px 16px 8px}
+  .search-row-in{padding:4px 16px 10px}
+  .filterbar{padding:1px 16px 10px}
+  .item{padding:15px 15px 13px;border-radius:14px}
+  .item.lead h3{font-size:16.5px}
+}
+.live-head{display:flex;align-items:center;gap:8px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#ff3b30;flex:none;
+  animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.live-when,.hot-when{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.live-refresh{appearance:none;border:0;background:none;color:var(--link);font-size:12px;cursor:pointer;
+  font-family:inherit;padding:4px 2px}
+.live-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:4px 18px;margin-top:12px}
+.video-card{display:flex;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px;margin-top:12px;text-decoration:none;color:inherit;transition:transform .18s ease}
+.video-thumb{width:38%;max-width:172px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;flex:none}
+.video-body{min-width:0}
+.video-body h3{font-size:15.5px;line-height:1.5;letter-spacing:-.01em;color:var(--text)}
+.video-body p{font-size:12.5px;color:var(--muted);line-height:1.7;margin-top:4px}
+@media (hover:hover){.video-card:hover{transform:translateY(-1px)}}
+.live-row{display:flex;gap:10px;padding:11px 0}
+.live-row + .live-row{border-top:1px solid var(--line)}
+.live-main{flex:1;min-width:0}
+.rank{flex:none;width:15px;text-align:center;font-size:12px;font-weight:600;color:var(--muted);
+  padding-top:3px;font-variant-numeric:tabular-nums}
+.live-row a{color:var(--text);text-decoration:none;font-size:14px;font-weight:600;line-height:1.5;display:block;letter-spacing:.01em}
+.live-row a:hover{color:var(--link)}
+.live-meta{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:12px;color:var(--faint)}
+.live-note{font-size:12px;color:var(--faint);padding:12px 0}
+.skel{padding:11px 0}
+.skel i{display:block;height:12px;border-radius:6px;background:var(--chip);animation:pulse 1.4s ease-in-out infinite}
+.skel i + i{margin-top:8px;height:10px;width:55%}
+.item{transition:transform .12s ease}
+.item:active{transform:scale(.995)}
+h2,h3{text-wrap:balance}
+.press-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:4px 18px;margin-top:12px}
+.press-group{padding:11px 0 7px}
+.press-group + .press-group{border-top:1px solid var(--line)}
+.press-head{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+.press-name{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--text)}
+.press-zh{font-size:11.5px;color:var(--faint)}
+.press-row{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.press-head + .press-row{border-top:none}
+.press-main{flex:1;min-width:0}
+.press-title{display:block;font-size:13.5px;font-weight:600;line-height:1.45;color:var(--text);text-decoration:none;letter-spacing:.01em}
+.press-title:hover{color:var(--link)}
+.press-sum{font-size:12px;line-height:1.5;color:var(--sub);margin-top:2px}
+.press-time{font-size:11px;color:var(--faint);margin-top:3px;font-variant-numeric:tabular-nums}
+.press-thumb{flex:none;width:84px}
+.press-thumb img{width:84px;height:auto;border-radius:8px;display:block}
+@media (min-width:1024px){
+  .topbar-in,.filterbar,.search-row-in,main{max-width:1160px}
+  .topbar-in{padding-left:28px;padding-right:28px}
+  .filterbar{padding-left:28px;padding-right:28px}
+  .search-row-in{padding-left:28px;padding-right:28px}
+  main{padding-top:30px;padding-left:28px;padding-right:28px}
+  .live-pair{display:flex;gap:16px;align-items:flex-start}
+  .live-pair>section{flex:1 1 0;min-width:0;margin-top:8px}
+  .items{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .items .item{margin-top:0}
+  .items .item.lead{grid-column:1/-1}
+  .item.lead h3{font-size:19px}
+  h2{font-size:22px;letter-spacing:-.015em}
+  .press-card{columns:2;column-gap:40px}
+  .press-group{break-inside:avoid}
+  main{padding-top:34px}
+  section{margin-top:56px}
+  .sec-head{margin-bottom:8px}
+  .overview{font-size:14.5px;max-width:48em}
+  .live-pair{gap:20px}
+  .live-card{padding:8px 22px}
+  .items{gap:16px}
+  .item{padding:22px 22px 18px}
+  .item.lead{display:grid;grid-template-columns:1.08fr .92fr;gap:26px;align-items:center;padding:26px}
+  .item.lead .thumb{margin:0}
+  .item.lead h3{font-size:23px;line-height:1.4}
+  .item.lead p{font-size:14.5px;line-height:1.85}
+  .press-card{padding:10px 26px}
+  .wordmark{font-size:15px}
+}
+@media print{.topbar,.filterbar,.daynav{display:none}body{background:#fff}.item{box-shadow:none}.item .thumb{opacity:1}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-in">
+<a class="wordmark" href="index.html">每日新闻</a>
+<span class="bar-date">11月28日 · 周六</span>
+<nav><button class="search-btn" type="button" aria-label="搜索" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 21 21"/></svg></button><a href="2026-11-27.html">往期</a></nav>
+</div><div class="search-row"><div class="search-row-in"><input class="search" type="search" placeholder="搜今天的新闻…" aria-label="搜索今天的新闻" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="search-cancel" type="button">取消</button></div></div><div class="filterbar"><button class="chip-btn" data-kind="all" aria-pressed="true">全部</button><button class="chip-btn" data-kind="hot" aria-pressed="false">国内热榜</button><button class="chip-btn" data-kind="live" aria-pressed="false">全球实时</button><button class="chip-btn" data-kind="ai" aria-pressed="false">AI 与 Agent 圈</button><button class="chip-btn" data-kind="tech" aria-pressed="false">全网科技</button><button class="chip-btn" data-kind="time" aria-pressed="false">时代周刊</button><button class="chip-btn" data-kind="press" aria-pressed="false">国际名媒</button><button class="chip-btn" data-kind="video" aria-pressed="false">视频</button></div></div>
+<main>
+<p class="result-line" aria-live="polite"></p>
+<div class="live-pair">
+<section data-kind="hot" style="margin-top:8px">
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">国内热榜 · 精选</p><span class="hot-when"></span></div>
+<div class="live-card"><div class="hot-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
+</section>
+<section data-kind="live">
+<div class="sec-head live-head"><span class="live-dot"></span><p class="kind" style="letter-spacing:.14em">全球实时</p><span class="live-when"></span><button class="live-refresh tr-btn" type="button">翻译</button></div>
+<div class="live-card"><div class="live-rows"><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div><div class="skel"><i></i><i></i></div></div></div>
+</section>
+</div>
+<section data-kind="video">
+<div class="sec-head"><p class="kind">视 频</p></div>
+<a class="video-card" href="ai-business-mindset.html"><img class="video-thumb" src="ai-business-mindset-poster.jpg" alt="AI 商业思维" width="1920" height="1080" loading="lazy" decoding="async"><div class="video-body"><h3>AI 商业思维：五个思维转变</h3><p>一堂白板课：AI 拉开的不是工具差距，而是思维差距。</p></div></a>
+</section>
+<section data-kind="ai">
+<div class="sec-head"><p class="kind">AI 与 Agent 圈</p><span class="sec-count">8 条</span></div>
+<h2>DeepMind让Agent自己管算力、谷歌收紧Workspace入口，GPT-6.2计费“纠错”让额度更快见底</h2>
+<p class="overview">11月27日AI圈的主线是Agent从演示走向实权与管控：DeepMind让Agent自主分配算力跑Gemini实验，谷歌则要求所有Workspace Agent从2027年2月起走官方MCP通道、而Gmail服务器至今不能发邮件；OpenAI一边承认GPT-6.2计费错误、一边把额度消耗调快四成，瑞士则首次证实AI Agent已攻破关键基础设施。与此同时，美国芯片管制与反蒸馏双管齐下，正把中国下一代旗舰模型的发布时间往后推；数学一侧，黎曼证明的Lean版本已从1740万行压缩到7.6万行并通过机器验证。</p>
+<div class="items">
+<div class="item lead" data-url="https://the-decoder.com/ai-agents-now-control-part-of-deepminds-compute-for-gemini-experiments-but-recursive-self-improvement-remains-distant/">
+<img class="thumb" src="images/2026-11-28-ai-1.jpg" alt="DeepMind让AI Agent自己分配算力跑Gemini实验，推理过程刻意不训练以便审计" width="1080" height="603" fetchpriority="high" decoding="async">
+<div class="lead-body">
+<div class="eyebrow"><span class="src-name">The Decoder</span><span class="chip">The Decoder 11月25日报道；HN评论指出Anthropic的Fable已在论文中贡献到接近一作的程度</span></div>
+<h3>DeepMind让AI Agent自己分配算力跑Gemini实验，推理过程刻意不训练以便审计</h3>
+<p>谷歌DeepMind研究副总裁Koray Kavukcuoglu在公司播客中透露，实验室已把一部分算力的分配权交给AI Agent，由它们自主安排下一代Gemini模型的实验。作为安全护栏，DeepMind刻意不对Agent的思维链进行训练奖励，让其推理以自然语言保留、可供人类审阅。Kavukcuoglu同时强调，递归式自我改进仍很遥远，实验室正从AlphaFold式的专项团队转向单一通用算法路线。</p>
+<div class="meta"><a href="https://the-decoder.com/ai-agents-now-control-part-of-deepminds-compute-for-gemini-experiments-but-recursive-self-improvement-remains-distant/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+</div>
+<div class="item" data-url="https://techstackups.com/articles/google-workspace-ai-agents-mcp/">
+<img class="thumb" src="images/2026-11-28-ai-2.jpg" alt="谷歌要求Workspace Agent从2027年2月起走官方MCP通道，Gmail服务器至今不能发邮件" width="1024" height="1024" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">Techstackups</span><span class="chip">11月26日发布后HN与开发者社区热议；条款同时把Workspace数据衍生的向量索引等保留期上限设为30天</span></div>
+<h3>谷歌要求Workspace Agent从2027年2月起走官方MCP通道，Gmail服务器至今不能发邮件</h3>
+<p>谷歌11月24日把8个Workspace MCP服务器转为正式版，并在API条款中新增规定：从2027年2月1日起，任何由AI Agent驱动的工具访问Gmail、Drive、Calendar等服务必须走官方MCP服务器，直接调REST API将被压到标准级配额、且违反条款可被停权。尴尬的是，Gmail的MCP服务器只能搜索、读信和建草稿，发送、回复、转发均属仅限合作伙伴的功能；Drive也不能移动、分享文件。免费标准级为每项目每天5000次MCP请求，Gmail一次搜索计10次。</p>
+<div class="meta"><a href="https://techstackups.com/articles/google-workspace-ai-agents-mcp/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://the-decoder.com/gpt-6-2-astra-users-now-hit-limits-40-faster-after-openai-patched-a-pricing-error/">
+<img class="thumb" src="images/2026-11-28-ai-3.jpg" alt="OpenAI承认GPT-6.2计费错误：Astra额度消耗快40%、Sol快25%，补偿一次重置" width="1080" height="603" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">The Decoder</span><span class="chip">X原帖11月26日发布；用户称之为“变相降级”，距11月17日模型上线仅9天</span></div>
+<h3>OpenAI承认GPT-6.2计费错误：Astra额度消耗快40%、Sol快25%，补偿一次重置</h3>
+<p>OpenAI产品负责人Thibault Sottiaux 11月26日在X上承认，GPT-6.2上线时计费有误，对多数用户的Astra与Sol用量打了不应有的折扣，现已修正：同样的任务，Astra用户触顶比上周快40%，Sol快25%。OpenAI称不会追收差额，其他模型不受影响，并给Go、Plus、Pro与Business订阅各补一次可攒着用的额度重置。独立分析还指出，GPT-6.2两款模型在真实任务基准上的输出与推理token较前代显著减少，被归为“少想”异常值。</p>
+<div class="meta"><a href="https://the-decoder.com/gpt-6-2-astra-users-now-hit-limits-40-faster-after-openai-patched-a-pricing-error/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-november-27-2026/">
+<img class="thumb" src="images/2026-11-28-ai-4.jpg" alt="美国芯片管制加反蒸馏双重收紧：中国下一代旗舰模型发布时间往后推" width="1080" height="608" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">Reuters</span><span class="chip">路透11月26日独家；Anthropic称9月发现近2亿次疑似蒸馏对话，涉及Moonshot与智谱等</span></div>
+<h3>美国芯片管制加反蒸馏双重收紧：中国下一代旗舰模型发布时间往后推</h3>
+<p>据路透社11月26日独家报道，美国11月19日生效的商务部新规要求中国企业在海外使用约750块H100以上算力须申请许可，叠加OpenAI与Anthropic自9月起封堵模型蒸馏，正让中国头部实验室的进度放慢。智谱约3万亿参数的GLM-5.5错过11月发布窗口、可能推迟到2027年一季度或更晚；重度依赖海外算力的Moonshot预计发布周期从半年拉长到一年以上，下一代Kimi K4可能推迟到2027年年中。两家公司均未置评，智谱公开否认了延期说法；中国实验室正转向欧洲租算力与国产芯片。</p>
+<div class="meta"><a href="https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-november-27-2026/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://thehackernews.com/2026/11/switzerland-confirms-ai-assisted.html">
+<img class="thumb" src="images/2026-11-28-ai-5.jpg" alt="瑞士首次证实AI Agent网络攻击：五起中四起得手，三起针对关键基础设施" width="900" height="470" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">The Hacker News</span><span class="chip">瑞士官方11月26日确认；BACS点名ARTEX与CyberStrikeAI为网上可获得的同类框架示例</span></div>
+<h3>瑞士首次证实AI Agent网络攻击：五起中四起得手，三起针对关键基础设施</h3>
+<p>瑞士联邦网络安全办公室（BACS）11月26日证实，近日已确认五起由AI Agent实施的网络攻击，其中四起成功入侵目标系统；三起针对电力、供水、电信等关键基础设施运营商，其中两起得手，暂未造成重大停运。国家网络安全中心主任Florian Schütz在SRF采访中公布了这一数字，攻击利用的是弱口令与未打补丁等老漏洞、胜在速度。BACS把这类工具称为“Agent式进攻框架”，并称自9月以来AI辅助攻击明显增多，网上可获得的此类Agent数量自10月以来几乎翻倍。</p>
+<div class="meta"><a href="https://thehackernews.com/2026/11/switzerland-confirms-ai-assisted.html" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://github.com/lsernau/grh-lean">
+<img class="thumb" src="images/2026-11-28-ai-6.jpg" alt="黎曼证明Lean版从1740万行压到7.6万行：两版均通过机器验证，仍无人通读" width="1080" height="540" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">GitHub</span><span class="chip">仓库11月25日公开；MIT验证页确认两版编译零错误；HN 11月25日登上首页</span></div>
+<h3>黎曼证明Lean版从1740万行压到7.6万行：两版均通过机器验证，仍无人通读</h3>
+<p>Anthropic研究员Luke Sernau牵头的grh-lean仓库11月25日公开，把Levent Alpöge与Claude合作的黎曼假设与广义黎曼假设Lean证明从1740万行重写为两个版本：可读版约30万行、附阅读指南，精简版仅约7.6万行。MIT数学家Andrew Sutherland验证确认，两版均可无错编译、且仅依赖propext、Classical.choice与Quot.sound三条标准公理。README明确写着“只通过了机器检查，无数学家通读全文，也没有配套论文”，新版以Apache 2.0协议开源。</p>
+<div class="meta"><a href="https://github.com/lsernau/grh-lean" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://generativehistory.substack.com/p/gpt-62-astra-solves-a-historical">
+<img class="thumb" src="images/2026-11-28-ai-7.jpg" alt="GPT-6.2 Astra 22分钟破解1808年匿名画册作者之谜，档案日记逐字印证" width="1080" height="608" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">Generative History</span><span class="chip">HN首页热帖221分、152条评论；作者称模型从一篇2014年博士论文脚注中追踪到日记线索</span></div>
+<h3>GPT-6.2 Astra 22分钟破解1808年匿名画册作者之谜，档案日记逐字印证</h3>
+<p>历史学家在测试预发布版GPT-6.2 Astra时，让它鉴定耶鲁贝内克图书馆一本1808年匿名旅行画册的作者：模型22分零1秒后给出答案——法国流亡贵族Louis-Guy-Charles-Guillaume de Rohan-Chabot，并指出克利夫兰州立大学藏有一部可验证该假设的微缩日记。作者调阅日记后发现，笔迹与画册一致、行程与 dated 画作逐日吻合，1808年6月18日的日记更写明登上圣约瑟夫堡后“我画了一幅速写”，与画作视角完全对应。这部画册匿名已逾200年，学界此前无人怀疑过这位人物。</p>
+<div class="meta"><a href="https://generativehistory.substack.com/p/gpt-62-astra-solves-a-historical" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://www.macrumors.com/2026/11/25/claude-install-artifacts-desktop-apps/">
+<img class="thumb" src="images/2026-11-28-ai-8.jpg" alt="Claude Artifacts可一键装成桌面应用：三档权限，最高可读写删文件且不经审核" width="1080" height="608" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">MacRumors</span><span class="chip">11月24日Beta上线；安全分析师提醒这等于把Artifact、桌面应用与开放分享通道打包成新的软件供应链</span></div>
+<h3>Claude Artifacts可一键装成桌面应用：三档权限，最高可读写删文件且不经审核</h3>
+<p>Anthropic 11月24日起以Beta形式推出“Install as app”：Claude在对话中生成的Artifacts小工具可直接安装为Mac与Windows桌面应用，各有图标与独立窗口，覆盖免费到企业全部档位，需Claude桌面版6.28899.0以上。应用分三档权限，最高档“完全访问此电脑”可在不逐次询问的情况下运行程序、读写与删除文件，Anthropic明确表示安装前不审核应用；应用须保持联网与登录、请求计入订阅额度，Docs、Slides与Sheets类模板暂不支持。</p>
+<div class="meta"><a href="https://www.macrumors.com/2026/11/25/claude-install-artifacts-desktop-apps/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+</div>
+</section>
+<section data-kind="tech">
+<div class="sec-head"><p class="kind">全网科技</p><span class="sec-count">8 条</span></div>
+<h2>英伟达暂停东南亚芯片发货、SAP拟裁万人转身AI，英央行警告AI借债超4万亿美元</h2>
+<p class="overview">今天科技圈的主线是AI热潮的另一面：英伟达为堵住转口漏洞暂停向东南亚四国发货，SAP据报考虑裁员逾万人押注AI转型，英国央行则警告超算中心发债今年将超3050亿美元、超算巨头债务与表外承诺合计逾4万亿美元。与此同时，弗吉尼亚与俄勒冈两州起诉SpaceX的Grok、波兰3亿美元签下Palantir军事AI，黑五前夕五家购物网站被曝遭WebRTC盗刷脚本入侵，数学家Michael Nielsen则为抗议前沿实验室的冒进下架了自己的经典教材。</p>
+<div class="items">
+<div class="item" data-url="https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/">
+<img class="thumb" src="images/2026-11-28-tech-1.jpg" alt="英伟达暂停向东南亚四国发运AI服务器，堵中国企业远程租算力漏洞" width="1024" height="683" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">TechCrunch</span><span class="chip">《华尔街日报》11月26日独家；Natixis估计四国近三分之一在运产能与中国业主或租户有关</span></div>
+<h3>英伟达暂停向东南亚四国发运AI服务器，堵中国企业远程租算力漏洞</h3>
+<p>据《华尔街日报》经TechCrunch报道，英伟达已通知戴尔、超微等制造合作伙伴，暂停向马来西亚、新加坡、泰国与印度尼西亚发运AI服务器，期限未定，期间审查区域合作伙伴是否遵守美国出口要求。背景是美国商务部本月早些时候堵住了中国企业租用东南亚数据中心英伟达算力的漏洞，智库Institute for Progress估计这类远程数据中心约占中国AI算力的24%。新加坡副总理颜金勇11月27日回应称停运尚未得到证实，新加坡正审查法规、防止本国成为非法转口通道。</p>
+<div class="meta"><a href="https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://www.channelnewsasia.com/business/sap-job-cuts-ai-restructuring-6585781">
+<img class="thumb" src="images/2026-11-28-tech-2.jpg" alt="SAP据报考虑裁员至少1万人、约9%员工，押注AI优先重组" width="1080" height="608" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">CNA</span><span class="chip">彭博11月26日报道；Challenger数据显示科技业占2026年美国裁员总数的28%，为各行业最高</span></div>
+<h3>SAP据报考虑裁员至少1万人、约9%员工，押注AI优先重组</h3>
+<p>据彭博社11月26日报道，SAP正考虑裁减至少1万个岗位、约占11万多名员工的9%，作为CEO Christian Klein推动的AI优先重组的一部分，重点涉及产品开发、工程与销售部门。这是SAP不到三年内的第二次大规模重组，上一次影响9000至1万个岗位、于2025年初完成。最终数字尚未确定，须与员工代表谈判；SAP未予证实，路透称无法独立核实该报道。SAP今年已两次改组执行董事会以推进AI战略。</p>
+<div class="meta"><a href="https://www.channelnewsasia.com/business/sap-job-cuts-ai-restructuring-6585781" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://www.lse.co.uk/news/bank-of-england-sees-growing-financial-risks-as-ai-borrowing-surges-ib6emac9jqden7q.html">
+<div class="eyebrow"><span class="src-name">Reuters</span><span class="chip">英央行11月26日半年报；超算巨头债务与表外承诺合计逾4万亿美元</span></div>
+<h3>英央行警告AI借债风险：超算巨头今年发债超3050亿美元，债务加承诺逾4万亿美元</h3>
+<p>英国央行11月26日发布的半年《金融稳定报告》警告，AI投资热潮的融资规模与复杂结构正让全球金融系统更易受冲击：超算巨头今年发债预计将超过3050亿美元、约占投资级公司债发行总量的8%，计入芯片商与数据中心运营商后，整个生态的借债规模超过多数发达国家政府的年度借款。超算巨头的债务与表外承诺合计已超过4万亿美元，央行称若AI收入预期下调、这类承诺可能承压，压力还会向政府债与股市传导；报告同时点名了前沿AI模型与量子计算对加密技术的长期风险。</p>
+<div class="meta"><a href="https://www.lse.co.uk/news/bank-of-england-sees-growing-financial-risks-as-ai-borrowing-surges-ib6emac9jqden7q.html" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://www.omahadailyrecord.com/content/states-sue-musk-companies-over-flood-sexualized-images-made-ai-chatbot-grok">
+<div class="eyebrow"><span class="src-name">美联社</span><span class="chip">11月23日提起诉讼；HN首页热帖195分、102条评论；两州要求禁令、赔偿与民事处罚</span></div>
+<h3>弗吉尼亚与俄勒冈两州起诉SpaceX：Grok被指为产色情图片去安全防护</h3>
+<p>弗吉尼亚州总检察长Jay Jones与俄勒冈州总检察长Dan Rayfield 11月23日分别起诉SpaceX及其AI与社交子公司，指控Grok为推广产品剥离行业标准安全防护、以“spicy mode”营销裸露生成功能，导致儿童性虐待材料与非自愿私密影像泛滥。这是首批针对Grok图像工具的州级诉讼。诉状引用的研究估计，2025年12月29日至2026年1月8日，Grok在X上生成并发布约300万张性化图片，其中约2.3万张疑似描绘儿童；xAI向失踪儿童中心提交的13.5万余份报告中，逾九成起初因缺少用户与位置数据而无法用于执法。SpaceX回应称涉未成年人的性内容“令人厌恶”，在X与Grok中没有容身之地。</p>
+<div class="meta"><a href="https://www.omahadailyrecord.com/content/states-sue-musk-companies-over-flood-sexualized-images-made-ai-chatbot-grok" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://www.reuters.com/technology/poland-signs-contract-with-palantir-worth-300-mln-over-5-years-2026-11-27/">
+<div class="eyebrow"><span class="src-name">Reuters</span><span class="chip">路透11月27日报道；合同价值约3亿美元、为期五年；Palantir股价当日上涨</span></div>
+<h3>波兰3亿美元签下Palantir军事AI：Maven系统助指挥决策，数据与密钥归军方所有</h3>
+<p>波兰国防部11月27日在华沙签署协议，以约3亿美元、为期五年采购Palantir的Maven Smart System军事AI决策支持软件，用于整合无人机、卫星与雷达数据、辅助指挥官判断战场态势，项目代号Saturn。国防部长Władysław Kosiniak-Kamysz称这是波兰武装力量作战能力的“分水岭时刻”。协议的关键限制是波兰军方保留对系统、军事数据与加密密钥的完全控制，Palantir不接触机密军事数据。签约消息公布后Palantir股价上涨，该系统此前已在美军与北约指挥机构中使用。</p>
+<div class="meta"><a href="https://www.reuters.com/technology/poland-signs-contract-with-palantir-worth-300-mln-over-5-years-2026-11-27/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://githubtrending.today/archive/2026-11-27/">
+<img class="thumb" src="images/2026-11-28-tech-6.jpg" alt="GitHub今日最热：Claude-BugHunter单日吸星1597个登顶，Agent工具包继续霸榜" width="1080" height="567" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">GitHub Trending</span><span class="chip">Claude-BugHunter单日+1597星居首；orca单日约+2400星、t3code约+1957星</span></div>
+<h3>GitHub今日最热：Claude-BugHunter单日吸星1597个登顶，Agent工具包继续霸榜</h3>
+<p>11月27日GitHub日趋势榜仍由Agent工具包主导：elementalsouls/Claude-BugHunter单日新增1597星居首，这是一套85个技能、16条斜杠命令的Claude Code漏洞挖掘与外部红队工具包，覆盖24类漏洞的681个已披露报告模式，总星数约2.5万。紧随其后的是stablyai/orca（单日约2400星，用一份订阅并行跑多个编码Agent并对比结果）与pingdotgg/t3code（单日约1957星，把本机编码Agent收进统一控制面），morluto/rea单日也新增约1342星、总星数近48万。</p>
+<div class="meta"><a href="https://githubtrending.today/archive/2026-11-27/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://www.infohawk.com/news/2026-11-27-black-friday-webrtc-skimmer">
+<img class="thumb" src="images/2026-11-28-tech-7.jpg" alt="黑五前夕五家购物网站遭WebRTC盗刷脚本入侵，卡号在支付校验前就被偷走" width="1080" height="567" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">InfoHawk</span><span class="chip">HN首页热帖379分、199条评论；11月16日Optimizely漏洞曾致178家机构网站被注入恶意代码</span></div>
+<h3>黑五前夕五家购物网站遭WebRTC盗刷脚本入侵，卡号在支付校验前就被偷走</h3>
+<p>安全公司InfoHawk 11月27日披露，Lascana、Samsonite、American Tourister、Revolve与FWRD五家购物网站在黑五前一周被植入盗刷脚本，脚本经营销像素、Cookie横幅设置或零售商CDN文件潜入，只在手机端结账页运行。脚本把卡号、有效期、安全码及姓名、地址、电话、邮箱经WebRTC数据通道、借Cloudflare中继发往攻击者服务器，绕过常规的connect-src防护；在Lascana结账页，研究人员亲眼看到测试卡信息被发出，且偷取发生在商店校验支付之前、订单被拒卡也会被盗。五家网站已于11月24日至25日清除脚本，尚不清楚有多少真实持卡人受影响。</p>
+<div class="meta"><a href="https://www.infohawk.com/news/2026-11-27-black-friday-webrtc-skimmer" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://neuralnetworksanddeeplearning.com/">
+<div class="eyebrow"><span class="src-name">Michael Nielsen</span><span class="chip">HN首页热帖310分、195条评论；教材原站已替换为作者的说明全文</span></div>
+<h3>Michael Nielsen下架经典神经网络教材：称前沿实验室鲁莽，不愿再为其培养人才</h3>
+<p>《神经网络与深度学习》作者Michael Nielsen 11月宣布下架这本2011至2015年间写就的免费经典教材，理由是前沿实验室的行为“极其鲁莽”，系统发展速度远超他的预期、留给社会应对的时间太少，他不愿再以任何方式帮助培养投身这项工作的人。Nielsen在长文中论证，超级智能的真正危险在于它会以远超社会防御进化速度的节奏解锁自然界中廉价而具灾难性的技术；他点名Anthropic在2026年放弃了2023年“安全无法保证就暂停”的承诺，并称去前沿实验室工作是“人生中最糟糕的选择之一”。该书网站现只保留这篇说明。</p>
+<div class="meta"><a href="https://neuralnetworksanddeeplearning.com/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+</div>
+</section>
+<section data-kind="time">
+<div class="sec-head"><p class="kind">时代周刊 · TIME</p><span class="sec-count">6 条</span></div>
+<h2>时代周刊精选</h2>
+<div class="items">
+<div class="item" data-url="https://time.com/article/2026/11/27/russian-exclave-kaliningrad-threat-nato-tensions-ukraine-war/">
+<div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 27 日</span></div>
+<h3>俄罗斯飞地加里宁格勒为何成为北约争端焦点</h3>
+<p>随着紧张局势升级，夹在立陶宛与波兰之间的这块战略要地可能成为与北约的冲突引爆点。</p>
+<div class="meta"><a href="https://time.com/article/2026/11/27/russian-exclave-kaliningrad-threat-nato-tensions-ukraine-war/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://time.com/article/2026/11/27/denis-villeneuve-dune-part-three-james-bond/">
+<div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 27 日</span></div>
+<h3>维伦纽瓦谈《沙丘3》的大幅改动：“改编就是杀死原著”</h3>
+<p>导演谈及为何改动契妮这一角色、邦德选角过程，以及影片与最新一部《复仇者联盟》同档上映。</p>
+<div class="meta"><a href="https://time.com/article/2026/11/27/denis-villeneuve-dune-part-three-james-bond/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://time.com/article/2026/11/27/tips-for-a-more-sustainable-black-friday/">
+<img class="thumb" src="images/2026-11-28-time-3.jpg" alt="专家支招：如何过一个更可持续的黑色星期五" width="1024" height="682" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 27 日</span></div>
+<h3>专家支招：如何过一个更可持续的黑色星期五</h3>
+<p>如果打算购物，专家给出建议，既能省钱，也能减少对地球的负担。</p>
+<div class="meta"><a href="https://time.com/article/2026/11/27/tips-for-a-more-sustainable-black-friday/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://time.com/article/2026/11/27/why-you-should-train-to-be-ethically-fit/">
+<img class="thumb" src="images/2026-11-28-time-4.jpg" alt="为什么要训练自己的“道德体能”" width="1080" height="612" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 27 日</span></div>
+<h3>为什么要训练自己的“道德体能”</h3>
+<p>“通过培养道德力量与敏捷性，我们可以成为并保持道德上的强健，”作者写道。</p>
+<div class="meta"><a href="https://time.com/article/2026/11/27/why-you-should-train-to-be-ethically-fit/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://time.com/article/2026/11/27/midterm-elections-redistricting-gerrymandering/">
+<img class="thumb" src="images/2026-11-28-time-5.jpg" alt="民主党中期选举大胜对选区重划之争意味着什么" width="1024" height="683" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 27 日</span></div>
+<h3>民主党中期选举大胜对选区重划之争意味着什么</h3>
+<p>围绕重划国会选区地图的激烈党派之争可能正在降温——至少暂时如此。</p>
+<div class="meta"><a href="https://time.com/article/2026/11/27/midterm-elections-redistricting-gerrymandering/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+<div class="item" data-url="https://time.com/article/2026/11/27/trump-thanksgiving-truth-social-economic-data-growth-estimate-revision-election/">
+<img class="thumb" src="images/2026-11-28-time-6.jpg" alt="特朗普指责本国政府伪造经济数据" width="1024" height="683" loading="lazy" decoding="async">
+<div class="eyebrow"><span class="src-name">时代周刊 TIME</span><span class="chip">时代周刊 · 11 月 27 日</span></div>
+<h3>特朗普指责本国政府伪造经济数据</h3>
+<p>特朗普在感恩节社交媒体发文中呼吁调查一次常规经济数据修正，称其为“重大且蓄意的错误”。</p>
+<div class="meta"><a href="https://time.com/article/2026/11/27/trump-thanksgiving-truth-social-economic-data-growth-estimate-revision-election/" target="_blank" rel="noopener">出处 →</a></div>
+</div>
+</div>
+</section>
+<section data-kind="press">
+<div class="sec-head"><p class="kind">国际名媒</p><span class="sec-count">40 条 · 8 家</span></div>
+<h2>世界名媒今日头条</h2>
+<div class="press-card">
+<div class="press-group">
+<div class="press-head"><span class="press-name">BBC</span><span class="press-zh">英国广播公司</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.bbc.co.uk/news/articles/c8wy5p4gdnwvo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">西班牙首相与对手在投票前最后拉票</a><div class="press-sum">桑切斯首相希望逆转民调，对手则指责他不讲实话、犯下“背叛”。</div><div class="press-time">11月28日 05:55</div></div><span class="press-thumb"><img src="images/2026-11-28-press-1.jpg" alt="" loading="lazy" decoding="async" width="240" height="135"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.bbc.co.uk/news/articles/c820q9wgrpyyo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">泽连斯基批评特朗普与普京之间“奇怪的友谊”</a><div class="press-sum">乌克兰总统在采访中表达对美国的不满，称美国在推动俄乌和谈上对俄施压不够。</div><div class="press-time">11月28日 02:00</div></div><span class="press-thumb"><img src="images/2026-11-28-press-2.jpg" alt="" loading="lazy" decoding="async" width="240" height="135"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.bbc.co.uk/news/articles/c3pw4yrr8kz9o?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">厌倦战争却不肯退让，基辅迎来又一个严冬</a><div class="press-sum">乌克兰迎来又一个严酷冬天，战争将如何收场仍无答案。</div><div class="press-time">11月28日 02:42</div></div><span class="press-thumb"><img src="images/2026-11-28-press-3.jpg" alt="" loading="lazy" decoding="async" width="240" height="135"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.bbc.co.uk/news/articles/c6rrg28npvzeo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">巴西回击马克龙称其肉类“掺药”</a><div class="press-sum">法国总统在面向本国农业代表讲话时发表此言，数月前欧盟已禁止进口巴西牛肉与禽肉产品。</div><div class="press-time">11月27日 23:54</div></div><span class="press-thumb"><img src="images/2026-11-28-press-4.jpg" alt="" loading="lazy" decoding="async" width="240" height="135"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.bbc.co.uk/news/articles/cmx2898wq2qjo?at_medium=RSS&amp;at_campaign=rss" target="_blank" rel="noopener">检方要求判处“毒药卖家”肯尼斯·劳 25 年监禁</a><div class="press-sum">这名加拿大人今年早些时候承认 14 项协助自杀罪名，将择日宣判。</div><div class="press-time">11月28日 06:03</div></div><span class="press-thumb"><img src="images/2026-11-28-press-5.jpg" alt="" loading="lazy" decoding="async" width="240" height="135"></span></div>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">CNN</span><span class="press-zh">美国有线电视新闻网</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5XTW11Wi1QV2lsNzVvRlYyVklERHdsUkxKLXdRbjRjbDk2eC1UYmM1LXNZN2FPdEdhRC1lci1SYU56M3ZSOWMxM3p6OXB0c2h0dTFVVjBHSWNVSEZJSnNuSnBJMU5HZGd6STY3Sg?oc=5" target="_blank" rel="noopener">OpenAI 反诉苹果窃取商业机密</a><div class="press-sum">OpenAI 对苹果提起反诉，指控其窃取商业机密，两家公司的商业秘密之争持续升级。</div><div class="press-time">11月28日 03:58</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMic0FVX3lxTE94QUFleTl1RlBpejd4S2NzYUxuR3RacTd3WnB0ekFWU1pKcHVaNW1kNVdZdzBpalJsSG1SNjhQeFo1MVJwR0p1eUFZUFZqa0h0SjNxS1ZtaTRRSnpfb1NBTXJQSlVyMjVlRTdQREJqZjB2NnM?oc=5" target="_blank" rel="noopener">纽约市长马姆达尼踢球受伤后接受手术</a><div class="press-sum">纽约市长马姆达尼因足球运动受伤接受手术。</div><div class="press-time">11月28日 04:10</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMihAFBVV95cUxNcFZuUnRnczNHOGpERFdmejZOa2dlSG5Tenh0WmVaa2hQQUcwTWhCZ0JrQy1WaC0yZXB4WnJweWRPSV9rZUdBSlBOSnpES0tFaWlfaHpGNHU0UVBUbGZPYUJ2UTN3MGtLNDFnSnliUnlhMzdRYnNZR3pDN2lUaFZpUWJtUTc?oc=5" target="_blank" rel="noopener">感恩节后返程：风暴可能在哪里拖慢行程</a><div class="press-sum">感恩节假期后，多地风暴天气可能影响返程交通。</div><div class="press-time">11月28日 01:27</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxOb1VPMld6aXpPTlpFc0lIdG04VldEbURyZVoybnRyOEJSc0lXb0gzczNXQ24ySFBKQWVjRk9aZHdVNVBKZmZjZEluWGtyZktYNnVLUEc2X2c4U1VMdFg1eWR2elVlMjQ1bjBFZkh4eWcwTUJMM0FzZndYRTlRZE5vVFpUV2hvNGxfVWZnVTgzeERQaUN6QlZSM0ExeF8?oc=5" target="_blank" rel="noopener">哥斯达黎加禁止联合国巴勒斯坦问题特别报告员入境</a><div class="press-sum">哥斯达黎加称该报告员与“恐怖行为”有关联，拒绝其入境。</div><div class="press-time">11月28日 03:41</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxOcF9SRmlaWWFyaFgwWms1NTQ5UkVLdUxidVFzQms1Z09xMkRVRVVDNWhlVUVDQWhOd0Z4M3kyUUlob3IydGxEZWpJMU9uUnppZTl0RzdOQU9SSFVaM3RwemxtMFhGcWNJWjBDUnhjYWhPWmt5VW9jR3JIWjlBME83MG9sY3JjejFCQ1E?oc=5" target="_blank" rel="noopener">普京最重要盟友质疑俄方入侵乌克兰的关键理由</a><div class="press-sum">普京最坚定的盟友对俄罗斯用来为入侵乌克兰辩护的一项关键说法提出质疑。</div><div class="press-time">11月27日 23:52</div></div></div>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">Reuters</span><span class="press-zh">路透社</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxOYmlHdGhKd3RFRUNYajhTdlVqdUdrckt5RmtIZEltNjE0OTVPMDhaSS1DTFlGQTU5Z19LRFpLRmpXdVJkcVpRY19iLU40eXpEWUhYdDNjMXhfRkJqckxleW8tY25rOVJFTzlGeGVaUTlwb1M1NVBXSzQwSG9hX2VQR1JiMVhXYk1mdG01ei1nR1ZmOFY5RWpnejVHRkJSa2RVTHRLeURHS3hCSHJMcGluWG1fQWNjS19wTy1RejVTWE5BMW8?oc=5" target="_blank" rel="noopener">独家：俄军舰 11 月 22 日被击沉后，赴利比亚舰队掉头返航</a><div class="press-sum">消息人士称，一艘俄军舰 11 月 22 日被击沉后，原定前往利比亚的俄罗斯海军舰队掉头返航。</div><div class="press-time">11月28日 06:55</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOMG12dXVFaTVOY1I4QnVlelVHenRWT3RKNDA4RWotOXZLSTF0ZThySjZUWlcycnlwNmZ4cjF3SDZIbUdydlJVOWNxNjlqcVBYb3RjcTZSbjNpRkZPZUZBUkxtSWlwVzZENnZIVkNzVFBfTndxc25wN2RobHZSajFLVTlxYVRCcXA3U2FadjlTUS1kNVlOaUVGVlVqUHktUF8yX3pWSmNLY0JKOXAzV2lz?oc=5" target="_blank" rel="noopener">消息称 Verizon 正洽谈以 60 亿美元收购 Fidium</a><div class="press-sum">据《金融时报》报道，Verizon 正就以 60 亿美元收购光纤运营商 Fidium 进行谈判。</div><div class="press-time">11月28日 02:25</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNOFg3b1hQNEFySWI3WEZRY21RRGFIQndWTWhVZkdpYUlVczFmR2hiSnZaemxZTzFqYU1uSThFbEVMSkgyVFR1SXE3UEpBd09jOWNzcW9IaXl0TXZIS3k2VXlEUDBVcEJjc25UOHBEXzhJcFBCX2YtdXpqLVVMN1lmVFliYWJ0QnY0YUhOOWJGblFRaXlmbFFpMUZ0aWdvRHRWQ0E4RFd3?oc=5" target="_blank" rel="noopener">西班牙加那利群岛附近移民船上至少 8 人死亡</a><div class="press-sum">一艘移民船在西班牙加那利群岛附近被发现，船上至少 8 人死亡。</div><div class="press-time">11月28日 00:43</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOd2lSdWtGZDVPZzFmZWxiRm9aZ2ZkcDhYV2lDUHRfRjhpcVpyNk80a2JRSUdhUXBMT0MyUUFZUDFpUi1LRzVDLTBrTTZaYjhyeDh6OVNmSUhKWlZNdUhQZmZ1U2NBcWhoSE1VSFNRMTRlR2VHa1Zwbm9jcDJPdzRMMEJSSFdsaXVfOGZwRjkxOFp6d1YxdXlJZUdza3oyM21fMnQtTE1SZ01xS094NS1TY1pRRXFmMFE1b1VoN2c5cWI4dw?oc=5" target="_blank" rel="noopener">墨西哥就缉毒局举报热线向美国提出交涉</a><div class="press-sum">墨西哥就美国缉毒局设立举报热线、征集涉毒贩与官员腐败线索一事向美方提出正式交涉。</div><div class="press-time">11月28日 00:48</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPbzhtZElCdnJJN0hCYkdsQ1lTWHc5UDRtNGE4cF9sWE14dlpacmk2blU5cXJMTHp0MGNaMElaQzdSem91dXNpNVRtd1k4ekZza09jVEpubTh3cjlpbE9CNWdMSU1seV9vNDFEeGQ1aDZBY1J1R0JoNVdlcjJaQnlWcU5Ib3ZISHVmNHA4eklQclI2WDIzR0VtNVp0NEJjaDZfcTlKNHRNbW54bGF2TExrR1NaSFJvLUxRcnc?oc=5" target="_blank" rel="noopener">美军致一艘试图离开伊朗的船只失去动力，伊朗誓言对抗封锁</a><div class="press-sum">美军使一艘试图离开伊朗的船只失去动力，伊朗则誓言对抗封锁。</div><div class="press-time">11月28日 04:06</div></div></div>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">AP</span><span class="press-zh">美联社</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVNiTVJwcnVUQ1RTTUdUbElNMll3d0xsRTRLSmhQS09GeWh6cFdmV2dDblpwWkJNRmlvdmZJSXZSekxQVVIxRHdOVC1icjZYVlptZlVETzcwZHhOWTlxS19fOFZCT3BnemFQWWZEOHVJS3dhbTZES3FrbGVvRlJ4MFA1bkZuMl96OFhjR3hPdFYxRG1Ob0tzM1hoOWZGWURF?oc=5" target="_blank" rel="noopener">法国影星德帕迪约被裁定就强奸与性侵指控受审</a><div class="press-sum">法国影星热拉尔·德帕迪约被裁定须就强奸与性侵指控出庭受审。</div><div class="press-time">11月27日 17:38</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMiowFBVV95cUxQcjg1R1BBRU1xekNBcWZHZzNNS184dFlybHJNNmhvUExfVVhhNjJLY2lPUlNDaUlXX2R2MXVLWE5yb05lR3pLdUE3MlBqcldyb3lhSk53YmxCRi1hQ1BjVFFIM25HN2JyTDlNMGpndUxGTkpacXcwVENZc0VDVGVORG82UHJjcV9fTDVkRTk0cHBRYjhNQmIxZ2FqTXI1a0FVSmtZ?oc=5" target="_blank" rel="noopener">美联社资深记者盖尔·穆尔森去世，享年 54 岁</a><div class="press-sum">长期任职于美联社柏林分社的资深记者盖尔·穆尔森去世，享年 54 岁。</div><div class="press-time">11月27日 22:52</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNV3hvSHlmM1QwQVMyanhDWEpTak5ZZkVwd2RBck9ObnBheXJoYWQxcUxMYXJqb2VhdWRiUVM2ZlNrSmNTYlZVZ1JmYXlRZ0lvclBleFJzRGZjUktHREZkY1JjOS15OVdGdmN5SVRmZUN2T1RVNTR2bnJwWjhfQnR5S015XzZtNmpNd19xbHFUbExjQk1OUTdPRDFxcUotZEZn?oc=5" target="_blank" rel="noopener">美股收涨，为动荡一周画上句号，也是华尔街一年多来表现最好的一周</a><div class="press-sum">美股收涨，结束了动荡的一周，这也是华尔街一年多以来表现最好的一周。</div><div class="press-time">11月27日 20:46</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPOXJMNWlyS1R4eWNOblA5OEJ4eFktZUlZY3c3eGNMNjJ3MzNKWWR6b0xSdzIxOHh2Wm5WbEhlLTY3YlN2THhUVVV3VVpoc3AwdVBhR1M2V0ZudTR5Nlhac0hVQUV1UXh4YmU4ODlxZ0FhVDI5SUtwUlloN2dOR05lWjkzQXpMX29KM3Z0c0YwV18zUTZOWDRBZ1BR?oc=5" target="_blank" rel="noopener">共和党人重新审视关税政策，给民主党挑战特朗普留下机会</a><div class="press-sum">共和党人开始重新审视关税政策，这为民主党挑战特朗普提供了机会。</div><div class="press-time">11月27日 20:30</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMinwFBVV95cUxObUt5bnNUdEVaVjhETTRjWFI5cnZYaUtyV0R1VE50ZGFPcnJyVmppY2xxeVFpOEtPWURRSFpKUGFXcDVkZGVtZnF2Ykg5aEk2NXY4VTVBVHZQWEstSk9CRGp6cHZLUWhyQkdDQ2ktQjl6WldZSlFRdzhfVUQ0dGNkNlZJaFZKMkFYeWdFUmNQSXdSTDJscjlEcXBZdVdhZWs?oc=5" target="_blank" rel="noopener">欧盟领导人在预算支出与 490 亿美元对乌贷款问题上意见分裂</a><div class="press-sum">欧盟领导人就预算支出与一笔 490 亿美元的对乌贷款出现分歧。</div><div class="press-time">11月27日 14:09</div></div></div>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">AFP</span><span class="press-zh">法新社</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOdnhCYUNQQ3BKZC1uVGU5bGJDN2ZiTzBkTmc2VGM0SDhZQWhnck1iX2ZMS2I3eHhubGc5czFueEtWZThkbEg0RmhBRmVydU1RRm5kYlZpQ0R0WjlQRmpMSFRQOWVTbElidEZMOFVCNG82YjV0akNyUll3OFJoV2xtMXctSGwtQ3pLNHpnQm9nNzYwcTI0cXNrdGkxTHFJcjVYdjZJ?oc=5" target="_blank" rel="noopener">保加利亚谴责马赛冲突“不可接受”，五名球迷入院</a><div class="press-sum">马赛发生球迷冲突，五名索菲亚列夫斯基球迷入院，保加利亚方面谴责冲突“不可接受”。</div><div class="press-time">11月27日 08:02</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMifkFVX3lxTFA1YnkyNlVER3RBajdGRFhuVkVONzlQZy0wUWIzeThJZWs3TnVrVnZkbFRhR2tKTVYyYXFURFlIcFc3cGhxcTA2X2tTTy1PR1psN0tsbC05ZllwamhadDR1Vkg3RnFabVZKS3Brd0NWQWxYUVg0UWRid0FZTFdwUQ?oc=5" target="_blank" rel="noopener">从逃课少年到第 50 场测试赛，布伦德尔动情迎里程碑</a><div class="press-sum">新西兰板球手布伦德尔迎来个人第 50 场测试赛，回顾了从逃课少年到国手的历程。</div><div class="press-time">11月27日 17:02</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNUDR5Rm1OaXhzX3BGajJoaHpyTXVzeURKV0Ffa1IxZnQ1RFdrLWp1bzl3NG1QeTJmX1VqcWkzRlAxc0hIdjRyT0FhVHdnWklsM21nOVVpR1Z3YWdYUmpmazNUTmVGS2lmZ1c5bFpxekJhWU5NdWNHcVJnRVVwdkhYeUlRazEybDJjdlJr?oc=5" target="_blank" rel="noopener">爱尔兰大胜澳大利亚，强势收官国家锦标赛</a><div class="press-sum">爱尔兰队以一场决定性胜利击败澳大利亚，结束本届国家锦标赛征程。</div><div class="press-time">11月28日 06:21</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMicEFVX3lxTE4zcVVJdk9pb1pWQzlFNi1CLXJsNG9CSHE5cERCV2FWUHUwNzVteVEwUzlCeUVmem9fbmhWNlZCeThBZGlXWFBlcGVqN3BTWTcxTWVtNGkyNFY5UU94bFE4TGpDLVI1ZDB0MDk0d0JaeWw?oc=5" target="_blank" rel="noopener">乌干达启动 mRNA 埃博拉疫苗试验</a><div class="press-sum">乌干达启动一项 mRNA 埃博拉疫苗试验。</div><div class="press-time">11月28日 02:26</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxOcjFiVE1wRnBYZVlhZjRfZXBMUTIyRjNKMGN0SW9SeGdWQ1F4Uy1wM1FONWRKTVlXbmhZVzhXMXlYNkxBOERYbXNEUlZjckNOUGltSU5xZENQbllxSHhhdFhHelR4S3hzVkg2cG1lTDF3WDB1T2FYcXpVQWlaclUtT2pWcFhJa0dPLVVCSDk5aV82UWJMcm5rOHhPN0wzaXNBWVpMLW9Bamwxel9oSWtKTkVocjlid2c?oc=5" target="_blank" rel="noopener">Hetero 率先在全球推出仿制来那卡帕韦，开始向非洲供货</a><div class="press-sum">印度药企 Hetero 成为首批在全球推出仿制 HIV 预防药物来那卡帕韦的企业之一，并已开始向非洲交付。</div><div class="press-time">11月27日 17:28</div></div></div>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">The New York Times</span><span class="press-zh">纽约时报</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.nytimes.com/2026/11/27/world/asia/puma-shen-taiwan-election-china.html" target="_blank" rel="noopener">批评中国大陆的沈伯洋或成台北下任市长</a><div class="press-sum">沈伯洋因推动民间防卫准备而遭大陆制裁，若当选可能成为台湾政坛新星。</div><div class="press-time">11月27日 21:33</div></div><span class="press-thumb"><img src="images/2026-11-28-press-26.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1080"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.nytimes.com/2026/11/27/world/europe/russia-gulag-memory.html" target="_blank" rel="noopener">俄罗斯一块接一块抹去古拉格的记忆</a><div class="press-sum">随着俄乌战争持续，克里姆林宫对斯大林的平反加速，古拉格劳改营的惨痛记忆正被系统性抹除。</div><div class="press-time">11月27日 18:00</div></div><span class="press-thumb"><img src="images/2026-11-28-press-27.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1081"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.nytimes.com/2026/11/27/world/africa/johannesburg-mayor-zille-mashaba-anc.html" target="_blank" rel="noopener">约翰内斯堡议员冷落海伦·齐勒，市长选举爆冷</a><div class="press-sum">赫尔曼·马沙巴当选南非最富裕城市的市长，对得票最多政党的候选人齐勒是一记打击。</div><div class="press-time">11月28日 04:51</div></div><span class="press-thumb"><img src="images/2026-11-28-press-28.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1080"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.nytimes.com/2026/11/27/world/middleeast/egypt-journalist-trial-lina-attalah-mada-masr.html" target="_blank" rel="noopener">一名记者在埃及为言论自由而战，也为免于入狱而战</a><div class="press-sum">记者莉娜·阿塔拉与她创办的新闻机构面临两起诉讼，被视为埃及独立新闻能否存续的试金石。</div><div class="press-time">11月27日 18:02</div></div><span class="press-thumb"><img src="images/2026-11-28-press-29.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1080"></span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.nytimes.com/2026/11/27/world/canada/canada-supreme-court-quebec-religion-bill-21.html" target="_blank" rel="noopener">加拿大最高法院裁定魁北克可保留宗教标志禁令</a><div class="press-sum">最高法院在一项里程碑式裁决中支持魁北克动用宪法但书条款，同时为未来的司法审查留了口子。</div><div class="press-time">11月28日 05:17</div></div><span class="press-thumb"><img src="images/2026-11-28-press-30.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1081"></span></div>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">The Guardian</span><span class="press-zh">卫报</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.theguardian.com/world/2026/nov/27/mad-about-mara-the-diy-dance-movement-helping-young-nigerians-escape-the-daily-grind" target="_blank" rel="noopener">“玛拉”热潮：自创舞蹈帮尼日利亚年轻人逃离日常重压</a><div class="press-sum">一场由一名艺术家发起的舞蹈运动已席卷尼日利亚文化圈，成为年轻人宣泄压力的出口。</div><div class="press-time">11月27日 14:00</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.theguardian.com/world/2026/nov/26/lana-nusseibeh-uae-sudan-un-secretary-general" target="_blank" rel="noopener">联合国秘书长热门人选努塞贝试图摆脱苏丹履历争议</a><div class="press-sum">美国与俄罗斯支持的秘书长候选人努塞贝正在英国展开魅力攻势，能否克服伦敦的反对仍是未知数。</div><div class="press-time">11月26日 20:37</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.theguardian.com/world/2026/nov/25/people-killed-fuel-tanker-crash-ignites-large-fire-cairo-highway" target="_blank" rel="noopener">开罗高速公路油罐车相撞起火，至少 31 人死亡</a><div class="press-sum">开罗环城公路上一辆油罐车相撞引发大火，至少 31 人死亡、21 人受伤，多辆汽车与摩托车被烧毁。</div><div class="press-time">11月26日 08:39</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.theguardian.com/environment/2026/nov/25/swiss-tourist-killed-british-americans-injured-elephants-cameroon" target="_blank" rel="noopener">喀麦隆大象袭人，一名瑞士游客死亡、多名英美游客受伤</a><div class="press-sum">一名在伦敦工作的瑞士保险业高管在喀麦隆山国家公园附近徒步时遭大象顶撞身亡。</div><div class="press-time">11月25日 22:03</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.theguardian.com/world/2026/nov/27/pete-hoekstra-canada-us-ambassador-petition" target="_blank" rel="noopener">近 29 万加拿大人联署要求驱逐美国大使</a><div class="press-sum">一份近 29 万人签署的请愿书已提交议会，要求宣布美国大使霍克斯特拉为“不受欢迎的人”。</div><div class="press-time">11月28日 05:24</div></div></div>
+</div>
+<div class="press-group">
+<div class="press-head"><span class="press-name">Al Jazeera</span><span class="press-zh">半岛电视台</span></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.aljazeera.com/news/2026/11/27/will-taiwan-vote-to-revive-nuclear-power-and-why-does-that-matter-for-ai?traffic_source=rss" target="_blank" rel="noopener">台湾会投票重启核电吗？这与 AI 有何关系</a><div class="press-sum">选民将于周六投票决定是否废除“非核家园”政策，核电重启与 AI 算力需求密切相关。</div><div class="press-time">11月28日 07:09</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.aljazeera.com/news/2026/11/27/kenyan-cult-leader-guilty-of-manslaughter-more-than-123-starvation-deaths?traffic_source=rss" target="_blank" rel="noopener">肯尼亚邪教头目被判过失杀人，123 多人饿死</a><div class="press-sum">保罗·麦肯齐被判对 123 多起饿死事件负有过失杀人责任，他已在服 200 年刑期。</div><div class="press-time">11月28日 06:33</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.aljazeera.com/video/newsfeed/2026/11/27/activists-of-rhythm-fighting-spains-far-right-through-art?traffic_source=rss" target="_blank" rel="noopener">“节奏行动者”：用艺术对抗西班牙极右翼</a><div class="press-sum">马德里的文化中心正用艺术对抗种族主义，为移民发声。</div><div class="press-time">11月28日 05:59</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.aljazeera.com/economy/2026/11/27/why-are-families-going-hungry-in-northern-yemen-even-where-food-is-on-sale?traffic_source=rss" target="_blank" rel="noopener">也门北部有粮可买，为何家庭仍在挨饿</a><div class="press-sum">面粉和食用油仍能运抵荷台达与萨那的市场，但高物价、缺工作、缺援助让粮食遥不可及。</div><div class="press-time">11月28日 05:11</div></div></div>
+<div class="press-row"><div class="press-main"><a class="press-title" href="https://www.aljazeera.com/news/2026/11/27/venezuela-to-repeal-law-that-bans-opposition-figures-from-office?traffic_source=rss" target="_blank" rel="noopener">委内瑞拉将废除禁止反对派人士任职的法律</a><div class="press-sum">委内瑞拉将废除禁止反对派人士担任公职的法律，反对派领袖马查多一个月前刚回国。</div><div class="press-time">11月28日 04:44</div></div></div>
+</div>
+</div>
+</section>
+<div class="daynav"><a href="2026-11-27.html"><span class="dir">← 上一期</span>2026 年 11 月 27 日 · 周五</a><span class="spacer"></span></div>
+<div class="archive"><p class="kind">往 期</p><a href="2026-11-27.html">11 月 27 日</a><a href="2026-11-26.html">11 月 26 日</a><a href="2026-11-25.html">11 月 25 日</a><a href="2026-11-24.html">11 月 24 日</a><a href="2026-11-23.html">11 月 23 日</a></div>
+<footer>由 Muse 每天整理生成 · 更新于 11 月 27 日 23:43 · 热度为抓取时刻的公开数值<br>数据来源 · 今日简报：Reddit、Hacker News、GitHub、Polymarket、Bluesky 等平台的公开讨论与报道<br>数据来源 · 国内热榜：微博、抖音、今日头条、知乎、哔哩哔哩、百度六平台热榜（UAPI 聚合）<br>数据来源 · 全球实时：Hacker News 与 Polymarket 的公开数据<br>数据来源 · 时代周刊：TIME 官方 RSS<br>数据来源 · 国际名媒：BBC、CNN、路透社、美联社、法新社、纽约时报、卫报、半岛电视台的公开 RSS<br>源码与往期存档：<a href="https://github.com/Mrhuangi/daily-news">github.com/Mrhuangi/daily-news</a></footer>
+</main>
+<script>
+document.querySelectorAll('img.thumb').forEach(function(im){
+  function done(){im.classList.add('on')}
+  im.addEventListener('load',done);
+  im.addEventListener('error',function(){im.remove()});
+  if(im.complete&&im.naturalWidth>0)done();
+});
+var chips=document.querySelectorAll('.chip-btn'), search=document.querySelector('.search'),
+    sections=document.querySelectorAll('section[data-kind]'), rline=document.querySelector('.result-line'),
+    activeKind='all';
+document.querySelectorAll('.item').forEach(function(el,i){el.style.setProperty('--i',Math.min(i,14))});
+function applyFilter(){
+  var q=search.value.trim().toLowerCase(), shown=0;
+  sections.forEach(function(sec){
+    var was=sec.hidden;
+    var rows=sec.querySelectorAll('.item, .live-row');
+    if(q){
+      var any=false;
+      rows.forEach(function(it){var hit=it.textContent.toLowerCase().indexOf(q)>-1; it.hidden=!hit; if(hit){any=true;shown++}});
+      sec.hidden=!any;
+      if(was&&!sec.hidden){sec.classList.remove('pop');void sec.offsetWidth;sec.classList.add('pop')}
+      return;
+    }
+    rows.forEach(function(it){it.hidden=false});
+    sec.hidden=!(activeKind==='all'||sec.dataset.kind===activeKind);
+    if(!sec.hidden)shown+=rows.length;
+    if(was&&!sec.hidden){sec.classList.remove('pop');void sec.offsetWidth;sec.classList.add('pop')}
+  });
+  rline.textContent=q?(shown?('找到 '+shown+' 条'):'没有找到相关新闻，换个词试试'):(activeKind==='all'?'':'');
+}
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.setAttribute('aria-pressed','false')});
+  c.setAttribute('aria-pressed','true'); activeKind=c.dataset.kind; applyFilter();
+})});
+search.addEventListener('input',applyFilter);
+var sBtn=document.querySelector('.search-btn'), sRow=document.querySelector('.search-row'),
+    sCancel=document.querySelector('.search-cancel');
+function closeSearch(){sRow.classList.remove('open');sBtn.setAttribute('aria-expanded','false');
+  if(search.value){search.value='';applyFilter()}}
+if(sBtn)sBtn.addEventListener('click',function(){
+  if(sRow.classList.contains('open')){closeSearch()}
+  else{sRow.classList.add('open');sBtn.setAttribute('aria-expanded','true');
+    setTimeout(function(){search.focus()},70)}
+});
+if(sCancel)sCancel.addEventListener('click',closeSearch);
+search.addEventListener('keydown',function(e){if(e.key==='Escape')closeSearch()});
+var vpMeta=document.querySelector('meta[name="viewport"]'), vpBase=vpMeta.getAttribute('content');
+search.addEventListener('focus',function(){vpMeta.setAttribute('content',vpBase+', maximum-scale=1')});
+search.addEventListener('blur',function(){vpMeta.setAttribute('content',vpBase)});
+function ago(ts){var m=Math.max(1,Math.round((Date.now()-ts)/60000));
+  if(m<60)return m+' 分钟前';var h=Math.round(m/60);if(h<24)return h+' 小时前';return Math.round(h/24)+' 天前'}
+function money(v){if(v>=1e6)return '$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return '$'+Math.round(v/1e3)+'K';return '$'+Math.round(v)}
+function hotFmt(v){if(!v)return '';if(v>=10000)return (v/10000).toFixed(1).replace(/\.0$/,'')+' 万';return ''+Math.round(v)}
+function rowHTML(chip,title,url,meta,rank){
+  return '<div class="live-row">'+(rank?'<span class="rank">'+rank+'</span>':'')+'<div class="live-main"><a href="'+url+'" target="_blank" rel="noopener">'+title+'</a>'+
+  '<div class="live-meta"><span class="chip">'+chip+'</span><span>'+meta+'</span></div></div></div>'}
+function esc(t){var d=document.createElement('div');d.textContent=t||'';return d.innerHTML}
+function stamp(el){var d=new Date();el.textContent='更新于 '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function fetchT(url,ms){var c=new AbortController();var t=setTimeout(function(){c.abort()},ms||9000);
+  return fetch(url,{signal:c.signal}).then(function(r){clearTimeout(t);if(!r.ok)throw 0;return r.json()})}
+var liveBox=document.querySelector('.live-rows'), liveWhen=document.querySelector('section[data-kind="live"] .live-when');
+var liveData=[], trMode=false, trCache={}, trBusy=false, trBtn=document.querySelector('.tr-btn');
+function renderLive(){
+  if(!liveData.length)return;
+  liveBox.innerHTML=liveData.map(function(r){
+    var t=(trMode&&trCache[r.title])?trCache[r.title]:r.title;
+    return rowHTML(r.chip,esc(t),r.url,r.meta);
+  }).join('');
+  applyFilter();
+}
+async function translateTitle(t){
+  if(trCache[t])return trCache[t];
+  if(!/[A-Za-z]{3,}/.test(t)){trCache[t]=t;return t}
+  var d=await fetchT('https://api.mymemory.translated.net/get?q='+encodeURIComponent(t.slice(0,450))+'&langpair=en%7Czh-CN',12000);
+  var out=d&&d.responseData&&d.responseData.translatedText;
+  if(!out||/MYMEMORY WARNING|QUERY LENGTH|INVALID/i.test(out))throw 0;
+  trCache[t]=out; return out;
+}
+async function translatePending(){
+  if(trBusy)return; trBusy=true;
+  for(var i=0;i<liveData.length;i++){
+    var r=liveData[i];
+    if(!trCache[r.title]){try{await translateTitle(r.title)}catch(e){trCache[r.title]=r.title}}
+  }
+  trBusy=false; if(trMode)renderLive();
+}
+if(trBtn)trBtn.addEventListener('click',async function(){
+  if(trMode){trMode=false;trBtn.textContent='翻译';renderLive();return}
+  trMode=true;trBtn.textContent='翻译中…';trBtn.disabled=true;
+  await translatePending();
+  trBtn.disabled=false;trBtn.textContent='原文';
+});
+async function loadLive(){
+  if(liveBox.querySelector('.live-row'))liveBox.classList.add('rows-loading');
+  var data=[];
+  try{
+    var hn=await fetchT('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=30');
+    hn.hits.filter(function(h){return h.title&&h.url}).slice(0,6).forEach(function(h){
+      data.push({chip:'Hacker News',title:h.title,url:h.url,meta:(h.points||0).toLocaleString()+' 热度 · '+ago(new Date(h.created_at).getTime())});
+    });
+  }catch(e){}
+  try{
+    var pm=await fetchT('https://gamma-api.polymarket.com/events?active=true&closed=false&order=volume24hr&ascending=false&limit=40');
+    var bad=/nfl|nba|mlb|nhl|ufc|soccer|football|tennis|golf|uefa|champions league|premier league|world cup|grand prix| vs\.? /i, n=0;
+    for(var i=0;i<pm.length&&n<4;i++){
+      var ev=pm[i]; if(bad.test(ev.title||''))continue;
+      var mk=(ev.markets||[])[0]; if(!mk)continue;
+      var prices=JSON.parse(mk.outcomePrices||'[]'), outs=JSON.parse(mk.outcomes||'[]');
+      if(!prices.length)continue;
+      var top=Math.max.apply(null,prices.map(Number)); if(top>0.97)continue;
+      var ti=prices.map(Number).indexOf(top);
+      data.push({chip:'Polymarket',title:ev.title,url:'https://polymarket.com/event/'+ev.slug,
+        meta:'24 小时成交 '+money(ev.volume24hr||0)+' · '+(outs[ti]||'')+' '+Math.round(top*100)+'%'});
+      n++;
+    }
+  }catch(e){}
+  if(data.length){liveData=data;renderLive();if(trMode)translatePending()}
+  else if(!liveBox.querySelector('.live-row')){liveBox.innerHTML='<p class="live-note">实时源暂时连不上，稍后再试。</p>'}
+  liveBox.classList.remove('rows-loading');
+  stamp(liveWhen);
+}
+var hotBox=document.querySelector('.hot-rows'), hotWhen=document.querySelector('section[data-kind="hot"] .hot-when');
+var PLATFORMS=[
+  ['微博','weibo'],['抖音','douyin'],['今日头条','toutiao'],['知乎','zhihu'],['哔哩哔哩','bilibili'],['百度','baidu']
+];
+function srcChain(key){
+  var b='https://hot.baiwumm.com/api/'+key, v='https://dailyhot-api.vercel.app/'+key;
+  var prox='https://api.allorigins.win/raw?url='+encodeURIComponent(b);
+  if(key==='douyin'||key==='toutiao')return [v,prox];
+  return [prox,v];
+}
+function parseHot(v){if(typeof v==='number')return v;if(!v)return 0;
+  var m=(''+v).match(/([\d.]+)\s*万/);if(m)return parseFloat(m[1])*10000;
+  var n=parseFloat(v);return isNaN(n)?0:n}
+async function fetchPlat(key){
+  try{
+    var u=await fetchT('https://uapis.cn/api/v1/misc/hotboard?type='+key,15000);
+    if(u&&u.list&&u.list.length&&u.list[0]&&u.list[0].title){
+      return u.list.map(function(it){return {title:it.title,url:it.url||'',hot:parseHot(it.hot_value),hotText:(''+(it.hot_value||'')).trim()}});
+    }
+  }catch(e){}
+  var urls=srcChain(key);
+  for(var i=0;i<urls.length;i++){
+    try{
+      var d=await fetchT(urls[i],10000);
+      if(d&&d.data&&d.data.length&&d.data[0]&&d.data[0].title){
+        return d.data.map(function(it){return {title:it.title,url:it.url||it.mobileUrl||'',hot:parseHot(it.hot),hotText:''}});
+      }
+    }catch(e){}
+  }
+  return [];
+}
+function bigrams(t){var x=(t||'').toLowerCase().replace(/[\s\W_]+/g,'');var o={};
+  for(var i=0;i<x.length-1;i++)o[x.substr(i,2)]=1;return o}
+function contains(a,b){var x=(a||'').toLowerCase().replace(/[\s\W_]+/g,''),y=(b||'').toLowerCase().replace(/[\s\W_]+/g,'');
+  var s=x.length<y.length?x:y,l=x.length<y.length?y:x;return s.length>=6&&l.indexOf(s)>-1}
+function similar(a,b){var A=bigrams(a),B=bigrams(b),inter=0,all=0,k;
+  for(k in A){all++;if(B[k])inter++}for(k in B){all++}
+  return all?(2*inter)/all:0}
+async function loadHot(){
+  if(hotBox.querySelector('.live-row'))hotBox.classList.add('rows-loading');
+  var lists=[];
+  for(var pi2=0;pi2<PLATFORMS.length;pi2++){
+    var one=await fetchPlat(PLATFORMS[pi2][1]);
+    if(!one.length){await new Promise(function(r){setTimeout(r,1200)});one=await fetchPlat(PLATFORMS[pi2][1]);}
+    lists.push(one);
+  }
+  var merged=[];
+  lists.forEach(function(items,pi){
+    items.slice(0,8).forEach(function(it,rank){
+      if(!it.title||it.title.length<4||/undefined/.test(it.title))return;
+      var found=null;
+      for(var m=0;m<merged.length;m++){if(similar(merged[m].title,it.title)>=0.42||contains(merged[m].title,it.title)){found=merged[m];break}}
+      if(found){
+        if(found.plats.indexOf(PLATFORMS[pi][0])<0)found.plats.push(PLATFORMS[pi][0]);
+        if(rank<found.rank)found.rank=rank;
+        if(!found.hot&&it.hot)found.hot=it.hot;
+        if(!found.hotText&&it.hotText)found.hotText=it.hotText;
+      }else{
+        merged.push({title:it.title,url:it.url||'',hot:it.hot||0,hotText:it.hotText||'',rank:rank,plats:[PLATFORMS[pi][0]]});
+      }
+    });
+  });
+  merged.sort(function(a,b){
+    var sa=a.plats.length*100-a.rank, sb=b.plats.length*100-b.rank;
+    return sb-sa||(b.hot||0)-(a.hot||0);
+  });
+  var top=merged.slice(0,12);
+  if(top.length){
+    hotBox.innerHTML=top.map(function(m,ri){
+      var hv='';
+      if(m.hotText&&/^[\d.]+$/.test(m.hotText))hv='热度 '+hotFmt(parseFloat(m.hotText));
+      else if(m.hotText){var mm2=m.hotText.match(/^([\d.]+)\s*(播放|阅读)$/);
+        hv=mm2?(hotFmt(parseFloat(mm2[1]))+mm2[2]):(/播放|阅读/.test(m.hotText)?m.hotText:('热度 '+m.hotText));}
+      else if(hotFmt(m.hot))hv='热度 '+hotFmt(m.hot);
+      var meta=(m.plats.length>1?('多平台热议 · '):'')+(hv?(hv+' · '):'')+'最高第 '+(m.rank+1)+' 名';
+      return rowHTML(m.plats.join(' · '),esc(m.title),m.url,meta,ri+1);
+    }).join('');
+    applyFilter();
+  }else if(!hotBox.querySelector('.live-row')){
+    hotBox.innerHTML='<p class="live-note">热榜暂时拉不到，稍后再试。</p>';
+  }
+  hotBox.classList.remove('rows-loading');
+  stamp(hotWhen);
+}
+function loadAll(){loadLive();loadHot()}
+loadAll(); setInterval(function(){if(!document.hidden)loadAll()},300000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)loadAll()});
+var tb=document.querySelector('.topbar');
+addEventListener('scroll',function(){tb.classList.toggle('scrolled',window.scrollY>4)},{passive:true});
+document.querySelectorAll('.item[data-url]').forEach(function(el){
+  el.addEventListener('click',function(e){
+    if(e.target.closest('a'))return;
+    var sel=window.getSelection?window.getSelection().toString():'';
+    if(sel)return;
+    window.open(el.getAttribute('data-url'),'_blank','noopener');
+  });
+});
+</script>
+</body>
+</html>
